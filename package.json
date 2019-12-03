@@ -12,7 +12,7 @@
     "clean": "lerna clean --yes && rimraf node_modules",
     "clean:build": "lerna exec -- rimraf \"{.next,dist,out,build,.docz}\"",
     "start:all": "lerna run --parallel start",
-    "start:iso-cra": "yarn workspace writer run start",
+    "start:writer": "yarn workspace writer run start",
     "build:iso-cra": "yarn workspace isomorphic run build",
     "serve:iso-cra": "yarn workspace writer run serve"
   },
