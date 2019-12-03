@@ -13,8 +13,11 @@
     "clean:build": "lerna exec -- rimraf \"{.next,dist,out,build,.docz}\"",
     "start:all": "lerna run --parallel start",
     "start:writer": "yarn workspace writer run start",
-    "build:iso-cra": "yarn workspace isomorphic run build",
-    "serve:iso-cra": "yarn workspace writer run serve"
+    "start:editor": "yarn workspace editor run start",
+    "build:writer": "yarn workspace writer run build",
+    "build:editor": "yarn workspace editor run build",
+    "serve:writer": "yarn workspace writer run serve",
+    "serve:editor": "yarn workspace editor run serve"
   },
   "husky": {
     "hooks": {
