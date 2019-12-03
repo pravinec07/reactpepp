@@ -2,7 +2,6 @@
   "name": "writer",
   "version": "3.0.3",
   "private": true,
-  "homepage":"file:///C:/PravinKumarProject/pepper_ui/packages/writer/build/",
   "dependencies": {
     "@progress/kendo-drawing": "^1.6.0",
     "@progress/kendo-react-pdf": "^3.4.1",
