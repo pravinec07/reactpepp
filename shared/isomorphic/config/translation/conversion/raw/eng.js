@@ -450,15 +450,15 @@ BACK HOME
 Internal Server Error
 Something went wrong. Please try again letter.
 BACK HOME
-Isomorphic
+writer
 Forgot Password?
 Enter your email and we send you a reset link.
 Send request
-Isomorphic
+writer
 Reset Password
 Enter new password and confirm it.
 Save
-Isomorphic
+writer
 Remember me
 Sign in
 username  demo   password  demodemo   or Just click on any button.
@@ -467,7 +467,7 @@ Sign in with Google Plus
 Sign in with Auth0
 Forgot password
 Create an Isomorphoic account
-Isomorphic
+writer
 I agree with terms and condtions
 Sign Up
 Sign up with Facebook

@@ -70,7 +70,7 @@ export default function DesktopView(props) {
     );
   }
   return (
-    <MailBox className="isomorphicMailBox">
+    <MailBox className="writerMailBox">
       <div className="isoLeftWrapper">
         <ComposeBtn
           changeComposeMail={value => dispatch(changeComposeMail(value))}

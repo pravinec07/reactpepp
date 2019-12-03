@@ -99,7 +99,7 @@ export default function MobileView(props) {
   }
   return (
     <div style={{ height: '100%' }}>
-      <MailBox className="isomorphicMailBox">
+      <MailBox className="writerMailBox">
         {listVisible ? (
           composeMail ? (
             <div className="isoSingleMailWrapper">

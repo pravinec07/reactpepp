@@ -24,7 +24,7 @@ export default function Notes() {
       ? notes.filter(note => note.id === selectedId)[0]
       : null;
   return (
-    <NoteComponentWrapper className="isomorphicNoteComponent">
+    <NoteComponentWrapper className="writerNoteComponent">
       <div style={{ width: '340px' }} className="isoNoteListSidebar">
         <NoteList
           notes={notes}
