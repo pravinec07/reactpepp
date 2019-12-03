@@ -6,7 +6,7 @@
   "author": "RedQ, Inc",
   "workspaces": [
     "shared/**/*",
-    "packages/*",
+    "packages/*"
   ],
   "scripts": {
     "clean": "lerna clean --yes && rimraf node_modules",
@@ -14,7 +14,7 @@
     "start:all": "lerna run --parallel start",
     "start:iso-cra": "yarn workspace writer run start",
     "build:iso-cra": "yarn workspace isomorphic run build",
-    "serve:iso-cra": "yarn workspace writer run serve",
+    "serve:iso-cra": "yarn workspace writer run serve"
   },
   "husky": {
     "hooks": {
