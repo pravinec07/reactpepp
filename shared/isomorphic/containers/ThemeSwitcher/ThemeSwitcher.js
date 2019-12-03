@@ -50,7 +50,7 @@ export default function ThemeSwitcher() {
 
       <div className="purchaseBtnWrapper">
         <a
-          href="https://themeforest.net/item/isomorphic-react-redux-admin-dashboard/20262330?ref=redqteam"
+          href="https://themeforest.net/item/writer-react-redux-admin-dashboard/20262330?ref=redqteam"
           className="purchaseBtn"
           target="_blank"
           style={styleButton}

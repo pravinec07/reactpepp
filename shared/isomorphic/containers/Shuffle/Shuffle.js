@@ -107,7 +107,7 @@ export default function() {
   return (
     <SortableCardWrapper
       id="shuffle"
-      className={`isomorphicSortableCardsHolder ${state.view}`}
+      className={`writerSortableCardsHolder ${state.view}`}
     >
       <header className="isoControlBar">
         <div className="isoViewBtnGroup">

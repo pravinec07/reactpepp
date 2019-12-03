@@ -33,7 +33,7 @@ export default function Contacts() {
   const onVIewChange = () => dispatch(viewChange(!editView));
   return (
     <ContactsWrapper
-      className="isomorphicContacts"
+      className="writerContacts"
       style={{ background: 'none' }}
     >
       <div className="isoContactListBar">

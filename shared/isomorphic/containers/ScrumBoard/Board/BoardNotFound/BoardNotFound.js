@@ -7,7 +7,7 @@ export default function NoBoardFounds({ history, match }) {
     <Wrapper>
       <Icon src={emptyProjectPlaceHolder} />
       <Title>You Currently have no projects</Title>
-      <Text>Let's Create your first project in Isomorphic</Text>
+      <Text>Let's Create your first project in writer</Text>
       <Button type="primary" onClick={() => history.push(`${match.url}/new`)}>
         Create Project
       </Button>

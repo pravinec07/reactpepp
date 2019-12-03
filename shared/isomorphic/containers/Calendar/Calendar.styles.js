@@ -10,7 +10,7 @@ const WDCalendarStyleWrapper = styled('div')`
   @media (max-width: 767px) {
     padding: 0;
   }
-  .isomorphicCalendar {
+  .writerCalendar {
     padding: 30px;
     background: #fff;
     border-radius: 10px;

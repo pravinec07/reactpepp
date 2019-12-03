@@ -53,7 +53,7 @@ export default function() {
             targetKeys={state.targetKeys}
             onChange={handleChange}
             render={item => item.title}
-            className="isomorphicTransfer"
+            className="writerTransfer"
           />
         </ContentHolder>
       </Box>

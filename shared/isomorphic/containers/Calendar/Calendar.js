@@ -119,14 +119,14 @@ export default function DndCalendar() {
   };
 
   return (
-    <CalendarStyleWrapper className="isomorphicCalendarWrapper">
+    <CalendarStyleWrapper className="writerCalendarWrapper">
       <ModalEvents
         modalVisible={state.modalVisible}
         selectedData={state.selectedData}
         setModalData={setModalData}
       />
       <DragAndDropCalendar
-        className="isomorphicCalendar"
+        className="writerCalendar"
         selectable
         localizer={Localizer}
         events={events.map(mapToRBCFormat)}
