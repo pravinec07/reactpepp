@@ -1,19 +1,19 @@
-# Isomorphic Reloaded
+# writer Reloaded
 
 ## Docker Guidelines
 
-### To Run the Isomorphic React Dashboard with Docker:
+### To Run the writer React Dashboard with Docker:
 
 - yarn && yarn build:iso-cra
 
-- docker build -t isomorphic/dashboard -f ./packages/isomorphic/Dockerfile .
-- docker run -it -p 8080:80 isomorphic/dashboard
+- docker build -t writer/dashboard -f ./packages/writer/Dockerfile .
+- docker run -it -p 8080:80 writer/dashboard
 - Open http://localhost:8080/
 
-### To Run the Isomorphic Next Dashboard with Docker:
+### To Run the writer Next Dashboard with Docker:
 
-- docker build -t isomorphic/dashboard-next -f ./packages/isomorphic-next/Dockerfile .
-- docker run -it -p 3000:3000 isomorphic/dashboard-next
+- docker build -t writer/dashboard-next -f ./packages/writer-next/Dockerfile .
+- docker run -it -p 3000:3000 writer/dashboard-next
 - Open http://localhost:3000/
 
 ## Hotel Post Grid Data: JSON Format

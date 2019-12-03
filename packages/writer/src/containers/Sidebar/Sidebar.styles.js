@@ -4,7 +4,7 @@ import { transition, borderRadius } from '@iso/lib/helpers/style_utils';
 import WithDirection from '@iso/lib/helpers/rtl';
 
 const SidebarWrapper = styled.div`
-  .isomorphicSidebar {
+  .writerSidebar {
     z-index: 1000;
     background: ${palette('secondary', 0)};
     width: 280px;

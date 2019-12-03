@@ -49,7 +49,7 @@ export default function Dashboard() {
               height: appHeight,
             }}
           >
-            <Content className="isomorphicContent" style={styles.content}>
+            <Content className="writerContent" style={styles.content}>
               <DashboardRoutes />
             </Content>
             <Footer style={styles.footer}>{siteConfig.footerText}</Footer>

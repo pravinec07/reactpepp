@@ -8,7 +8,7 @@ import {
 import WithDirection from '@iso/lib/helpers/rtl';
 
 const TopbarWrapper = styled.div`
-  .isomorphicTopbar {
+  .writerTopbar {
     display: flex;
     justify-content: space-between;
     background-color: #ffffff;

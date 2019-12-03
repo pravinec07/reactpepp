@@ -16,16 +16,16 @@
 8. Rename App Container to Dashboard.
 9. Remove unnecessary `Provider's` from `Dashboard` container
 10. Remove `global.css` file add `DashboardGlobalStyles`.
-11. change `import Input from '@isomorphic/shared/isomorphic/components/uielements/input';` to `import Input from '@iso/components/uielements/input';`
+11. change `import Input from '@writer/shared/writer/components/uielements/input';` to `import Input from '@iso/components/uielements/input';`
 12. Refactor `sidebar, AppRouter, and Other Routing` to `react-router-dom` v5.1.1
 13. Convert class components to functional components .
 14. replace `connect` with `useSelector, useDispatch` from `react-redux` hooks.
-15. Move `redux and container` folder to shared/isomorphic/
+15. Move `redux and container` folder to shared/writer/
 16. Remove `"leaflet-routing-machine": "^3.2.12", "leaflet.markercluster": "^1.4.1"`.
 17. Remove `accountKit` implementation.
 18. Remove global `antd.css` file , use `babel-plugin-import`
 
 ## Features:
 
-1. Isomorphic GraphQL boilerplate Added.
-2. Isomorphic boilerplate single Added.
+1. writer GraphQL boilerplate Added.
+2. writer boilerplate single Added.

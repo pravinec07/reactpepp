@@ -99,7 +99,7 @@ export default function Sidebar() {
         collapsible={true}
         collapsed={isCollapsed}
         width={240}
-        className="isomorphicSidebar"
+        className="writerSidebar"
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         style={styling}

@@ -2,7 +2,7 @@
   "packages": [
     "shared/**/*",
     "packages/*",
-    "packages/isomorphic-boilerplate-graphql/*"
+    "packages/writer-boilerplate-graphql/*"
   ],
   "version": "independent",
   "npmClient": "yarn",

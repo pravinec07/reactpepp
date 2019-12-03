@@ -103,7 +103,7 @@ const initialData = {
     'board-1': {
       id: 'board-1',
       column_orders: ['column-1', 'column-3'],
-      title: 'Isomorphic',
+      title: 'writer',
       category: 'Software',
       progress: 50,
       thumb: '',

@@ -32,7 +32,7 @@ export default function Topbar() {
       <Header
         style={styling}
         className={
-          isCollapsed ? 'isomorphicTopbar collapsed' : 'isomorphicTopbar'
+          isCollapsed ? 'writerTopbar collapsed' : 'writerTopbar'
         }
       >
         <div className="isoLeft">

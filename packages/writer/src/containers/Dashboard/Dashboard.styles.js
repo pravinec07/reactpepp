@@ -294,7 +294,7 @@ export const DashboardContainer = styled.div`
     height: 100%;
   }
 
-  .isomorphicLayout {
+  .writerLayout {
     width: calc(100% - 240px);
     flex-shrink: 0;
     overflow-x: hidden !important;

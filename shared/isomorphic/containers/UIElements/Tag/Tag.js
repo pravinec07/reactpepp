@@ -80,7 +80,7 @@ export default function() {
             <ContentHolder>
               <Tag>{<IntlMessages id="uiElements.tags.tagOne" />}</Tag>
               <Tag>
-                <a href="https://isomorphic.redq.io/dashboard/op_tag">
+                <a href="https://writer.redq.io/dashboard/op_tag">
                   {<IntlMessages id="uiElements.tags.link" />}
                 </a>
               </Tag>
