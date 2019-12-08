@@ -1,5 +1,5 @@
 export default {
-  siteName: 'writer',
+  siteName: 'Pepper',
   siteIcon: 'ion-flash',
   footerText: `writer @ ${new Date().getFullYear()} Created by RedQ, Inc`,
   enableAnimatedRoute: false,

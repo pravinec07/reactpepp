@@ -168,6 +168,7 @@ const ThemeSwitcherStyle = styled.div`
   }
 
   .switcherToggleBtn {
+    display: none !important;
     width: 50px;
     height: 50px;
     display: flex;
