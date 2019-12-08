@@ -9,6 +9,7 @@ import appActions from '@iso/redux/app/actions';
 import Logo from '@iso/components/utility/logo';
 import SidebarWrapper from './Sidebar.styles';
 import SidebarMenu from './SidebarMenu';
+import siteConfig from '@iso/config/site.config';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const { Sider } = Layout;
@@ -104,7 +105,7 @@ export default function Sidebar() {
         onMouseLeave={onMouseLeave}
         style={styling}
       >
-        <Logo collapsed={isCollapsed} />
+        <Logo collapsed={isCollapsed} type={siteConfig.panelType.writer} />
         <Scrollbars style={{ height: height - 70 }}>
           <Menu
             onClick={handleClick}
@@ -123,41 +124,6 @@ export default function Sidebar() {
                 singleOption={singleOption}
               />
             ))}
-            {/* Demo Menu */}
-            <SubMenu
-              key="sub1"
-              title={
-                <span className="isoMenuHolder" style={submenuColor}>
-                  <i className="ion-android-options" />
-                  <span className="nav-text">
-                    <IntlMessages id="sidebar.menuLevels" />
-                  </span>
-                </span>
-              }
-            >
-              <MenuItemGroup
-                key="g1"
-                title={<IntlMessages id="sidebar.item1" />}
-              >
-                <Menu.Item style={submenuStyle} key="1">
-                  <IntlMessages id="sidebar.option1" />
-                </Menu.Item>
-                <Menu.Item style={submenuStyle} key="2">
-                  <IntlMessages id="sidebar.option2" />
-                </Menu.Item>
-              </MenuItemGroup>
-              <MenuItemGroup
-                key="g2"
-                title={<IntlMessages id="sidebar.item2" />}
-              >
-                <Menu.Item style={submenuStyle} key="3">
-                  <IntlMessages id="sidebar.option3" />
-                </Menu.Item>
-                <Menu.Item style={submenuStyle} key="4">
-                  <IntlMessages id="sidebar.option4" />
-                </Menu.Item>
-              </MenuItemGroup>
-            </SubMenu>
           </Menu>
         </Scrollbars>
       </Sider>
