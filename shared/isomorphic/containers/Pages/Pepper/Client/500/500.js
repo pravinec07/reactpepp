@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Image from '@iso/assets/images/rob.png';
-import IntlMessages from '@iso/components/utility/intlMessages';
+import React from './node_modules/react';
+import { Link } from './node_modules/react-router-dom';
+import Image from './node_modules/@iso/assets/images/rob.png';
+import IntlMessages from './node_modules/@iso/components/utility/intlMessages';
 import FiveZeroZeroStyleWrapper from './500.styles';
 
 export default function() {

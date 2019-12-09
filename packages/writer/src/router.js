@@ -18,34 +18,46 @@ const publicRoutes = [
   {
     path: PUBLIC_ROUTE.LANDING,
     exact: true,
-    component: lazy(() => import('@iso/containers/Pages/Writer/SignIn/SignIn')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/SignIn/SignIn')
+    ),
   },
   {
     path: PUBLIC_ROUTE.PAGE_404,
-    component: lazy(() => import('@iso/containers/Pages/Writer/404/404')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/404/404')
+    ),
   },
   {
     path: PUBLIC_ROUTE.PAGE_500,
-    component: lazy(() => import('@iso/containers/Pages/Writer/500/500')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/500/500')
+    ),
   },
   {
     path: PUBLIC_ROUTE.SIGN_IN,
-    component: lazy(() => import('@iso/containers/Pages/Writer/SignIn/SignIn')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/SignIn/SignIn')
+    ),
   },
   {
     path: PUBLIC_ROUTE.SIGN_UP,
-    component: lazy(() => import('@iso/containers/Pages/Writer/SignUp/SignUp')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/SignUp/SignUp')
+    ),
   },
   {
     path: PUBLIC_ROUTE.FORGET_PASSWORD,
     component: lazy(() =>
-      import('@iso/containers/Pages/Writer/ForgotPassword/ForgotPassword')
+      import(
+        '@iso/containers/Pages/Pepper/Writer/ForgotPassword/ForgotPassword'
+      )
     ),
   },
   {
     path: PUBLIC_ROUTE.RESET_PASSWORD,
     component: lazy(() =>
-      import('@iso/containers/Pages/Writer/ResetPassword/ResetPassword')
+      import('@iso/containers/Pages/Pepper/Writer/ResetPassword/ResetPassword')
     ),
   },
   {

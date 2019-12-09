@@ -5,6 +5,11 @@ const options = [
     leftIcon: 'ion-person',
   },
   {
+    key: 'assignments',
+    label: 'Assignments',
+    leftIcon: 'ion-person',
+  },
+  {
     key: 'chat',
     label: 'sidebar.chat',
     leftIcon: 'ion-chatbubbles',

@@ -1,7 +1,10 @@
-import styled from 'styled-components';
-import { palette } from 'styled-theme';
-import { transition, borderRadius } from '@iso/lib/helpers/style_utils';
-import WithDirection from '@iso/lib/helpers/rtl';
+import styled from './node_modules/styled-components';
+import { palette } from './node_modules/styled-theme';
+import {
+  transition,
+  borderRadius,
+} from './node_modules/@iso/lib/helpers/style_utils';
+import WithDirection from './node_modules/@iso/lib/helpers/rtl';
 
 const FourZeroFourStyleWrapper = styled.div`
   width: 100%;
