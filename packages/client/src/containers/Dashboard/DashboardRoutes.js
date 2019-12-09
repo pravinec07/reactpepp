@@ -9,18 +9,16 @@ const routes = [
     exact: true,
   },
   {
-    path: 'inbox',
-    component: lazy(() => import('@iso/containers/Mail/Mail')),
+    path: 'project',
+    component: lazy(() => import('../Project/Project')),
   },
   {
     path: 'my-profile',
     component: lazy(() => import('@iso/containers/Profile/Profile')),
   },
   {
-    path: 'swiperslider',
-    component: lazy(() =>
-      import('@iso/containers/UIElements/SwiperSlider/SwiperSlider')
-    ),
+    path: 'assignments',
+    component: lazy(() => import('../Assignments/Assignments')),
   },
   {
     path: 'scrum-board',

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Layout } from 'antd';
+import { Layout, Tabs, Table, Button } from 'antd';
 import useWindowSize from '@iso/lib/hooks/useWindowSize';
 import appActions from '@iso/redux/app/actions';
 import ThemeSwitcher from '@iso/containers/ThemeSwitcher/ThemeSwitcher';
 import siteConfig from '@iso/config/site.config';
+
 import Sidebar from '../Sidebar/Sidebar';
 import Topbar from '../Topbar/Topbar';
 import DashboardRoutes from './DashboardRoutes';
@@ -49,7 +50,10 @@ export default function Dashboard() {
               height: appHeight,
             }}
           >
-            <Content className="writerContent" style={styles.content}>
+            <Content
+              className="client-assignment-Content"
+              style={styles.content}
+            >
               <DashboardRoutes />
             </Content>
             <Footer style={styles.footer}>{siteConfig.footerText}</Footer>

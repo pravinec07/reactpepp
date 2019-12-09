@@ -31,9 +31,7 @@ export default function Topbar() {
     <TopbarWrapper>
       <Header
         style={styling}
-        className={
-          isCollapsed ? 'writerTopbar collapsed' : 'writerTopbar'
-        }
+        className={isCollapsed ? 'writerTopbar collapsed' : 'writerTopbar'}
       >
         <div className="isoLeft">
           <button
@@ -55,13 +53,6 @@ export default function Topbar() {
             className={selectedItem ? 'isoNotify active' : 'isoNotify'}
           >
             <TopbarNotification />
-          </li>
-
-          <li onClick={() => setSelectedItem('message')} className="isoMsg">
-            <TopbarMessage />
-          </li>
-          <li onClick={() => setSelectedItem('addToCart')} className="isoCart">
-            <TopbarAddtoCart />
           </li>
 
           <li onClick={() => setSelectedItem('user')} className="isoUser">
