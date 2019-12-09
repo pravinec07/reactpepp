@@ -5,7 +5,12 @@ const options = [
     leftIcon: 'ion-person',
   },
   {
-    key: 'scrum-board',
+    key: 'assignments',
+    label: 'Assignments',
+    leftIcon: 'ion-person',
+  },
+  {
+    key: 'project',
     label: 'Project',
     leftIcon: 'ion-android-checkbox-outline',
   },
