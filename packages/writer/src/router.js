@@ -45,7 +45,7 @@ const publicRoutes = [
   {
     path: PUBLIC_ROUTE.RESET_PASSWORD,
     component: lazy(() =>
-      import('@iso/containers/Pages/ResetPassword/ResetPassword')
+      import('@iso/containers/Pages/Writer/ResetPassword/ResetPassword')
     ),
   },
   {
