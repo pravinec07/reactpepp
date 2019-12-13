@@ -14,11 +14,19 @@ const routes = [
   },
   {
     path: 'my-profile',
-    component: lazy(() => import('@iso/containers/Profile/Profile')),
+    component: lazy(() => import('../Profile/Profile')),
   },
   {
     path: 'chat',
     component: lazy(() => import('@iso/containers/Chat/Chat')),
+  },
+  {
+    path: 'invoice/:invoiceId',
+    component: lazy(() => import('@iso/containers/Invoice/SingleInvoice')),
+  },
+  {
+    path: 'invoice',
+    component: lazy(() => import('@iso/containers/Invoice/Invoices')),
   },
 ];
 

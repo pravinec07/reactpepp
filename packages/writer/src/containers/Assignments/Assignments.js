@@ -1,11 +1,8 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
 import Assignments from '@iso/containers/Assignments/Assignments';
 
 export default function Dashboard() {
-  const dispatch = useDispatch();
-  const appHeight = useSelector(state => state.App.height);
   const { TabPane } = Tabs;
   return (
     <Tabs defaultActiveKey="1">

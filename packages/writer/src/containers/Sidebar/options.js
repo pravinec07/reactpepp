@@ -6,8 +6,13 @@ const options = [
   },
   {
     key: 'assignments',
-    label: 'Assignments',
+    label: 'sidebar.assignments',
     leftIcon: 'ion-person',
+  },
+  {
+    key: 'invoice',
+    label: 'sidebar.payment',
+    leftIcon: 'ion-clipboard',
   },
   {
     key: 'chat',
