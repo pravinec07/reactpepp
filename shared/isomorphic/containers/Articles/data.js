@@ -2,7 +2,7 @@ const data = [
   {
     key: '1',
     sNo: '1',
-    projectCode: 'PRJ-111',
+    projectCode: 'ART-111',
     projectName: 'IT',
     noOfArticles: '1',
     dueDate: '11/22/2001',
@@ -11,7 +11,7 @@ const data = [
   {
     key: '2',
     sNo: '2',
-    projectCode: 'PRJ-222',
+    projectCode: 'ART-222',
     projectName: 'IT',
     noOfArticles: '1',
     dueDate: '11/22/2001',
@@ -20,7 +20,7 @@ const data = [
   {
     key: '3',
     sNo: '3',
-    projectCode: 'PRJ-333',
+    projectCode: 'ART-333',
     projectName: 'IT',
     noOfArticles: '1',
     dueDate: '11/22/2001',
@@ -29,29 +29,11 @@ const data = [
   {
     key: '4',
     sNo: '4',
-    projectCode: 'PRJ-444',
+    projectCode: 'ART-444',
     projectName: 'IT',
     noOfArticles: '1',
     dueDate: '11/22/2001',
     status: 'Inprogress',
-  },
-  {
-    key: '5',
-    sNo: '5',
-    projectCode: 'PRJ-555',
-    projectName: 'IT',
-    noOfArticles: '1',
-    dueDate: '11/22/2001',
-    status: 'Rework',
-  },
-  {
-    key: '6',
-    sNo: '6',
-    projectCode: 'PRJ-666',
-    projectName: 'IT',
-    noOfArticles: '1',
-    dueDate: '11/22/2001',
-    status: 'Completed',
   },
 ];
 export default data;
