@@ -52,7 +52,9 @@ export default function Dashboard() {
             <Content className="writerContent" style={styles.content}>
               <DashboardRoutes />
             </Content>
-            <Footer style={styles.footer}>{siteConfig.footerText}</Footer>
+            <Footer style={styles.footer}>
+              {siteConfig.writer.footerText}
+            </Footer>
           </Layout>
         </Layout>
         <ThemeSwitcher />

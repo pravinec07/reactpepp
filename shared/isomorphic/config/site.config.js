@@ -1,7 +1,7 @@
 export default {
   siteName: 'Pepper',
   siteIcon: 'ion-flash',
-  footerText: `writer @ ${new Date().getFullYear()} Created by RedQ, Inc`,
+  footerText: `Pepper @ ${new Date().getFullYear()} Created by RedQ, Inc`,
   enableAnimatedRoute: false,
   apiUrl: 'http://yoursite.com/api/',
   google: {
@@ -11,7 +11,7 @@ export default {
   writer: {
     siteName: 'Dashboard',
     siteIcon: 'ion-flash',
-    footerText: `writer @ ${new Date().getFullYear()} Created by RedQ, Inc`,
+    footerText: `Pepper @ ${new Date().getFullYear()}, All rights reserved.`,
     enableAnimatedRoute: false,
     apiUrl: 'http://yoursite.com/api/',
     google: {
