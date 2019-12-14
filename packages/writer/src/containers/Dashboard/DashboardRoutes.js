@@ -5,12 +5,16 @@ import Loader from '@iso/components/utility/loader';
 const routes = [
   {
     path: '',
-    component: lazy(() => import('../Assignments/Assignments')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/Assignments/Assignments')
+    ),
     exact: true,
   },
   {
     path: 'assignments',
-    component: lazy(() => import('../Assignments/Assignments')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/Assignments/Assignments')
+    ),
   },
   {
     path: 'my-profile',
