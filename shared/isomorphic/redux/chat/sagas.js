@@ -80,7 +80,7 @@ function* initChat(action) {
   const messages = yield call(getDocumentsByQuery, 'messages', [
     'chatRoomId',
     '==',
-    chatRooms[0].id,
+    chatRooms.length > 0 ? chatRooms[0].id : null,
   ]);
   console.log(chatRooms, 'chatRooms');
   messages.sort(sortMessages);

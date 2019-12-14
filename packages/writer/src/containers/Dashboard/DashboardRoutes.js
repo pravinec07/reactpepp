@@ -5,20 +5,32 @@ import Loader from '@iso/components/utility/loader';
 const routes = [
   {
     path: '',
-    component: lazy(() => import('../Assignments/Assignments')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/Assignments/Assignments')
+    ),
     exact: true,
   },
   {
     path: 'assignments',
-    component: lazy(() => import('../Assignments/Assignments')),
+    component: lazy(() =>
+      import('@iso/containers/Pages/Pepper/Writer/Assignments/Assignments')
+    ),
   },
   {
     path: 'my-profile',
-    component: lazy(() => import('@iso/containers/Profile/Profile')),
+    component: lazy(() => import('../Profile/Profile')),
   },
   {
     path: 'chat',
     component: lazy(() => import('@iso/containers/Chat/Chat')),
+  },
+  {
+    path: 'invoice/:invoiceId',
+    component: lazy(() => import('@iso/containers/Invoice/SingleInvoice')),
+  },
+  {
+    path: 'invoice',
+    component: lazy(() => import('@iso/containers/Invoice/Invoices')),
   },
 ];
 
