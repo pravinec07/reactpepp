@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Button } from 'antd';
+import { Table, Button, Select } from 'antd';
 import useWindowSize from '@iso/lib/hooks/useWindowSize';
 import data from './data';
 
@@ -60,6 +60,28 @@ export default function Assignments() {
       sorter: (a, b) => a.status - b.status,
       sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
       ellipsis: true,
+      render: () => (
+        <Select defaultValue="In Progress" name="status">
+          <Select.Option value={'Rework'} label={'Rework'} key={2}>
+            Rework{' '}
+          </Select.Option>
+          <Select.Option value={'Completed'} label={'Completed'} key={3}>
+            {' '}
+            Completed{' '}
+          </Select.Option>
+          <Select.Option value={'Rejected'} label={'Rejected'} key={4}>
+            {' '}
+            Rejected{' '}
+          </Select.Option>
+          <Select.Option value={'Success'} label={'Success'} key={5}>
+            {' '}
+            Success
+          </Select.Option>
+          <Select.Option value={'Submitted'} label={'Submitted'} key={6}>
+            Submitted
+          </Select.Option>
+        </Select>
+      ),
     },
   ];
 
@@ -72,8 +94,10 @@ export default function Assignments() {
       </div>
       <Table
         columns={columns}
-        dataSource={data}
-        onChange={dispatch.handleChange}
+        dataSource={JSON.parse(localStorage.getItem('projects'))}
+        onChange={() => {
+          console.log('uffff');
+        }}
       />
     </AssignmentsContainer>
   );

@@ -3,12 +3,19 @@ import { Tabs } from 'antd';
 import Assignments from '@iso/containers/Assignments/Assignments';
 
 class ClientAssignments extends React.Component {
+  handleChange = i => {
+    console.log('lllllllllllll', i);
+  };
   render() {
     const { TabPane } = Tabs;
     return (
       <Tabs defaultActiveKey="1">
         <TabPane tab="All" key="1">
-          <Assignments clearFilters={() => {}} clearAll={() => {}} />
+          <Assignments
+            clearFilters={() => {}}
+            clearAll={() => {}}
+            handleChange={this.handleChange}
+          />
         </TabPane>
         <TabPane tab="Ongoing Assignments" key="2">
           <Assignments clearFilters={() => {}} clearAll={() => {}} />

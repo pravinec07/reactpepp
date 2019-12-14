@@ -62,6 +62,24 @@ class RegistrationForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        if (typeof Storage !== 'undefined') {
+          const data = JSON.parse(localStorage.getItem('projects')) || [];
+          data.push(
+            Object.assign(
+              {},
+              values,
+              { projectCode: 'PRJ111' },
+              { key: 1 },
+              { sNo: 1 },
+              { status: 'InProgress' }
+            )
+          );
+          // Store
+          localStorage.setItem('projects', JSON.stringify(data));
+          //window.location.href = "/dashboard/assignments";
+        } else {
+          console.log('Sorry, your browser does not support Web Storage...');
+        }
       }
     });
   };
@@ -69,35 +87,6 @@ class RegistrationForm extends React.Component {
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  };
-
-  compareToFirstPassword = (rule, value, callback) => {
-    const { form } = this.props;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
-    }
-  };
-
-  validateToNextPassword = (rule, value, callback) => {
-    const { form } = this.props;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
-    }
-    callback();
-  };
-
-  handleWebsiteChange = value => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = ['.com', '.org', '.net'].map(
-        domain => `${value}${domain}`
-      );
-    }
-    this.setState({ autoCompleteResult });
   };
 
   render() {
@@ -148,7 +137,7 @@ class RegistrationForm extends React.Component {
           <Row gutter={24}>
             <Col span={12}>
               <Form.Item label="No. Of Articles">
-                {getFieldDecorator('numArticles', {
+                {getFieldDecorator('noOfArticles', {
                   rules: [
                     {
                       required: true,
@@ -160,7 +149,7 @@ class RegistrationForm extends React.Component {
             </Col>
             <Col span={12}>
               <Form.Item label="Article Topic">
-                {getFieldDecorator('topic', {
+                {getFieldDecorator('projectName', {
                   rules: [
                     {
                       required: true,
