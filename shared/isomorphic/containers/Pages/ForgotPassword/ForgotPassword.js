@@ -35,6 +35,12 @@ export default function() {
                 <IntlMessages id="page.sendRequest" />
               </Button>
             </div>
+
+            <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
+              <Link to="/signin">
+                <IntlMessages id="page.signUpAlreadyAccount" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ export default function SignUp() {
               />
             </div>
 
-            <div className="isoInputWrapper" style={{ marginBottom: '50px' }}>
+            <div className="isoInputWrapper" style={{ marginBottom: '20px' }}>
               <Checkbox>
                 <IntlMessages id="page.signUpTermsConditions" />
               </Checkbox>
@@ -74,37 +74,6 @@ export default function SignUp() {
               <Button type="primary">
                 <IntlMessages id="page.signUpButton" />
               </Button>
-            </div>
-            <div className="isoInputWrapper isoOtherLogin">
-              <Button
-                onClick={handleLogin}
-                type="primary"
-                className="btnFacebook"
-              >
-                <IntlMessages id="page.signUpFacebook" />
-              </Button>
-              <Button
-                onClick={handleLogin}
-                type="primary"
-                className="btnGooglePlus"
-              >
-                <IntlMessages id="page.signUpGooglePlus" />
-              </Button>
-              <Button
-                onClick={() => {
-                  Auth0.login();
-                }}
-                type="primary"
-                className="btnAuthZero"
-              >
-                <IntlMessages id="page.signUpAuth0" />
-              </Button>
-
-              <FirebaseSignUpForm
-                signup={true}
-                history={history}
-                login={() => dispatch(login())}
-              />
             </div>
             <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
               <Link to="/signin">

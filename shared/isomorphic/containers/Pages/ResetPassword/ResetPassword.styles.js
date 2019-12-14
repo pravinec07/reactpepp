@@ -8,7 +8,7 @@ const ResetPasswordStyleWrapper = styled.div`
   min-height: 100vh;
   height: 100vh;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   position: relative;
   background: url(${bgImage}) no-repeat center center;
@@ -29,10 +29,13 @@ const ResetPasswordStyleWrapper = styled.div`
 
   .isoFormContentWrapper {
     width: 500px;
-    height: 100%;
+    min-height: 400px;
+    max-height: 95vh;
     overflow-y: auto;
     z-index: 10;
     position: relative;
+    border-radius: 10px;
+    background-color: #ffffff;
   }
 
   .isoFormContent {

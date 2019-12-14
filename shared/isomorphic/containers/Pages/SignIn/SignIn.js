@@ -5,10 +5,10 @@ import Input from '@iso/components/uielements/input';
 import Checkbox from '@iso/components/uielements/checkbox';
 import Button from '@iso/components/uielements/button';
 import IntlMessages from '@iso/components/utility/intlMessages';
-import FirebaseLoginForm from '../../FirebaseForm/FirebaseForm';
+import FirebaseLoginForm from '@iso/containers/FirebaseForm/FirebaseForm';
 import authAction from '@iso/redux/auth/actions';
 import appAction from '@iso/redux/app/actions';
-import Auth0 from '../../Authentication/Auth0/Auth0';
+import Auth0 from '@iso/containers/Authentication/Auth0/Auth0';
 import {
   signInWithGoogle,
   signInWithFacebook,
@@ -54,7 +54,7 @@ export default function SignIn() {
         <div className="isoLoginContent">
           <div className="isoLogoWrapper">
             <Link to="/dashboard">
-              <IntlMessages id="page.signInTitle" />
+              <IntlMessages id="page.writer.signInTitle" />
             </Link>
           </div>
           <div className="isoSignInForm">
@@ -66,7 +66,6 @@ export default function SignIn() {
                   autoComplete="true"
                 />
               </div>
-
               <div className="isoInputWrapper">
                 <Input
                   size="large"
@@ -78,54 +77,19 @@ export default function SignIn() {
 
               <div className="isoInputWrapper isoLeftRightComponent">
                 <Checkbox>
-                  <IntlMessages id="page.signInRememberMe" />
+                  <IntlMessages id="page.writer.signInRememberMe" />
                 </Checkbox>
                 <Button type="primary" onClick={handleLogin}>
-                  <IntlMessages id="page.signInButton" />
+                  <IntlMessages id="page.writer.signInButton" />
                 </Button>
               </div>
-
-              <p className="isoHelperText">
-                <IntlMessages id="page.signInPreview" />
-              </p>
             </form>
-            <div className="isoInputWrapper isoOtherLogin">
-              <Button
-                onClick={signInWithFacebook}
-                type="primary"
-                className="btnFacebook"
-              >
-                <IntlMessages id="page.signInFacebook" />
-              </Button>
-              <Button
-                onClick={signInWithGoogle}
-                type="primary"
-                className="btnGooglePlus"
-              >
-                <IntlMessages id="page.signInGooglePlus" />
-              </Button>
-
-              <Button
-                onClick={() => {
-                  Auth0.login();
-                }}
-                type="primary"
-                className="btnAuthZero"
-              >
-                <IntlMessages id="page.signInAuth0" />
-              </Button>
-
-              <FirebaseLoginForm
-                history={history}
-                login={token => dispatch(login(token))}
-              />
-            </div>
             <div className="isoCenterComponent isoHelperWrapper">
               <Link to="/forgotpassword" className="isoForgotPass">
                 <IntlMessages id="page.signInForgotPass" />
               </Link>
               <Link to="/signup">
-                <IntlMessages id="page.signInCreateAccount" />
+                <IntlMessages id="page.writer.signInCreateAccount" />
               </Link>
             </div>
           </div>

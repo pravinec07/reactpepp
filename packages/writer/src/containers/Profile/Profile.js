@@ -254,7 +254,7 @@ class ProfileForm extends React.Component {
               <p className="ant-form-item">Writer</p>
             </Col>
             <Col span={18}>
-              <Radio.Group onChange={this.onChange} value={this.state.value}>
+              <Radio.Group onChange={null}>
                 <Radio value={1}>Full Time</Radio>
                 <Radio value={2}>Part Time</Radio>
               </Radio.Group>
@@ -266,7 +266,7 @@ class ProfileForm extends React.Component {
               <p className="ant-form-item">Freelancer</p>
             </Col>
             <Col span={18}>
-              <Radio.Group onChange={this.onChange} value={this.state.value}>
+              <Radio.Group onChange={null}>
                 <Radio value={1}>Full Time</Radio>
                 <Radio value={2}>Part Time</Radio>
               </Radio.Group>

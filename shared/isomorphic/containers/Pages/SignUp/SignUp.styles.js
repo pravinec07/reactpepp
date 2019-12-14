@@ -8,7 +8,7 @@ const SignUpStyleWrapper = styled.div`
   min-height: 100vh;
   height: 100vh;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   position: relative;
   background: url(${bgImage}) no-repeat center center;
@@ -29,17 +29,19 @@ const SignUpStyleWrapper = styled.div`
 
   .isoSignUpContentWrapper {
     width: 500px;
-    height: 100%;
+    min-height: 400px;
+    max-height: 95vh;
     overflow-y: auto;
     z-index: 10;
     position: relative;
+    border-radius: 10px;
   }
 
   .isoSignUpContent {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 70px 50px;
+    padding: 20px 30px;
     position: relative;
     background-color: #ffffff;
 
@@ -109,7 +111,6 @@ const SignUpStyleWrapper = styled.div`
       }
 
       .isoHelperWrapper {
-        margin-top: 35px;
         flex-direction: column;
       }
 

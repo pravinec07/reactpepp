@@ -8,7 +8,7 @@ const SignInStyleWrapper = styled.div`
   min-height: 100vh;
   height: 100vh;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   position: relative;
   background: url(${bgImage}) no-repeat center center;
@@ -29,10 +29,12 @@ const SignInStyleWrapper = styled.div`
 
   .isoLoginContentWrapper {
     width: 500px;
-    height: 100%;
+    min-height: 400px;
+    max-height: 600px;
     overflow-y: auto;
     z-index: 10;
     position: relative;
+    border-radius: 10px;
   }
 
   .isoLoginContent {

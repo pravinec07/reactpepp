@@ -8,7 +8,7 @@ const ForgotPasswordStyleWrapper = styled.div`
   min-height: 100vh;
   height: 100vh;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   position: relative;
   background: url(${bgImage}) no-repeat center center;
@@ -29,10 +29,13 @@ const ForgotPasswordStyleWrapper = styled.div`
 
   .isoFormContentWrapper {
     width: 500px;
-    height: 100%;
+    min-height: 400px;
+    max-height: 95vh;
     overflow-y: auto;
     z-index: 10;
     position: relative;
+    border-radius: 10px;
+    background-color: #ffffff;
   }
 
   .isoFormContent {
@@ -41,7 +44,6 @@ const ForgotPasswordStyleWrapper = styled.div`
     flex-direction: column;
     padding: 70px 50px;
     position: relative;
-    background-color: #ffffff;
 
     @media only screen and (max-width: 767px) {
       width: 100%;
