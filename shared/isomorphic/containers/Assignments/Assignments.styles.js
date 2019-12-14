@@ -19,3 +19,16 @@ export const AssignmentsContainer = styled.div`
     margin-right: 8px;
   }
 `;
+
+export const AssignmentDetailsWrapper = styled.div`
+  padding: 10px;
+  .article-details-heading {
+    padding: 0;
+    label {
+      color: #3e75f2;
+    }
+    .time {
+      color: red;
+    }
+  }
+`;

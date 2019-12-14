@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button, Select } from 'antd';
 import useWindowSize from '@iso/lib/hooks/useWindowSize';
+import ArticleDetails from '../Articles/Articles';
 import data from './data';
 
 import { AssignmentsContainer, AssignmentsStyles } from './Assignments.styles';
@@ -98,6 +99,7 @@ export default function Assignments() {
         onChange={() => {
           console.log('uffff');
         }}
+        expandedRowRender={record => <ArticleDetails />}
       />
     </AssignmentsContainer>
   );

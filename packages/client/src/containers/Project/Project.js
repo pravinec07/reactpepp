@@ -219,14 +219,14 @@ class RegistrationForm extends React.Component {
               <hr />
               <Row gutter={24}>
                 <Col span={12}>
-                  <Form.Item>
+                  <Form.Item label="Download File">
                     <Button type="primary" htmlType="Download CSV">
                       Download CSV
                     </Button>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Form.Item label="Dragger">
+                  <Form.Item label="Upload file">
                     {getFieldDecorator('dragger', {
                       valuePropName: 'fileList',
                       getValueFromEvent: this.normFile,
