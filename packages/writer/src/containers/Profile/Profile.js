@@ -4,54 +4,14 @@ import {
   Input,
   Upload,
   Icon,
-  Select,
   Row,
   Col,
   Checkbox,
   Button,
-  AutoComplete,
   Modal,
   message,
   Radio,
 } from 'antd';
-
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
-
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {

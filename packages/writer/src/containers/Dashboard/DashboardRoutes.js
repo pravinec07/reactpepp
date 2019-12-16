@@ -5,7 +5,7 @@ import Loader from '@iso/components/utility/loader';
 const routes = [
   {
     path: '',
-    component: lazy(() => import('../Assignments/Assignments')),
+    component: lazy(() => import('../Profile/Profile')),
     exact: true,
   },
   {
@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: 'my-profile',
-    component: lazy(() => import('../Profile/Profile')),
+    component: lazy(() => import('../Profile/updateProfile')),
   },
   {
     path: 'chat',
