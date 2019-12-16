@@ -4,7 +4,7 @@ import data from './data';
 
 import { ArticleContainer, ArticleStyles } from './Article.styles';
 
-export default function Articles() {
+export default function Articles({ data }) {
   const columns = [
     {
       title: 'S.No.',

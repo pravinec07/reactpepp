@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Table, Button, Select } from 'antd';
-import useWindowSize from '@iso/lib/hooks/useWindowSize';
 import ArticleDetails from '../Articles/Articles';
-import data from './data';
 
 import { AssignmentsContainer, AssignmentsStyles } from './Assignments.styles';
+import Constants from '../../../common/Utilities/Constants';
 
-export default function Assignments() {
-  const dispatch = useDispatch();
-  const { width, height } = useWindowSize();
+export default function Assignments(props) {
+  console.log('----pros--->', props);
   let { sortedInfo, filteredInfo } = useSelector;
   sortedInfo = sortedInfo || {};
   filteredInfo = filteredInfo || {};
@@ -61,28 +59,30 @@ export default function Assignments() {
       sorter: (a, b) => a.status - b.status,
       sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
       ellipsis: true,
-      render: () => (
-        <Select defaultValue="In Progress" name="status">
-          <Select.Option value={'Rework'} label={'Rework'} key={2}>
-            Rework{' '}
-          </Select.Option>
-          <Select.Option value={'Completed'} label={'Completed'} key={3}>
-            {' '}
-            Completed{' '}
-          </Select.Option>
-          <Select.Option value={'Rejected'} label={'Rejected'} key={4}>
-            {' '}
-            Rejected{' '}
-          </Select.Option>
-          <Select.Option value={'Success'} label={'Success'} key={5}>
-            {' '}
-            Success
-          </Select.Option>
-          <Select.Option value={'Submitted'} label={'Submitted'} key={6}>
-            Submitted
-          </Select.Option>
-        </Select>
-      ),
+      render: key => {
+        return (
+          <Select defaultValue={key} name="status">
+            <Select.Option value={'In-Progress'} label={'In-Progress'} key={1}>
+              In-Progress
+            </Select.Option>
+            <Select.Option value={'Rework'} label={'Rework'} key={2}>
+              Rework
+            </Select.Option>
+            <Select.Option value={'Completed'} label={'Completed'} key={3}>
+              Completed
+            </Select.Option>
+            <Select.Option value={'Rejected'} label={'Rejected'} key={4}>
+              Rejected
+            </Select.Option>
+            <Select.Option value={'Success'} label={'Success'} key={5}>
+              Success
+            </Select.Option>
+            <Select.Option value={'Submitted'} label={'Submitted'} key={6}>
+              Submitted
+            </Select.Option>
+          </Select>
+        );
+      },
     },
   ];
 
@@ -90,16 +90,18 @@ export default function Assignments() {
     <AssignmentsContainer>
       <AssignmentsStyles />
       <div className="table-operations">
-        <Button onClick={dispatch.clearFilters}>Clear filters</Button>
-        <Button onClick={dispatch.clearAll}>Clear filters and sorters</Button>
+        <Button onClick={props.clearFilters}>Clear filters</Button>
+        <Button onClick={props.clearAll}>Clear filters and sorters</Button>
       </div>
       <Table
         columns={columns}
-        dataSource={JSON.parse(localStorage.getItem('projects'))}
-        onChange={() => {
-          console.log('uffff');
+        dataSource={props.data}
+        onRow={row => {
+          props.onStatusChange(row);
         }}
-        expandedRowRender={record => <ArticleDetails />}
+        expandedRowRender={record =>
+          record.articles.length && <ArticleDetails data={record.articles} />
+        }
       />
     </AssignmentsContainer>
   );
