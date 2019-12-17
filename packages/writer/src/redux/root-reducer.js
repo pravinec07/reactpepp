@@ -15,7 +15,7 @@ import ThemeSwitcher from '@iso/redux/themeSwitcher/reducer';
 import Invoices from '@iso/redux/invoice/reducer';
 import LanguageSwitcher from '@iso/redux/languageSwitcher/reducer';
 import YoutubeSearch from '@iso/redux/youtubeSearch/reducers';
-import Articles from '@iso/redux/articles/reducers';
+import Article from '@iso/redux/article/reducers';
 import Investors from '@iso/redux/investors/reducers';
 import scrumBoard from '@iso/redux/scrumBoard/reducer';
 import drawer from '@iso/redux/drawer/reducer';
@@ -40,7 +40,7 @@ export default combineReducers({
   Ecommerce,
   Invoices,
   YoutubeSearch,
-  Articles,
+  Article,
   Investors,
   scrumBoard,
   modal,
