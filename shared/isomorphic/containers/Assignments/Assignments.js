@@ -7,19 +7,12 @@ import { AssignmentsContainer, AssignmentsStyles } from './Assignments.styles';
 import Constants from '../../../common/Utilities/Constants';
 
 export default function Assignments(props) {
-  console.log('----pros--->', props);
   let { sortedInfo, filteredInfo } = useSelector;
   sortedInfo = sortedInfo || {};
   filteredInfo = filteredInfo || {};
+  const { status, colors } = Constants;
+
   const columns = [
-    {
-      title: 'S.No.',
-      dataIndex: 'sNo',
-      key: 'sNo',
-      sorter: (a, b) => a.sNo - b.sNo,
-      sortOrder: sortedInfo.columnKey === 'sNo' && sortedInfo.order,
-      ellipsis: true,
-    },
     {
       title: 'Project Code',
       dataIndex: 'projectCode',
@@ -38,10 +31,10 @@ export default function Assignments(props) {
     },
     {
       title: 'No Of Articles',
-      dataIndex: 'noOfArticles',
-      key: 'noOfArticles',
-      sorter: (a, b) => a.noOfArticles - b.noOfArticles,
-      sortOrder: sortedInfo.columnKey === 'noOfArticles' && sortedInfo.order,
+      dataIndex: 'totalArticle',
+      key: 'totalArticle',
+      sorter: (a, b) => a.totalArticle - b.totalArticle,
+      sortOrder: sortedInfo.columnKey === 'totalArticle' && sortedInfo.order,
       ellipsis: true,
     },
     {
@@ -60,29 +53,48 @@ export default function Assignments(props) {
       sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
       ellipsis: true,
       render: key => {
-        return (
-          <Select defaultValue={key} name="status">
-            <Select.Option value={'In-Progress'} label={'In-Progress'} key={1}>
-              In-Progress
-            </Select.Option>
-            <Select.Option value={'Rework'} label={'Rework'} key={2}>
-              Rework
-            </Select.Option>
-            <Select.Option value={'Completed'} label={'Completed'} key={3}>
-              Completed
-            </Select.Option>
-            <Select.Option value={'Rejected'} label={'Rejected'} key={4}>
-              Rejected
-            </Select.Option>
-            <Select.Option value={'Success'} label={'Success'} key={5}>
-              Success
-            </Select.Option>
-            <Select.Option value={'Submitted'} label={'Submitted'} key={6}>
-              Submitted
-            </Select.Option>
-          </Select>
-        );
+        return (() => {
+          console.log(key, status);
+          switch (key) {
+            case status.INPROGRESS:
+              return <span style={{ color: colors.INPROGRESS }}>{key}</span>;
+            case status.REJECTED:
+              return <span style={{ color: colors.REJECTED }}>{key}</span>;
+            case status.COMPLETED:
+              return <span style={{ color: colors.COMPLETED }}>{key}</span>;
+            case status.SUBMITTED:
+              return <span style={{ color: colors.SUBMITTED }}>{key}</span>;
+            case status.REWORK:
+              return <span style={{ color: colors.REWORK }}>{key}</span>;
+            default:
+              return <span style={{ color: colors.ALL }}>{key}</span>;
+          }
+        })();
       },
+      // render: (key, record) => {
+      //   return (
+      //     <Select defaultValue={key} name="status" onChange={(key1, row)=>props.onStatusChange(key1, record)}>
+      //       <Select.Option value={'In-Progress'} label={'In-Progress'} key={1}>
+      //         In-Progress
+      //       </Select.Option>
+      //       <Select.Option value={'Rework'} label={'Rework'} key={2}>
+      //         Rework
+      //       </Select.Option>
+      //       <Select.Option value={'Completed'} label={'Completed'} key={3}>
+      //         Completed
+      //       </Select.Option>
+      //       <Select.Option value={'Rejected'} label={'Rejected'} key={4}>
+      //         Rejected
+      //       </Select.Option>
+      //       <Select.Option value={'Success'} label={'Success'} key={5}>
+      //         Success
+      //       </Select.Option>
+      //       <Select.Option value={'Submitted'} label={'Submitted'} key={6}>
+      //         Submitted
+      //       </Select.Option>
+      //     </Select>
+      //   );
+      // },
     },
   ];
 
@@ -96,8 +108,8 @@ export default function Assignments(props) {
       <Table
         columns={columns}
         dataSource={props.data}
-        onRow={row => {
-          props.onStatusChange(row);
+        onRow={(val, row) => {
+          props.onStatusChange(val, row);
         }}
         expandedRowRender={record =>
           record.articles.length && <ArticleDetails data={record.articles} />

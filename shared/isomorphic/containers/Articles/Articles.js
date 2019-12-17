@@ -7,39 +7,33 @@ import { ArticleContainer, ArticleStyles } from './Article.styles';
 export default function Articles({ data }) {
   const columns = [
     {
-      title: 'S.No.',
-      dataIndex: 'sNo',
-      key: 'sNo',
-      ellipsis: true,
-    },
-    {
       title: 'Article Code',
-      dataIndex: 'projectCode',
-      key: 'projectCode',
+      dataIndex: 'articleCode',
+      key: 'articleCode',
       ellipsis: true,
     },
     {
       title: 'Topic Name',
-      dataIndex: 'projectName',
-      key: 'projectName',
+      dataIndex: 'articleTopic',
+      key: 'articleTopic',
       ellipsis: true,
     },
     {
       title: 'Word Count',
-      dataIndex: 'noOfArticles',
-      key: 'noOfArticles',
+      dataIndex: 'word',
+      key: 'word',
       ellipsis: true,
     },
     {
       title: 'Date Created',
-      dataIndex: 'dueDate',
-      key: 'dueDate',
+      dataIndex: 'createdDate',
+      key: 'createdDate',
       ellipsis: true,
     },
     {
       title: 'File Link',
-      dataIndex: 'dueDate',
-      key: 'dueDate',
+      dataIndex: 'transactiondocumentUrl',
+      key: 'transactiondocumentUrl',
       ellipsis: true,
     },
   ];

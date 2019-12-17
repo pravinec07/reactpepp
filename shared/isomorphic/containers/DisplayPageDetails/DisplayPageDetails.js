@@ -58,7 +58,6 @@ export default function DisplayPageDetails({ data }) {
   const { pageHeader, articleDetails } = modifiedData.getData();
   return (
     <DisplayPageDetailsWrapper className="displayPageDetailsWrapper">
-      <div>hello</div>
       <PageHeader
         // onBack={() => window.history.back()}
         title={pageHeader.title}

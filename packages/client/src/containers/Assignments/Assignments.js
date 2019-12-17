@@ -2,6 +2,8 @@ import React from 'react';
 import { Tabs, Row, Col, Card } from 'antd';
 import Assignments from '@iso/containers/Assignments/Assignments';
 import DisplayPageDetails from '@iso/containers/DisplayPageDetails/DisplayPageDetails';
+import BasicStyle from './Assignments.style';
+
 const assignmentData = [
   {
     projectCode: 'PRJ-01',
@@ -961,7 +963,7 @@ const assignmentData = [
     language: 'English',
     objective: 'for marketing',
     audience: 'Young',
-    totalArticle: '7',
+    totalArticle: '8',
     dueDate: '25-12-2019',
     createdDate: '25-12-2019',
     status: 'Done',
@@ -1278,8 +1280,9 @@ class ClientAssignments extends React.Component {
     this.handleStatusChange = this.handleStatusChange.bind(this);
   }
 
-  handleStatusChange(i) {
-    console.log('lllllllllllll', i);
+  handleStatusChange(val, row) {
+    //console.log('lllllllllllll', val, row);
+    //change the status here
   }
 
   handleTabChange(key) {
@@ -1320,61 +1323,68 @@ class ClientAssignments extends React.Component {
         break;
     }
   }
+
   render() {
     const { TabPane } = Tabs;
     const { assignmentData } = this.state;
+    const { cardStyle, rowStyle, colStyle } = BasicStyle;
     return (
-      <div>
-        <Row span={24}>
-          <Col span={16}>
-            <Tabs defaultActiveKey="1" onChange={this.handleTabChange}>
-              <TabPane tab="All" key="1">
-                <Assignments
-                  clearFilters={() => {}}
-                  clearAll={() => {}}
-                  onStatusChange={this.handleStatusChange}
-                  data={assignmentData}
-                />
-              </TabPane>
-              <TabPane tab="Ongoing Assignments" key="2">
-                <Assignments
-                  clearFilters={() => {}}
-                  clearAll={() => {}}
-                  data={assignmentData}
-                  onStatusChange={this.handleStatusChange}
-                />
-              </TabPane>
-              <TabPane tab="Submitted by Portal" key="3">
-                <Assignments
-                  clearFilters={() => {}}
-                  clearAll={() => {}}
-                  data={assignmentData}
-                  onStatusChange={this.handleStatusChange}
-                />
-              </TabPane>
-              <TabPane tab="Completed" key="4">
-                <Assignments
-                  clearFilters={() => {}}
-                  clearAll={() => {}}
-                  data={assignmentData}
-                  onStatusChange={this.handleStatusChange}
-                />
-              </TabPane>
-              <TabPane tab="Rejected" key="5">
-                <Assignments
-                  clearFilters={() => {}}
-                  clearAll={() => {}}
-                  data={assignmentData}
-                  onStatusChange={this.handleStatusChange}
-                />
-              </TabPane>
-            </Tabs>
+      <Card>
+        <Row span={24} gutter={16} style={rowStyle}>
+          <Col span={16} style={colStyle}>
+            <Card hoverable={true} style={cardStyle}>
+              <Tabs defaultActiveKey="1" onChange={this.handleTabChange}>
+                <TabPane tab="All" key="1">
+                  <Assignments
+                    clearFilters={() => {}}
+                    clearAll={() => {}}
+                    onStatusChange={this.handleStatusChange}
+                    data={assignmentData}
+                  />
+                </TabPane>
+                <TabPane tab="Ongoing Assignments" key="2">
+                  <Assignments
+                    clearFilters={() => {}}
+                    clearAll={() => {}}
+                    data={assignmentData}
+                    onStatusChange={this.handleStatusChange}
+                  />
+                </TabPane>
+                <TabPane tab="Submitted by Portal" key="3">
+                  <Assignments
+                    clearFilters={() => {}}
+                    clearAll={() => {}}
+                    data={assignmentData}
+                    onStatusChange={this.handleStatusChange}
+                  />
+                </TabPane>
+                <TabPane tab="Completed" key="4">
+                  <Assignments
+                    clearFilters={() => {}}
+                    clearAll={() => {}}
+                    data={assignmentData}
+                    onStatusChange={this.handleStatusChange}
+                  />
+                </TabPane>
+                <TabPane tab="Rejected" key="5">
+                  <Assignments
+                    clearFilters={() => {}}
+                    clearAll={() => {}}
+                    data={assignmentData}
+                    onStatusChange={this.handleStatusChange}
+                  />
+                </TabPane>
+              </Tabs>
+            </Card>
           </Col>
-          <Col span={8} style={{ borderLeft: '2px solid black' }}>
-            <DisplayPageDetails />
+
+          <Col span={8} style={colStyle}>
+            <Card hoverable={true} style={cardStyle}>
+              <DisplayPageDetails />
+            </Card>
           </Col>
         </Row>
-      </div>
+      </Card>
     );
   }
 }
