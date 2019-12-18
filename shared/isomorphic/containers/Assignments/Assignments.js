@@ -101,10 +101,12 @@ export default function Assignments(props) {
   return (
     <AssignmentsContainer>
       <AssignmentsStyles />
-      <div className="table-operations">
-        <Button onClick={props.clearFilters}>Clear filters</Button>
-        <Button onClick={props.clearAll}>Clear filters and sorters</Button>
-      </div>
+      {props.filters && (
+        <div className="table-operations">
+          <Button onClick={props.clearFilters}>Clear filters</Button>
+          <Button onClick={props.clearAll}>Clear filters and sorters</Button>
+        </div>
+      )}
       <Table
         columns={columns}
         dataSource={props.data}

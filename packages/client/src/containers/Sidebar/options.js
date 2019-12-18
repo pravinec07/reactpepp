@@ -15,7 +15,7 @@ const options = [
     leftIcon: 'ion-android-checkbox-outline',
   },
   {
-    key: 'invoice',
+    key: 'payment',
     label: 'Payment',
     leftIcon: 'ion-clipboard',
   },
