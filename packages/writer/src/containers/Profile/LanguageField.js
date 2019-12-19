@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Row, Col, Checkbox, Select } from 'antd';
+import { Icon, Row, Col, Checkbox, Select } from 'antd';
 
 import ContentWrapper from './Profile.styles';
 const { Option } = Select;

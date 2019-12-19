@@ -2,6 +2,23 @@ import styled from 'styled-components';
 import { palette } from 'styled-theme';
 
 const Wrapper = styled.div``;
+export const UpdateWrapper = styled.div`
+  padding: 20px;
+  .gutter-example .ant-row > div {
+    background: transparent;
+    border: 0;
+  }
+  .gutter-box {
+    background: #00a0e9;
+    padding: 5px 0;
+  }
+`;
+export const ProfileWrapper = styled.div`
+  padding: 10px;
+  .label {
+    font-weight: bold;
+  }
+`;
 
 export const Banner = styled.div`
   background-repeat: no-repeat;
