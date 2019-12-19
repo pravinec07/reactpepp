@@ -10,6 +10,11 @@ const options = [
     leftIcon: 'ion-person',
   },
   {
+    key: 'my-assignments',
+    label: 'sidebar.myassignments',
+    leftIcon: 'ion-person',
+  },
+  {
     key: 'invoice',
     label: 'sidebar.payment',
     leftIcon: 'ion-clipboard',

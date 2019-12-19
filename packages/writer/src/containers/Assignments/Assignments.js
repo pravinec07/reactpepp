@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import articleActions from '@iso/redux/article/actions';
 import { Tabs, Row, Col, Card } from 'antd';
-import Assignments from '@iso/containers/Assignments/Assignments';
+import ArticlesListing from '@iso/containers/Writer/Articles/ArticlesListing';
 import DisplayPageDetails from '@iso/containers/DisplayPageDetails/DisplayPageDetails';
 import BasicStyle from './Assignments.style';
 const STATUS = {
@@ -34,15 +34,15 @@ export default function AssignmentCantainer() {
               onChange={() => setArticle(articlesData)}
             >
               <TabPane tab="All" key="1">
-                <Assignments
+                <ArticlesListing
                   clearFilters={() => {}}
                   clearAll={() => {}}
                   data={articles}
                   onStatusChange={onStatusChange}
                 />
               </TabPane>
-              <TabPane tab="Ongoing Assignments" key="2">
-                <Assignments
+              <TabPane tab="Assignment Request" key="2">
+                <ArticlesListing
                   clearFilters={() => {}}
                   clearAll={() => {}}
                   data={articles.filter(
@@ -51,8 +51,8 @@ export default function AssignmentCantainer() {
                   onStatusChange={onStatusChange}
                 />
               </TabPane>
-              <TabPane tab="Submitted by Portal" key="3">
-                <Assignments
+              <TabPane tab="Ongoing Assignments" key="3">
+                <ArticlesListing
                   clearFilters={() => {}}
                   clearAll={() => {}}
                   data={articles.filter(
@@ -61,8 +61,8 @@ export default function AssignmentCantainer() {
                   onStatusChange={onStatusChange}
                 />
               </TabPane>
-              <TabPane tab="Completed" key="4">
-                <Assignments
+              <TabPane tab="Rework Requirements" key="4">
+                <ArticlesListing
                   clearFilters={() => {}}
                   clearAll={() => {}}
                   data={articles.filter(
@@ -72,7 +72,7 @@ export default function AssignmentCantainer() {
                 />
               </TabPane>
               <TabPane tab="Rejected" key="5">
-                <Assignments
+                <ArticlesListing
                   clearFilters={() => {}}
                   clearAll={() => {}}
                   data={articles.filter(

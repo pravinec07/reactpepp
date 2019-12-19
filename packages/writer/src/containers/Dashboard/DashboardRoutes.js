@@ -13,6 +13,10 @@ const routes = [
     component: lazy(() => import('../Assignments/Assignments')),
   },
   {
+    path: 'my-assignments',
+    component: lazy(() => import('../MyAssignments/Assignments')),
+  },
+  {
     path: 'my-profile',
     component: lazy(() => import('../Profile/UpdateProfile')),
   },
