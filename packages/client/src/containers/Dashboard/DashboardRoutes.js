@@ -21,8 +21,8 @@ const routes = [
     component: lazy(() => import('../Assignments/Assignments')),
   },
   {
-    path: 'scrum-board',
-    component: lazy(() => import('@iso/containers/ScrumBoard')),
+    path: 'payment',
+    component: lazy(() => import('../Payments/Payments')),
     exact: false,
   },
   {
