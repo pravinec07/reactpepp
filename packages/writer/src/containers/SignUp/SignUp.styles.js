@@ -39,19 +39,19 @@ const SignUpStyleWrapper = styled.div`
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 70px 50px;
+    padding: 30px 50px;
     position: relative;
     background-color: #ffffff;
 
     @media only screen and (max-width: 767px) {
       width: 100%;
-      padding: 70px 20px;
+      padding: 30px 20px;
     }
 
     .isoLogoWrapper {
       width: 100%;
       display: flex;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
       justify-content: center;
       flex-shrink: 0;
 
@@ -69,9 +69,11 @@ const SignUpStyleWrapper = styled.div`
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
-
+      .ant-form-explain {
+        font-size: 11px;
+      }
       .isoInputWrapper {
-        margin-bottom: 15px;
+        margin-bottom: 0;
 
         &:last-child {
           margin-bottom: 0;
