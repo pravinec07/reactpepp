@@ -20,6 +20,11 @@ const options = [
     leftIcon: 'ion-clipboard',
   },
   {
+    key: 'signup',
+    label: 'Signup',
+    leftIcon: 'ion-clipboard',
+  },
+  {
     key: 'feedback',
     label: 'sidebar.feedback',
     leftIcon: 'ion-thumbsup',

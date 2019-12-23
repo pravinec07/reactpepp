@@ -26,8 +26,8 @@ const routes = [
     exact: false,
   },
   {
-    path: 'mailbox',
-    component: lazy(() => import('@iso/containers/Mail/Mail')),
+    path: 'SignUp',
+    component: lazy(() => import('../Signup/Signup')),
   },
   {
     path: 'calendar',
