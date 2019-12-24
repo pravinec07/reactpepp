@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: 'my-profile',
-    component: lazy(() => import('@iso/containers/Profile/Profile')),
+    component: lazy(() => import('../Profile/Profile')),
   },
   {
     path: 'assignments',
