@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Input from '@iso/components/uielements/input';
 import Checkbox from '@iso/components/uielements/checkbox';
 import Button from '@iso/components/uielements/button';
+import Form from '@iso/components/uielements/form';
 import IntlMessages from '@iso/components/utility/intlMessages';
-import authAction from '@iso/redux/auth/actions';
+import authAction from '../../redux/auth/actions';
 import appAction from '@iso/redux/app/actions';
 import SignInStyleWrapper from './SignIn.styles';
 
@@ -16,6 +17,10 @@ export default function SignIn() {
   let history = useHistory();
   let location = useLocation();
   const dispatch = useDispatch();
+  const [userName, setUserName] = React.useState('sami.frnd@gmail.com');
+  const [password, setPassword] = React.useState('Ajaysoni@1234');
+  const [remeberMe, setRemeberMe] = React.useState(false);
+
   const isLoggedIn = useSelector(state => state.Auth.idToken);
 
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
@@ -27,14 +32,14 @@ export default function SignIn() {
 
   function handleLogin(e, token = false) {
     e.preventDefault();
-    if (token) {
-      dispatch(login(token));
-    } else {
-      dispatch(login());
+    if (userName && password) {
+      dispatch(login({ username: userName, password }));
+
+      // dispatch(clearMenu());
+      // history.push("/dashboard");
     }
-    dispatch(clearMenu());
-    history.push('/dashboard');
   }
+
   let { from } = location.state || { from: { pathname: '/dashboard' } };
 
   if (redirectToReferrer) {
@@ -50,12 +55,14 @@ export default function SignIn() {
             </Link>
           </div>
           <div className="isoSignInForm">
-            <form>
+            <Form onSubmit={handleLogin}>
               <div className="isoInputWrapper">
                 <Input
                   size="large"
                   placeholder="Username"
                   autoComplete="true"
+                  value={userName}
+                  onChange={e => setUserName(e.target.value)}
                 />
               </div>
               <div className="isoInputWrapper">
@@ -64,18 +71,23 @@ export default function SignIn() {
                   type="password"
                   placeholder="Password"
                   autoComplete="false"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
                 />
               </div>
 
               <div className="isoInputWrapper isoLeftRightComponent">
-                <Checkbox>
+                <Checkbox
+                  checked={remeberMe}
+                  onClick={() => setRemeberMe(!remeberMe)}
+                >
                   <IntlMessages id="page.writer.signInRememberMe" />
                 </Checkbox>
-                <Button type="primary" onClick={handleLogin}>
+                <Button type="primary" htmlType="submit">
                   <IntlMessages id="page.writer.signInButton" />
                 </Button>
               </div>
-            </form>
+            </Form>
             <div className="isoCenterComponent isoHelperWrapper">
               <Link to="/forgotpassword" className="isoForgotPass">
                 <IntlMessages id="page.signInForgotPass" />
