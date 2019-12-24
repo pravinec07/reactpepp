@@ -147,7 +147,7 @@ function SignUp(props) {
           </>
         );
       }
-      case 4: {
+      case 5: {
         return (
           <>
             <FormItem {...tailFormItemLayout}>
@@ -312,6 +312,10 @@ function SignUp(props) {
                       )}
                     </FormItem>
                   </div>
+                </>
+              )}
+              {formStep === 2 && (
+                <>
                   <div className="isoInputWrapper">
                     <FormItem
                       label="Please upload your CV"
@@ -329,10 +333,6 @@ function SignUp(props) {
                       </Dragger>
                     </FormItem>
                   </div>
-                </>
-              )}
-              {formStep === 2 && (
-                <>
                   <div className="isoInputWrapper">
                     <FormItem
                       label="Please select your Most Prefered Genre"
@@ -402,6 +402,10 @@ function SignUp(props) {
                       </Select>
                     </FormItem>
                   </div>
+                </>
+              )}
+              {formStep === 3 && (
+                <>
                   <div className="isoInputWrapper">
                     <FormItem
                       label="Please select your Most Preferred Vertical"
@@ -462,10 +466,6 @@ function SignUp(props) {
                       </Select>
                     </FormItem>
                   </div>
-                </>
-              )}
-              {formStep === 3 && (
-                <>
                   <div className="isoInputWrapper">
                     <FormItem
                       label="What languages are you proficient in?"
@@ -478,6 +478,10 @@ function SignUp(props) {
                       />
                     </FormItem>
                   </div>
+                </>
+              )}
+              {formStep === 4 && (
+                <>
                   <div className="isoInputWrapper">
                     <FormItem
                       label="Please upload Samples (Preferably in the categories that you have selected.)"
@@ -523,10 +527,6 @@ function SignUp(props) {
                       </Select>
                     </FormItem>
                   </div>
-                </>
-              )}
-              {formStep === 4 && (
-                <>
                   <div className="isoInputWrapper">
                     <FormItem
                       label="Please tell us a bit about your previous writing experiences and skillsets."
@@ -535,6 +535,10 @@ function SignUp(props) {
                       <TextArea />
                     </FormItem>
                   </div>
+                </>
+              )}
+              {formStep === 5 && (
+                <>
                   <div className="isoInputWrapper">
                     <FormItem
                       label="Please list down the companies that you've worked for in the past."

@@ -1,4 +1,4 @@
-export default class AssignmentDetail {
+export default class SignUp {
   constructor(data) {
     this.data = data;
     this.modifiedData = {};
