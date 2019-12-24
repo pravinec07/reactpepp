@@ -3,7 +3,7 @@ import { Form, Input, Row, Col, Button, Radio } from 'antd';
 
 export default function Step1(props) {
   const { getFieldDecorator } = props.data.form;
-  const { handleRadioChange } = props;
+  const { handleRadioChange, handleNextBackAction } = props;
 
   return (
     <Fragment>
@@ -90,7 +90,11 @@ export default function Step1(props) {
       </Row>
       <Row gutter={24}>
         <Col span={24} style={{ textAlign: 'right' }}>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={handleNextBackAction(+1)}
+          >
             Next
           </Button>
         </Col>

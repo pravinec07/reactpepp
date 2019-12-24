@@ -4,96 +4,92 @@ import { useDispatch, useSelector } from 'react-redux';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import FormWrapper, { CardStyles } from './Signup.styles';
+import action from './actions';
 
-class Signup extends React.Component {
-  state = {
-    confirmDirty: false,
-    autoCompleteResult: [],
-    current: 1,
-    radios: { primaryIndustry: 0 },
-  };
+function Signup(props) {
+  const dispatch = useDispatch();
+  const isSignedUp = useSelector(state => state.Auth.idToken);
+  const [current, setCurrent] = React.useState(1);
+  const [confirmDirty, setConfirmDirty] = React.useState(false);
+  const [radios, setRadios] = React.useState({ primaryIndustry: 0 });
 
-  handleSubmit = e => {
+  function handleSubmit(e) {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        this.setState({
-          current: this.state.current + 1,
-        });
+        dispatch(action.fetchSignUpSaveStart(values));
       }
+      setCurrent(current + 1);
     });
-  };
+  }
 
-  handleConfirmBlur = e => {
+  function handleConfirmBlur(e) {
     const { value } = e.target;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  };
+    setConfirmDirty(confirmDirty || !!value);
+  }
 
-  handleback = e => {
-    this.setState({
-      current: this.state.current - 1,
-    });
-  };
+  function handleNextBackAction(val) {
+    if (val > 0) {
+      props.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          setCurrent(current + val);
+        }
+      });
+    } else {
+      setCurrent(current + val);
+    }
+  }
 
-  handleRadioChange = e => {
+  function handleRadioChange(e) {
     e.preventDefault();
     switch (e.target.name) {
       case 'identification': {
-        this.setState({
-          radios: { ...this.state.radios, identification: e.target.value },
-        });
+        setRadios({ ...radios, identification: e.target.value });
         break;
       }
       case 'primaryIndustry': {
-        this.setState({
-          radios: { ...this.state.radios, primaryIndustry: e.target.value },
-        });
+        setRadios({ ...radios, primaryIndustry: e.target.value });
         break;
       }
       case 'isLanguage': {
-        this.setState({
-          radios: { ...this.state.radios, isLanguage: e.target.value },
-        });
+        setRadios({ ...radios, primaryIndustry: e.target.value });
         break;
       }
     }
-  };
-
-  render() {
-    const { current } = this.state;
-    return (
-      <FormWrapper>
-        <Card styles={{ CardStyles }}>
-          <div className="isoSignupContentWrapper">
-            <Form
-              layout="vertical"
-              onSubmit={this.handleSubmit}
-              style={{ padding: '50px 100px' }}
-            >
-              {current === 1 && (
-                <Step1
-                  data={this.props}
-                  radios={this.state.radios}
-                  handleRadioChange={this.handleRadioChange}
-                />
-              )}
-              {current === 2 && (
-                <Step2
-                  data={this.props}
-                  handleback={this.handleback}
-                  radios={this.state.radios}
-                  handleRadioChange={this.handleRadioChange}
-                  identityType={this.state.radios.identification}
-                />
-              )}
-              {current === 3 && <div>Thankyou for sign up!!!</div>}
-            </Form>
-          </div>
-        </Card>
-      </FormWrapper>
-    );
   }
+
+  return (
+    <FormWrapper>
+      <Card styles={{ CardStyles }}>
+        <div className="isoSignupContentWrapper">
+          <Form
+            layout="vertical"
+            onSubmit={handleSubmit}
+            style={{ padding: '50px 100px' }}
+          >
+            {current === 1 && (
+              <Step1
+                data={props}
+                radios={radios}
+                handleRadioChange={handleRadioChange}
+                handleNextBackAction={handleNextBackAction}
+              />
+            )}
+            {current === 2 && (
+              <Step2
+                data={props}
+                handleNextBackAction={handleNextBackAction}
+                radios={radios}
+                handleRadioChange={handleRadioChange}
+                identityType={radios.identification}
+              />
+            )}
+            {current === 3 && <div>Thankyou for sign up!!!</div>}
+          </Form>
+        </div>
+      </Card>
+    </FormWrapper>
+  );
 }
 
 const SignupForm = Form.create({ name: 'signup' })(Signup);

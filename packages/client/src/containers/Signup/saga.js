@@ -1,6 +1,7 @@
 // saga.js
 import { all, takeEvery, put } from 'redux-saga/effects';
 import Actions from './actions';
+import { signUp } from '../../services/usersApi';
 
 function* fetchSignupDataEffect() {
   try {

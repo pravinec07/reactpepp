@@ -5,7 +5,12 @@ export default function Step2(props) {
   const { getFieldDecorator } = props.data.form;
   const { TextArea } = Input;
   const { Option } = Select;
-  const { handleSelectChange, handleRadioChange, radios, identityType } = props;
+  const {
+    handleNextBackAction,
+    handleRadioChange,
+    radios,
+    identityType,
+  } = props;
   const radioStyle = {
     display: 'block',
     height: '30px',
@@ -264,7 +269,13 @@ export default function Step2(props) {
       )}
       <Row gutter={24}>
         <Col xs={12} sm={12} style={{ textAlign: 'left' }}>
-          <Button type="primary">Back</Button>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={handleNextBackAction}
+          >
+            Back
+          </Button>
         </Col>
         <Col xs={12} sm={12} style={{ textAlign: 'right' }}>
           <Button type="primary" htmlType="submit">
