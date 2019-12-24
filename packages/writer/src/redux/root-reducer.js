@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import App from '@iso/redux/app/reducer';
-import Auth from '@iso/redux/auth/reducer';
+import Auth from './auth/reducer';
 import Mails from '@iso/redux/mail/reducer';
 import Calendar from '@iso/redux/calendar/reducer';
 import Box from '@iso/redux/box/reducer';
@@ -15,7 +15,7 @@ import ThemeSwitcher from '@iso/redux/themeSwitcher/reducer';
 import Invoices from '@iso/redux/invoice/reducer';
 import LanguageSwitcher from '@iso/redux/languageSwitcher/reducer';
 import YoutubeSearch from '@iso/redux/youtubeSearch/reducers';
-import Article from '@iso/redux/article/reducers';
+import Articles from './articles/reducers';
 import Investors from '@iso/redux/investors/reducers';
 import scrumBoard from '@iso/redux/scrumBoard/reducer';
 import drawer from '@iso/redux/drawer/reducer';
@@ -40,7 +40,7 @@ export default combineReducers({
   Ecommerce,
   Invoices,
   YoutubeSearch,
-  Article,
+  Articles,
   Investors,
   scrumBoard,
   modal,

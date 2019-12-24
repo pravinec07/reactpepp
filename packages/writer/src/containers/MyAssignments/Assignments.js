@@ -18,7 +18,7 @@ function onStatusChange(row, col) {
   console.log(row, col);
 }
 export default function AssignmentCantainer() {
-  const { articles } = useSelector(state => state.Article);
+  const { articles } = useSelector(state => state.Articles);
   const [articlesData, setArticle] = useState([]);
   const dispatch = useDispatch();
   React.useEffect(() => {
