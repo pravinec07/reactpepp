@@ -1,6 +1,6 @@
 import actions from './actions';
 
-const initState = { idToken: null };
+const initState = { idToken: null, profile: null };
 
 export default function authReducer(state = initState, action) {
   console.log(action, '----->');
@@ -8,6 +8,7 @@ export default function authReducer(state = initState, action) {
     case actions.LOGIN_SUCCESS:
       return {
         idToken: action.token,
+        profile: action.profile,
       };
     case actions.LOGOUT:
       return initState;
