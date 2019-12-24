@@ -6,23 +6,18 @@ const options = [
   },
   {
     key: 'assignments',
-    label: 'sidebar.assignments',
+    label: 'Assignments',
     leftIcon: 'ion-person',
   },
   {
     key: 'project',
-    label: 'sidebar.myassignments',
-    leftIcon: 'ion-person',
+    label: 'Project',
+    leftIcon: 'ion-android-checkbox-outline',
   },
   {
-    key: 'invoice',
-    label: 'sidebar.payment',
+    key: 'payment',
+    label: 'Payment',
     leftIcon: 'ion-clipboard',
-  },
-  {
-    key: 'chat',
-    label: 'sidebar.chat',
-    leftIcon: 'ion-chatbubbles',
   },
 ];
 export default options;
