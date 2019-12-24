@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Input from '@iso/components/uielements/input';
 import Checkbox from '@iso/components/uielements/checkbox';
@@ -14,7 +14,7 @@ const { login } = authAction;
 const { clearMenu } = appAction;
 
 export default function SignIn() {
-  let history = useHistory();
+  // let history = useHistory();
   let location = useLocation();
   const dispatch = useDispatch();
   const [userName, setUserName] = React.useState('sami.frnd@gmail.com');
@@ -34,9 +34,7 @@ export default function SignIn() {
     e.preventDefault();
     if (userName && password) {
       dispatch(login({ username: userName, password }));
-
-      // dispatch(clearMenu());
-      // history.push("/dashboard");
+      dispatch(clearMenu());
     }
   }
 

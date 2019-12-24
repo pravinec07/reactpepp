@@ -1,13 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
 import { ProfileWrapper } from './Profile.styles';
-const ProfileData = {
-  name: 'Guest',
-};
+
 export default function ViewProfile(...props) {
   const { profile } = useSelector(state => state.Auth);
-  console.log(profile, '------>');
   return (
     <>
       <ProfileWrapper>

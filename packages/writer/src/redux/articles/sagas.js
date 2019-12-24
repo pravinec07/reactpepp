@@ -1,6 +1,5 @@
-import { all, takeEvery, put, call } from 'redux-saga/effects';
+import { all, takeEvery, put } from 'redux-saga/effects';
 import actions from './actions';
-import omit from 'lodash/omit';
 import fakeData from './fakeData';
 
 const fakeDataList = new fakeData(5).getAll();

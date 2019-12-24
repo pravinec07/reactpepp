@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
 import Input from '@iso/components/uielements/input';
 import Checkbox from '@iso/components/uielements/checkbox';
 import Button from '@iso/components/uielements/button';
@@ -9,8 +9,6 @@ import Upload from '@iso/components/uielements/upload';
 import message from '@iso/components/uielements/message';
 import Icon from '@iso/components/uielements/icon';
 import Form from '@iso/components/uielements/form';
-import authAction from '@iso/redux/auth/actions';
-import appActions from '@iso/redux/app/actions';
 import IntlMessages from '@iso/components/utility/intlMessages';
 import SignUpStyleWrapper from './SignUp.styles';
 import {
@@ -23,8 +21,6 @@ import {
 import TextArea from 'antd/lib/input/TextArea';
 
 const { Dragger } = Upload;
-const { login } = authAction;
-const { clearMenu } = appActions;
 const FormItem = Form.Item;
 
 const draggerProps = {
@@ -60,8 +56,6 @@ function onSearch(val) {
   console.log('search:', val);
 }
 function SignUp(props) {
-  const dispatch = useDispatch();
-  const history = useHistory();
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const [formStep, setFormStep] = React.useState(1);
 
@@ -99,16 +93,6 @@ function SignUp(props) {
 
   const { getFieldDecorator } = props.form;
 
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 6 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 14 },
-    },
-  };
   const tailFormItemLayout = {
     wrapperCol: {
       xs: {
@@ -193,16 +177,7 @@ function SignUp(props) {
       }
     }
   };
-  const handleLogin = (token = false) => {
-    console.log(token, 'handlelogin');
-    if (token) {
-      dispatch(login(token));
-    } else {
-      dispatch(login());
-    }
-    dispatch(clearMenu());
-    history.push('/dashboard');
-  };
+
   return (
     <SignUpStyleWrapper className="isoSignUpPage">
       <div className="isoSignUpContentWrapper">

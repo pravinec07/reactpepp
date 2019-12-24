@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import articleActions from '@iso/redux/article/actions';
-import { Tabs, Row, Col, Card } from 'antd';
+import { Row, Col, Card } from 'antd';
 import ArticlesListing from '@iso/containers/Writer/MyArticles/MyArticlesListing';
 import DisplayPageDetails from '@iso/containers/DisplayPageDetails/DisplayPageDetails';
 import BasicStyle from './Assignments.style';
-const STATUS = {
-  IN_PROGRESS: 'In-Progress',
-  SUBMITTED: 'Submitted',
-  COMPLETED: 'Completed',
-  REJECTED: 'Rejected',
-};
-const { TabPane } = Tabs;
 const { cardStyle, rowStyle, colStyle } = BasicStyle;
 const { getArticle } = articleActions;
 function onStatusChange(row, col) {
-  console.log(row, col);
+  // console.log(row, col);
 }
 export default function AssignmentCantainer() {
   const { articles } = useSelector(state => state.Articles);
-  const [articlesData, setArticle] = useState([]);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getArticle());

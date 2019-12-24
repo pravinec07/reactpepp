@@ -15,7 +15,7 @@ const { TabPane } = Tabs;
 const { cardStyle, rowStyle, colStyle } = BasicStyle;
 const { getArticle } = articleActions;
 function onStatusChange(row, col) {
-  console.log(row, col);
+  // console.log(row, col);
 }
 export default function AssignmentCantainer() {
   const { articles } = useSelector(state => state.Articles);

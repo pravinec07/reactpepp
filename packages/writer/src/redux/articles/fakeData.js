@@ -4,7 +4,7 @@ const RawData = {
   id: '939d07e3-1e00-46fc-aefb-db8938031efa',
   articleName: 'pepper article1',
   articleDesc: 'pepper article description1',
-  createdDate: 1576400578533,
+  createdDate: createdAt,
   projectId: 'cd3e150f-8b3d-4cb5-92d5-ff8b598505db',
   deadLineDate: 1577005378534,
   articleCode: 'ART-01',
