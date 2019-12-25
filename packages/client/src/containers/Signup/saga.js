@@ -1,17 +1,19 @@
 // saga.js
-import { all, takeEvery, put } from 'redux-saga/effects';
-import Actions from './actions';
+import { all, takeEvery, put, call, fork } from 'redux-saga/effects';
+import actions from './actions';
 import { signUp } from '../../services/usersApi';
 
 function* fetchSignupDataEffect() {
   try {
-    let profile = 'DemoProfileData';
-    yield put(Actions.fetchSignUpSaveSuccess(profile));
+    yield takeEvery(actions.FETCH_START, function*(payload) {
+      let data = yield call(signUp, payload.payload);
+      yield put(actions.fetchSignUpSaveSuccess(data));
+    });
   } catch (error) {
-    yield put(Actions.fetchSignUpSaveFailure(error));
+    console.log(error);
+    yield put(actions.getArticleError(error));
   }
 }
-
-export default function* signUpSaga() {
-  yield all([takeEvery(Actions.FETCH_START, fetchSignupDataEffect)]);
+export default function* rootSaga() {
+  yield all([fork(fetchSignupDataEffect)]);
 }

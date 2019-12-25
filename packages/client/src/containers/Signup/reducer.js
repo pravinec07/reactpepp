@@ -11,12 +11,19 @@ export default function signupReducer(state = INITIAL_DATA, action) {
       return {
         ...state,
         data: action.payload,
+        loading: true,
+        error: null,
+      };
+    case Actions.FETCH_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
         loading: false,
         error: null,
       };
     case Actions.FETCH_FAILURE:
       return {
-        ...state,
+        data: action.payload,
         loading: false,
         error: action.payload,
       };

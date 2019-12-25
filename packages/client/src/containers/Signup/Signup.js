@@ -1,38 +1,33 @@
 import React, { Fragment } from 'react';
 import { Form, Card } from 'antd';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import FormWrapper, { CardStyles } from './Signup.styles';
 import action from './actions';
+import { PUBLIC_ROUTE } from '../../route.constants';
 
 function Signup(props) {
   const dispatch = useDispatch();
-  const isSignedUp = useSelector(state => state.Auth.idToken);
+  const signupResponse = useSelector(state => state.signup);
   const [current, setCurrent] = React.useState(1);
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const [radios, setRadios] = React.useState({ primaryIndustry: 0 });
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        dispatch(action.fetchSignUpSaveStart(values));
-      }
-      setCurrent(current + 1);
-    });
-  }
 
   function handleConfirmBlur(e) {
     const { value } = e.target;
     setConfirmDirty(confirmDirty || !!value);
   }
 
-  function handleNextBackAction(val) {
+  function handleNextBackAction(val, isSubmit) {
     if (val > 0) {
       props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           setCurrent(current + val);
+          if (isSubmit) {
+            dispatch(action.fetchSignUpSaveStart(JSON.stringify(values)));
+          }
         }
       });
     } else {
@@ -52,7 +47,7 @@ function Signup(props) {
         break;
       }
       case 'isLanguage': {
-        setRadios({ ...radios, primaryIndustry: e.target.value });
+        setRadios({ ...radios, isLanguage: e.target.value });
         break;
       }
     }
@@ -64,7 +59,7 @@ function Signup(props) {
         <div className="isoSignupContentWrapper">
           <Form
             layout="vertical"
-            onSubmit={handleSubmit}
+            onSubmit={handleNextBackAction}
             style={{ padding: '50px 100px' }}
           >
             {current === 1 && (
@@ -84,7 +79,12 @@ function Signup(props) {
                 identityType={radios.identification}
               />
             )}
-            {current === 3 && <div>Thankyou for sign up!!!</div>}
+            {current === 3 && (
+              <div>
+                <p>Thankyou for sign up!!!</p>
+                <Link to={PUBLIC_ROUTE.SIGN_IN}>Login</Link>
+              </div>
+            )}
           </Form>
         </div>
       </Card>

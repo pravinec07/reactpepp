@@ -22,53 +22,82 @@ export default function Step2(props) {
         <Row gutter={24}>
           <Col xs={24}>
             <Form.Item label="Primary industry">
-              <Radio.Group name="primaryIndustry" onChange={handleRadioChange}>
-                <Radio style={radioStyle} key={'primaryIndustry1'} value={1}>
-                  Health and Medical
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry2'} value={2}>
-                  Business and Finance
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry3'} value={3}>
-                  Technical
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry4'} value={4}>
-                  Deep Technical- AI/ML/IoT/Cybersecurity
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry5'} value={5}>
-                  Lifestyle and Fashion
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry6'} value={6}>
-                  Food and Beverage/Nutrition
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry7'} value={7}>
-                  News Content/Entertainment
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry8'} value={8}>
-                  Travel and Hospitality
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry9'} value={9}>
-                  Sports and Recreation
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry10'} value={10}>
-                  Real Estate
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry11'} value={11}>
-                  Astrology and Spiritual
-                </Radio>{' '}
-                <Radio style={radioStyle} key={'primaryIndustry12'} value={12}>
-                  Generic
-                </Radio>
-                <Radio style={radioStyle} key={'primaryIndustry13'} value={13}>
-                  Other
-                  {radios.primaryIndustry === 13 ? (
-                    <Input
-                      name="primaryIndustryOther"
-                      style={{ width: 100, marginLeft: 10 }}
-                    />
-                  ) : null}
-                </Radio>
-              </Radio.Group>
+              {' '}
+              {getFieldDecorator('industryType', {
+                rules: [
+                  {
+                    required: false,
+                    message: 'Please select industry type',
+                  },
+                ],
+              })(
+                <Radio.Group
+                  name="primaryIndustry"
+                  onChange={handleRadioChange}
+                >
+                  <Radio style={radioStyle} key={'primaryIndustry1'} value={1}>
+                    Health and Medical
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry2'} value={2}>
+                    Business and Finance
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry3'} value={3}>
+                    Technical
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry4'} value={4}>
+                    Deep Technical- AI/ML/IoT/Cybersecurity
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry5'} value={5}>
+                    Lifestyle and Fashion
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry6'} value={6}>
+                    Food and Beverage/Nutrition
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry7'} value={7}>
+                    News Content/Entertainment
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry8'} value={8}>
+                    Travel and Hospitality
+                  </Radio>
+                  <Radio style={radioStyle} key={'primaryIndustry9'} value={9}>
+                    Sports and Recreation
+                  </Radio>
+                  <Radio
+                    style={radioStyle}
+                    key={'primaryIndustry10'}
+                    value={10}
+                  >
+                    Real Estate
+                  </Radio>
+                  <Radio
+                    style={radioStyle}
+                    key={'primaryIndustry11'}
+                    value={11}
+                  >
+                    Astrology and Spiritual
+                  </Radio>{' '}
+                  <Radio
+                    style={radioStyle}
+                    key={'primaryIndustry12'}
+                    value={12}
+                  >
+                    Generic
+                  </Radio>
+                  <Radio
+                    style={radioStyle}
+                    key={'primaryIndustry13'}
+                    value={13}
+                  >
+                    Other
+                    {radios.primaryIndustry === 13 ? (
+                      <Input
+                        name="primaryIndustryOther"
+                        style={{ width: 100, marginLeft: 10 }}
+                      />
+                    ) : null}
+                  </Radio>
+                </Radio.Group>
+              )}
             </Form.Item>
           </Col>
           <Col xs={24}>
@@ -86,7 +115,7 @@ export default function Step2(props) {
           {radios.isLanguage === 1 && (
             <Col xs={24}>
               <Form.Item label="If 'Yes' then could you tell us ehich languages?">
-                {getFieldDecorator('language', {
+                {getFieldDecorator('languages', {
                   rules: [
                     {
                       required: false,
@@ -132,7 +161,7 @@ export default function Step2(props) {
           )}
           <Col xs={24}>
             <Form.Item label="Volume of content pieces per month?">
-              {getFieldDecorator('volume', {
+              {getFieldDecorator('volumeofContent', {
                 rules: [
                   {
                     required: true,
@@ -148,16 +177,16 @@ export default function Step2(props) {
                   <Option key={'volume2'} value="type2">
                     10-20
                   </Option>
-                  <Option key={'volume3'} value="type2">
+                  <Option key={'volume3'} value="type3">
                     20-40
                   </Option>
-                  <Option key={'volume4'} value="type2">
+                  <Option key={'volume4'} value="type4">
                     40-70
                   </Option>
-                  <Option key={'volume5'} value="type2">
+                  <Option key={'volume5'} value="type5">
                     70-100
                   </Option>
-                  <Option key={'volume6'} value="type2">
+                  <Option key={'volume6'} value="type6">
                     >100
                   </Option>
                 </Select>
@@ -166,7 +195,7 @@ export default function Step2(props) {
           </Col>
           <Col xs={24}>
             <Form.Item label="Estimated monthly budget on content?(INR)">
-              {getFieldDecorator('budget', {
+              {getFieldDecorator('estimatedMonthlyBudget', {
                 rules: [
                   {
                     required: true,
@@ -179,16 +208,16 @@ export default function Step2(props) {
                   <Option key={'budget1'} value="type1">
                     15,000-35,000
                   </Option>
-                  <Option key={'budget2'} value="type2">
+                  <Option key={'budget2'} value="type3">
                     35,000-1,00,000
                   </Option>
-                  <Option key={'budget3'} value="type2">
+                  <Option key={'budget3'} value="type4">
                     1,00,000-4,00,000
                   </Option>
-                  <Option key={'budget4'} value="type2">
+                  <Option key={'budget4'} value="type5">
                     4,00,000-10,00,000
                   </Option>
-                  <Option key={'budget5'} value="type2">
+                  <Option key={'budget5'} value="type6">
                     >10,00,000
                   </Option>
                 </Select>
@@ -212,7 +241,7 @@ export default function Step2(props) {
           </Col>
           <Col xs={24}>
             <Form.Item label="Any Message or requirements you would like us to know of?">
-              {getFieldDecorator('message', {
+              {getFieldDecorator('requirements', {
                 rules: [
                   {
                     required: true,
@@ -228,7 +257,7 @@ export default function Step2(props) {
         <Row gutter={24}>
           <Col xs={24}>
             <Form.Item label="How many clients do you create content for?">
-              {getFieldDecorator('clientNo', {
+              {getFieldDecorator('contentFor', {
                 rules: [
                   {
                     required: false,
@@ -272,13 +301,17 @@ export default function Step2(props) {
           <Button
             type="primary"
             htmlType="button"
-            onClick={handleNextBackAction}
+            onClick={() => handleNextBackAction(-1)}
           >
             Back
           </Button>
         </Col>
         <Col xs={12} sm={12} style={{ textAlign: 'right' }}>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={() => handleNextBackAction(+1, true)}
+          >
             Next
           </Button>
         </Col>

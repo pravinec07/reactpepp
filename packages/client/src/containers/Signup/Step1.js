@@ -22,7 +22,7 @@ export default function Step1(props) {
         </Col>
         <Col xs={24}>
           <Form.Item label="Your Name">
-            {getFieldDecorator('name', {
+            {getFieldDecorator('username', {
               rules: [
                 {
                   required: true,
@@ -47,7 +47,7 @@ export default function Step1(props) {
 
         <Col xs={24}>
           <Form.Item label="Contact Number">
-            {getFieldDecorator('contactNum', {
+            {getFieldDecorator('phoneNumber', {
               rules: [
                 {
                   required: true,
@@ -60,7 +60,7 @@ export default function Step1(props) {
 
         <Col xs={24}>
           <Form.Item label="Please identify yourself">
-            {getFieldDecorator('identification', {
+            {getFieldDecorator('identifyType', {
               rules: [
                 {
                   required: true,
@@ -93,7 +93,7 @@ export default function Step1(props) {
           <Button
             type="primary"
             htmlType="button"
-            onClick={handleNextBackAction(+1)}
+            onClick={() => handleNextBackAction(+1)}
           >
             Next
           </Button>
