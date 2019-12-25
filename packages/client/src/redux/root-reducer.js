@@ -22,6 +22,7 @@ import drawer from '@iso/redux/drawer/reducer';
 import modal from '@iso/redux/modal/reducer';
 import profile from '@iso/redux/profile/reducer';
 import githubSearch from '@iso/redux/githubSearch/reducers';
+import signup from '../containers/Signup/reducer';
 
 export default combineReducers({
   Auth,
@@ -47,4 +48,5 @@ export default combineReducers({
   drawer,
   profile,
   githubSearch,
+  signup,
 });

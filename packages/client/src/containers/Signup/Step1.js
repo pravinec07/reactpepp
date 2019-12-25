@@ -3,7 +3,7 @@ import { Form, Input, Row, Col, Button, Radio } from 'antd';
 
 export default function Step1(props) {
   const { getFieldDecorator } = props.data.form;
-  const { handleRadioChange } = props;
+  const { handleRadioChange, handleNextBackAction } = props;
 
   return (
     <Fragment>
@@ -22,7 +22,7 @@ export default function Step1(props) {
         </Col>
         <Col xs={24}>
           <Form.Item label="Your Name">
-            {getFieldDecorator('name', {
+            {getFieldDecorator('username', {
               rules: [
                 {
                   required: true,
@@ -47,7 +47,7 @@ export default function Step1(props) {
 
         <Col xs={24}>
           <Form.Item label="Contact Number">
-            {getFieldDecorator('contactNum', {
+            {getFieldDecorator('phoneNumber', {
               rules: [
                 {
                   required: true,
@@ -60,7 +60,7 @@ export default function Step1(props) {
 
         <Col xs={24}>
           <Form.Item label="Please identify yourself">
-            {getFieldDecorator('identification', {
+            {getFieldDecorator('identifyType', {
               rules: [
                 {
                   required: true,
@@ -73,13 +73,13 @@ export default function Step1(props) {
                 onChange={handleRadioChange}
                 style={{}}
               >
-                <Radio value={1}>
+                <Radio value={'business'}>
                   I'm a Business- I need content for my company
                 </Radio>
-                <Radio value={2}>
+                <Radio value={'agency'}>
                   I'm an Agency- I need content for my clients
                 </Radio>
-                <Radio value={3}>
+                <Radio value={'individual'}>
                   I'm an individual- I need content for my website,
                   <br /> social media channel, blogs, etc.
                 </Radio>
@@ -90,7 +90,11 @@ export default function Step1(props) {
       </Row>
       <Row gutter={24}>
         <Col span={24} style={{ textAlign: 'right' }}>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={() => handleNextBackAction(+1)}
+          >
             Next
           </Button>
         </Col>
