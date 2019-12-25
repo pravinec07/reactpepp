@@ -8,24 +8,28 @@ const history = createBrowserHistory();
 
 export function* loginRequest() {
   yield takeEvery('LOGIN_REQUEST', function*({ payload }) {
-    const response = yield call(signIn, payload);
-    switch (response.status) {
-      case 200:
-        yield put({
-          type: actions.LOGIN_SUCCESS,
-          token: response.data.accessToken,
-          profile: response.data,
-        });
-        break;
-      case 404:
-        yield put({ type: actions.LOGIN_ERROR });
-        break;
-      case 500:
-        yield put({ type: actions.LOGIN_ERROR });
-        break;
-      default:
-        yield put({ type: actions.LOGIN_ERROR });
-        break;
+    try {
+      const response = yield call(signIn, payload);
+      switch (response.status) {
+        case 200:
+          yield put({
+            type: actions.LOGIN_SUCCESS,
+            token: response.data.accessToken,
+            profile: response.data,
+          });
+          break;
+        case 404:
+          yield put({ type: actions.LOGIN_ERROR });
+          break;
+        case 500:
+          yield put({ type: actions.LOGIN_ERROR });
+          break;
+        default:
+          yield put({ type: actions.LOGIN_ERROR });
+          break;
+      }
+    } catch (e) {
+      yield put({ type: actions.LOGIN_ERROR, payload: e });
     }
   });
 }

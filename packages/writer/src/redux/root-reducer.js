@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import App from '@iso/redux/app/reducer';
 import Auth from './auth/reducer';
+import User from './user/reducer';
 import Mails from '@iso/redux/mail/reducer';
 import Calendar from '@iso/redux/calendar/reducer';
 import Box from '@iso/redux/box/reducer';
@@ -25,6 +26,7 @@ import githubSearch from '@iso/redux/githubSearch/reducers';
 
 export default combineReducers({
   Auth,
+  User,
   App,
   ThemeSwitcher,
   LanguageSwitcher,
