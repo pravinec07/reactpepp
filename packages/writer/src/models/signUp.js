@@ -6,7 +6,7 @@ export default class Model {
   }
 
   init(data) {
-    this.username = data.username || '';
+    // this.username = data.username || '';
     this.password = data.password || '';
     this.email = data.email || '';
     this.emailVerified = true;
