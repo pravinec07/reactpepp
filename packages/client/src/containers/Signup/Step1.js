@@ -73,13 +73,13 @@ export default function Step1(props) {
                 onChange={handleRadioChange}
                 style={{}}
               >
-                <Radio value={1}>
+                <Radio value={'business'}>
                   I'm a Business- I need content for my company
                 </Radio>
-                <Radio value={2}>
+                <Radio value={'agency'}>
                   I'm an Agency- I need content for my clients
                 </Radio>
-                <Radio value={3}>
+                <Radio value={'individual'}>
                   I'm an individual- I need content for my website,
                   <br /> social media channel, blogs, etc.
                 </Radio>
