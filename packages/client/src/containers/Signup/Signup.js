@@ -43,7 +43,20 @@ function Signup(props) {
           if (isSubmit) {
             console.log(fullData);
             const ph = `${fullData.prefix}${fullData.phoneNumber}`;
-            fullData = { ...fullData, phoneNumber: ph };
+            fullData = {
+              ...fullData,
+              phoneNumber: ph,
+              volumeofContent: fullData.volumeofContent
+                ? JSON.stringify(fullData.volumeofContent)
+                : '',
+              estimatedMonthlyBudget: fullData.estimatedMonthlyBudget
+                ? JSON.stringify(fullData.estimatedMonthlyBudget)
+                : '',
+              marketingType: fullData.marketingType
+                ? JSON.stringify(fullData.marketingType)
+                : '',
+            };
+            console.log('full data', fullData);
             dispatch(action.fetchSignUpSaveStart(fullData));
           }
         }
