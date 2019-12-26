@@ -7,7 +7,7 @@ import Step2 from './Step2';
 import FormWrapper, { CardStyles } from './Signup.styles';
 import action from './actions';
 import { PUBLIC_ROUTE } from '../../route.constants';
-
+let fullData;
 function Signup(props) {
   const dispatch = useDispatch();
   const signupResponse = useSelector(state => state.signup);
@@ -15,8 +15,20 @@ function Signup(props) {
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const [radios, setRadios] = React.useState({ primaryIndustry: 0 });
 
-  function handleConfirmBlur(e) {
-    const { value } = e.target;
+  function handleBlur(e) {
+    const { value, name } = e.target;
+    console.log(
+      'hello',
+      e.target,
+      props.form,
+      props.form.setFieldsvalue(
+        'phoneNumber',
+        props.form.getFieldValue('prefix') + value
+      )
+    );
+    if (name === 'phoneNumber') {
+      console.log(e.target);
+    }
     setConfirmDirty(confirmDirty || !!value);
   }
 
@@ -25,8 +37,14 @@ function Signup(props) {
       props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           setCurrent(current + val);
+          console.log(values);
+
+          fullData = { ...fullData, ...values };
           if (isSubmit) {
-            dispatch(action.fetchSignUpSaveStart(JSON.stringify(values)));
+            console.log(fullData);
+            const ph = `${fullData.prefix}${fullData.phoneNumber}`;
+            fullData = { ...fullData, phoneNumber: ph };
+            dispatch(action.fetchSignUpSaveStart(fullData));
           }
         }
       });
@@ -68,6 +86,7 @@ function Signup(props) {
                 radios={radios}
                 handleRadioChange={handleRadioChange}
                 handleNextBackAction={handleNextBackAction}
+                handleBlur={handleBlur}
               />
             )}
             {current === 2 && (

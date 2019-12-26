@@ -1,10 +1,17 @@
 import React, { Fragment } from 'react';
-import { Form, Input, Row, Col, Button, Radio } from 'antd';
+import { Form, Input, InputNumber, Row, Col, Button, Radio } from 'antd';
+import Select, { SelectOption } from '@iso/components/uielements/select';
 
 export default function Step1(props) {
   const { getFieldDecorator } = props.data.form;
-  const { handleRadioChange, handleNextBackAction } = props;
-
+  const { handleRadioChange, handleNextBackAction, handleBlur } = props;
+  const prefixSelector = getFieldDecorator('prefix', {
+    initialValue: '+91',
+  })(
+    <Select style={{ width: 70 }}>
+      <SelectOption value="+91">+91</SelectOption>
+    </Select>
+  );
   return (
     <Fragment>
       <Row gutter={24}>
@@ -15,18 +22,6 @@ export default function Step1(props) {
                 {
                   required: true,
                   message: 'Please input name of Company',
-                },
-              ],
-            })(<Input />)}
-          </Form.Item>
-        </Col>
-        <Col xs={24}>
-          <Form.Item label="Your Name">
-            {getFieldDecorator('username', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your name',
                 },
               ],
             })(<Input />)}
@@ -54,7 +49,7 @@ export default function Step1(props) {
                   message: 'Please input contact number',
                 },
               ],
-            })(<Input />)}
+            })(<Input addonBefore={prefixSelector} />)}
           </Form.Item>
         </Col>
 
