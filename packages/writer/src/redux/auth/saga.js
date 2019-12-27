@@ -9,14 +9,35 @@ const history = createBrowserHistory();
 export function* loginRequest() {
   yield takeEvery('LOGIN_REQUEST', function*({ payload }) {
     try {
+      console.log(payload, 'LOGIN_REQUEST');
+
       const response = yield call(signIn, payload);
+      console.log(response, payload, '-------->');
+
       switch (response.status) {
         case 200:
-          yield put({
-            type: actions.LOGIN_SUCCESS,
-            token: response.data.accessToken,
-            profile: response.data,
-          });
+          const status =
+            response.data.metadata && response.data.metadata.status
+              ? response.data.metadata.status
+              : 'SUCCESS';
+          switch (status) {
+            case 'SUCCESS':
+              const token = Buffer.from(JSON.stringify(response.data)).toString(
+                'base64'
+              );
+              yield put({
+                type: actions.LOGIN_SUCCESS,
+                token,
+              });
+              yield localStorage.setItem('id_token', token);
+              break;
+            default:
+              yield put({
+                type: actions.LOGIN_ERROR,
+                payload: response.data.errors[0].message.split('(')[0],
+              });
+              break;
+          }
           break;
         case 404:
           yield put({ type: actions.LOGIN_ERROR });
@@ -34,17 +55,6 @@ export function* loginRequest() {
   });
 }
 
-export function* loginSuccess() {
-  yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
-    yield localStorage.setItem('id_token', payload.token);
-    yield localStorage.setItem('profile', JSON.stringify(payload.profile));
-  });
-}
-
-export function* loginError() {
-  yield takeEvery(actions.LOGIN_ERROR, function*() {});
-}
-
 export function* logout() {
   yield takeEvery(actions.LOGOUT, function*() {
     yield clearToken();
@@ -58,17 +68,10 @@ export function* checkAuthorization() {
       yield put({
         type: actions.LOGIN_SUCCESS,
         token,
-        profile: 'Profile',
       });
     }
   });
 }
 export default function* rootSaga() {
-  yield all([
-    fork(checkAuthorization),
-    fork(loginRequest),
-    fork(loginSuccess),
-    fork(loginError),
-    fork(logout),
-  ]);
+  yield all([fork(checkAuthorization), fork(loginRequest), fork(logout)]);
 }

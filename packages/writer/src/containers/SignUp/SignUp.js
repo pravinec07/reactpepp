@@ -61,7 +61,7 @@ function onSearch(val) {
 }
 let formValues = {};
 function SignUp(props) {
-  const dev = false;
+  const dev = true;
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const [formStep, setFormStep] = React.useState(1);
   const dispatch = useDispatch();
