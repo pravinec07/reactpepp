@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
-import { Form, Input, Upload, Icon, Row, Col, Button, Table } from 'antd';
+import { Form, Input, Upload, Icon, Row, Col, Button, Table, Card } from 'antd';
 
 export default function AddArticlesForm(props) {
   const { articlesData } = props;
@@ -72,122 +72,144 @@ export default function AddArticlesForm(props) {
 
   return (
     <Fragment>
-      <Row gutter={24}>
-        <Col span={12}>
-          <Form.Item label="No. Of Articles">
-            {getFieldDecorator('noOfArticles', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input no. of Articles',
-                },
-              ],
-            })(<Input />)}
-          </Form.Item>
+      <Row>
+        <Col span={3}></Col>
+        <Col span={18}>
+          <Card
+            type="inner"
+            title="Add Article"
+            style={{ marginBottom: '20px' }}
+          >
+            <Row gutter={24}>
+              <Col span={24}>
+                <Form.Item label="No. Of Articles">
+                  {getFieldDecorator('noOfArticles', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input no. of Articles',
+                      },
+                    ],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={18}>
+                <Form.Item label="Article Topic">
+                  {getFieldDecorator('articleTopic', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your topic!',
+                        whitespace: true,
+                      },
+                    ],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Form.Item label="Word Count">
+                  {getFieldDecorator('wordCount', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input word count',
+                      },
+                    ],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={12}>
+                <Form.Item label="Keyword">
+                  {getFieldDecorator('keyword', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input keyword',
+                      },
+                    ],
+                  })(<TextArea />)}
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="References">
+                  {getFieldDecorator('references', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input References',
+                      },
+                    ],
+                  })(<TextArea />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={24}>
+                <Form.Item label="Description">
+                  {getFieldDecorator('description', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input Description',
+                      },
+                    ],
+                  })(<TextArea style={{ height: '120px' }} />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={24} style={{ float: 'right' }}>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Add
+                  </Button>
+                </Form.Item>
+                <hr />
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <Form.Item label="Download File">
+                      <Button type="primary" htmlType="Download CSV">
+                        Download CSV
+                      </Button>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="Upload file">
+                      {getFieldDecorator('dragger', {
+                        valuePropName: 'fileList',
+                        // getValueFromEvent: this.normFile,
+                      })(
+                        <Upload.Dragger
+                          name="files"
+                          action="/upload.do"
+                          style={{ height: '100px' }}
+                        >
+                          <p className="ant-upload-drag-icon">
+                            <Icon type="inbox" />
+                          </p>
+                          <p className="ant-upload-text">
+                            Click or drag file to this area to upload
+                          </p>
+                          <p className="ant-upload-hint">
+                            Support for a single or bulk upload.
+                          </p>
+                        </Upload.Dragger>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Table columns={columns} dataSource={articlesData} />
+                </Row>
+              </Col>
+            </Row>
+          </Card>
         </Col>
-        <Col span={12}>
-          <Form.Item label="Article Topic">
-            {getFieldDecorator('articleTopic', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your topic!',
-                  whitespace: true,
-                },
-              ],
-            })(<Input />)}
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item label="Word Count">
-            {getFieldDecorator('wordCount', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input word count',
-                },
-              ],
-            })(<Input />)}
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item label="Keyword">
-            {getFieldDecorator('keyword', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input keyword',
-                },
-              ],
-            })(<TextArea />)}
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item label="References">
-            {getFieldDecorator('references', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input References',
-                },
-              ],
-            })(<TextArea />)}
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item label="Description">
-            {getFieldDecorator('description', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input Description',
-                },
-              ],
-            })(<TextArea />)}
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={24}>
-        <Col span={24} style={{ float: 'right' }}>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Add
-            </Button>
-          </Form.Item>
-          <hr />
-          <Row gutter={24}>
-            <Col span={12}>
-              <Form.Item label="Download File">
-                <Button type="primary" htmlType="Download CSV">
-                  Download CSV
-                </Button>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="Upload file">
-                {getFieldDecorator('dragger', {
-                  valuePropName: 'fileList',
-                  // getValueFromEvent: this.normFile,
-                })(
-                  <Upload.Dragger name="files" action="/upload.do">
-                    <p className="ant-upload-drag-icon">
-                      <Icon type="inbox" />
-                    </p>
-                    <p className="ant-upload-text">
-                      Click or drag file to this area to upload
-                    </p>
-                    <p className="ant-upload-hint">
-                      Support for a single or bulk upload.
-                    </p>
-                  </Upload.Dragger>
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Table columns={columns} dataSource={articlesData} />
-          </Row>
-        </Col>
+        <Col span={3}></Col>
       </Row>
     </Fragment>
   );

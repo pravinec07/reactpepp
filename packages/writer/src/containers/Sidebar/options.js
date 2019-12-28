@@ -1,28 +1,43 @@
 const options = [
-  // {
-  //   key: 'my-profile',
-  //   label: 'sidebar.profile',
-  //   leftIcon: 'ion-person',
-  // },
-  // {
-  //   key: 'assignments',
-  //   label: 'sidebar.assignments',
-  //   leftIcon: 'ion-person',
-  // },
-  // {
-  //   key: 'my-assignments',
-  //   label: 'sidebar.myassignments',
-  //   leftIcon: 'ion-person',
-  // },
-  // {
-  //   key: 'invoice',
-  //   label: 'sidebar.payment',
-  //   leftIcon: 'ion-clipboard',
-  // },
-  // {
-  //   key: 'chat',
-  //   label: 'sidebar.chat',
-  //   leftIcon: 'ion-chatbubbles',
-  // },
+  {
+    key: 'dashboard',
+    label: 'Dashboard',
+    leftIcon: 'ion-speedometer',
+  },
+  {
+    key: 'assignments',
+    label: 'sidebar.assignments',
+    leftIcon: 'ion-person',
+  },
+  {
+    key: 'my-assignments',
+    label: 'My Project',
+    leftIcon: 'ion-person',
+  },
+  {
+    key: 'invoice',
+    label: 'sidebar.payment',
+    leftIcon: 'ion-clipboard',
+  },
+  {
+    key: 'chat',
+    label: 'Message Center',
+    leftIcon: 'ion-chatbubbles',
+  },
+  {
+    key: 'my-profile',
+    label: 'sidebar.profile',
+    leftIcon: 'ion-person',
+  },
+  {
+    key: 'completeProfile',
+    label: 'Complete Your Profile',
+    leftIcon: 'ion-person',
+  },
+  {
+    key: 'profileVerify',
+    label: 'Profile After Verification',
+    leftIcon: 'ion-person',
+  },
 ];
 export default options;

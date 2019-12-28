@@ -126,32 +126,47 @@ class ProfileForm extends React.Component {
           onSubmit={this.handleSubmit}
           style={{ padding: '0px 20px 20px 20px' }}
         >
-          <h2 style={{ margin: '10px 0px' }}>Client Details</h2>
+          <h2 style={{ margin: '10px 0px' }}>Complete Client Details</h2>
           <Row gutter={12}>
             <Col span={10}>
               <Card
                 type="inner"
                 title="Company Information"
                 extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
+                  <a href="./my-profile">
+                    <Icon type="close" />
                   </a>
                 }
               >
                 <Form.Item label="Company Name">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    ABA Infotech Pvt Ltd
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter Company Name" />)}
                 </Form.Item>
                 <Form.Item label="Company Email">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    info@abainfotech.com
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter Email" />)}
                 </Form.Item>
                 <Form.Item label="Company Website">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    www.abainfotech.com
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter Website" />)}
                 </Form.Item>
               </Card>
             </Col>
@@ -161,33 +176,53 @@ class ProfileForm extends React.Component {
                 style={{ height: '304px' }}
                 title="Industry & Audience"
                 extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
+                  <a href="./my-profile">
+                    <Icon type="close" />
                   </a>
                 }
               >
                 <Form.Item label="Primary Industry">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Technology & Software
-                  </p>
+                  {getFieldDecorator('gender', {
+                    rules: [
+                      { required: true, message: 'Please select your gender!' },
+                    ],
+                  })(
+                    <Select
+                      placeholder="Select Primary Industry"
+                      onChange={this.handleSelectChange}
+                    >
+                      <Option value="male"></Option>
+                      <Option value="female"></Option>
+                    </Select>
+                  )}
                 </Form.Item>
                 <Form.Item label="Secondary Industry">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Digital Marketing
-                  </p>
+                  {getFieldDecorator('gender', {
+                    rules: [
+                      { required: true, message: 'Please select your gender!' },
+                    ],
+                  })(
+                    <Select
+                      placeholder="Select Secondary Industry"
+                      onChange={this.handleSelectChange}
+                    >
+                      <Option value="male"></Option>
+                      <Option value="female"></Option>
+                    </Select>
+                  )}
                 </Form.Item>
                 <Form.Item label="What are you looking for">
                   <Row>
                     <Col span={12}>
-                      <Checkbox checked>Content Writer</Checkbox>
+                      <Checkbox>Content Writer</Checkbox>
                     </Col>
                     <Col span={12}>
-                      <Checkbox checked>Graphic Designer</Checkbox>
+                      <Checkbox>Graphic Designer</Checkbox>
                     </Col>
                   </Row>
                   <Row>
                     <Col span={12}>
-                      <Checkbox checked>Language Translators</Checkbox>
+                      <Checkbox>Language Translators</Checkbox>
                     </Col>
                     <Col span={12}>
                       <Checkbox>Video Maker</Checkbox>
@@ -207,25 +242,40 @@ class ProfileForm extends React.Component {
                 type="inner"
                 title="Other Company Details"
                 extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
+                  <a href="./my-profile">
+                    <Icon type="close" />
                   </a>
                 }
               >
                 <Form.Item label="Company Registered Name">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    ABA Infotech
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Company Registered Name" />)}
                 </Form.Item>
                 <Form.Item label="Company Address">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    609 6th Floor Padma Tower 2,
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Address Line 1" />)}
                 </Form.Item>
                 <Form.Item label="">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Near Rajender Place Metro Station
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Address Line 2" />)}
                 </Form.Item>
                 <Form.Item
                   label=""
@@ -233,43 +283,70 @@ class ProfileForm extends React.Component {
                 >
                   <Row>
                     <Col span={11}>
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        Delhi
-                      </p>
+                      <Select
+                        placeholder="State"
+                        onChange={this.handleSelectChange}
+                      >
+                        <Option value=""></Option>
+                        <Option value=""></Option>
+                      </Select>
                     </Col>
                     <Col span={2}></Col>
                     <Col span={11}>
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        New Delhi
-                      </p>
+                      <Select
+                        placeholder="City"
+                        onChange={this.handleSelectChange}
+                      >
+                        <Option value=""></Option>
+                        <Option value=""></Option>
+                      </Select>
                     </Col>
                   </Row>
                   <Row>
                     <Col span={24} style={{ marginTop: '12px' }}></Col>
                     <Col span={11}>
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        India
-                      </p>
+                      <Select
+                        placeholder="Country"
+                        onChange={this.handleSelectChange}
+                      >
+                        <Option value=""></Option>
+                        <Option value=""></Option>
+                      </Select>
                     </Col>
                     <Col span={2}></Col>
                     <Col span={11}>
                       <Form.Item label="">
-                        <p style={{ color: '#16224F', fontWeight: '600' }}>
-                          110008
-                        </p>
+                        {getFieldDecorator('companyName', {
+                          rules: [
+                            {
+                              required: true,
+                              message: 'Please input your Company Name!',
+                            },
+                          ],
+                        })(<Input placeholder="Pincode" />)}
                       </Form.Item>
                     </Col>
                   </Row>
                 </Form.Item>
                 <Form.Item label="Company Phone">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    011-47020788
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter Company Phone" />)}
                 </Form.Item>
                 <Form.Item label="Company GST">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    MHNC89787SJS9
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter GST Details" />)}
                 </Form.Item>
               </Card>
             </Col>
@@ -278,32 +355,47 @@ class ProfileForm extends React.Component {
                 type="inner"
                 title="POC Details"
                 extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
+                  <a href="./my-profile">
+                    <Icon type="close" />
                   </a>
                 }
               >
                 <Form.Item label="">
                   <Row>
                     <Col span={24}>
-                      <Checkbox checked>I am the POC</Checkbox>
+                      <Checkbox>I am the POC</Checkbox>
                     </Col>
                   </Row>
                 </Form.Item>
                 <Form.Item label="Name">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Rahul Sharma
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter POC Name" />)}
                 </Form.Item>
                 <Form.Item label="Email">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    rahulsharma888@gmail.com
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter POC Email" />)}
                 </Form.Item>
                 <Form.Item label="Phone">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    +91-8586047534
-                  </p>
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter POC Phone" />)}
                 </Form.Item>
                 <Collapse accordion>
                   <Panel header="Add Alternate POC" key="1">

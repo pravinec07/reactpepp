@@ -21,6 +21,18 @@ const routes = [
     component: lazy(() => import('../Assignments/Assignments')),
   },
   {
+    path: 'chat',
+    component: lazy(() => import('../Chat/Chat')),
+  },
+  {
+    path: 'otherDetails',
+    component: lazy(() => import('../Profile/profile2')),
+  },
+  {
+    path: 'editDetails',
+    component: lazy(() => import('../Profile/EditProfile.js')),
+  },
+  {
     path: 'payment',
     component: lazy(() => import('../Payments/Payments')),
     exact: false,

@@ -96,8 +96,8 @@ export default function Sidebar() {
     <SidebarWrapper>
       <Sider
         trigger={null}
-        collapsible={true}
-        collapsed={isCollapsed}
+        collapsible={false}
+        collapsed={false}
         width={240}
         className="writerSidebar"
         onMouseEnter={onMouseEnter}
