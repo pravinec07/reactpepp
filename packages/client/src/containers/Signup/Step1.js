@@ -4,7 +4,7 @@ import Select, { SelectOption } from '@iso/components/uielements/select';
 
 export default function Step1(props) {
   const { getFieldDecorator } = props.data.form;
-  const { handleRadioChange, handleNextBackAction, handleBlur } = props;
+  const { handleRadioChange, identityType, handleNextBackAction } = props;
   const prefixSelector = getFieldDecorator('prefix', {
     initialValue: '+91',
   })(
@@ -16,17 +16,37 @@ export default function Step1(props) {
     <Fragment>
       <Row gutter={24}>
         <Col xs={24}>
-          <Form.Item label="Company Name">
-            {getFieldDecorator('companyName', {
+          <Form.Item label="Please identify yourself">
+            {getFieldDecorator('identifyType', {
               rules: [
                 {
                   required: true,
-                  message: 'Please input name of Company',
+                  message: 'Please select one identity',
                 },
               ],
-            })(<Input />)}
+            })(
+              <Radio.Group name="identification" onChange={handleRadioChange}>
+                <Radio value={'business'}>Business</Radio>
+                <Radio value={'agency'}>Agency</Radio>
+                <Radio value={'individual'}>Individual</Radio>
+              </Radio.Group>
+            )}
           </Form.Item>
         </Col>
+        {identityType !== 'individual' && (
+          <Col xs={24}>
+            <Form.Item label="Company Name">
+              {getFieldDecorator('companyName', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input name of Company',
+                  },
+                ],
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+        )}
         <Col xs={24}>
           <Form.Item label="Email Id">
             {getFieldDecorator('email', {
@@ -52,45 +72,15 @@ export default function Step1(props) {
             })(<Input addonBefore={prefixSelector} />)}
           </Form.Item>
         </Col>
-
-        <Col xs={24}>
-          <Form.Item label="Please identify yourself">
-            {getFieldDecorator('identifyType', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please select one identity',
-                },
-              ],
-            })(
-              <Radio.Group
-                name="identification"
-                onChange={handleRadioChange}
-                style={{}}
-              >
-                <Radio value={'business'}>
-                  I'm a Business- I need content for my company
-                </Radio>
-                <Radio value={'agency'}>
-                  I'm an Agency- I need content for my clients
-                </Radio>
-                <Radio value={'individual'}>
-                  I'm an individual- I need content for my website,
-                  <br /> social media channel, blogs, etc.
-                </Radio>
-              </Radio.Group>
-            )}
-          </Form.Item>
-        </Col>
       </Row>
       <Row gutter={24}>
         <Col span={24} style={{ textAlign: 'right' }}>
           <Button
             type="primary"
             htmlType="button"
-            onClick={() => handleNextBackAction(+1)}
+            onClick={handleNextBackAction}
           >
-            Next
+            Submit
           </Button>
         </Col>
       </Row>

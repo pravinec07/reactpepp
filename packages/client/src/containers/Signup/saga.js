@@ -56,6 +56,7 @@ function* sendOTPRequest() {
             case 'SUCCESS':
               yield put({
                 type: actions.SEND_OTP_SUCCESS,
+                payload: true,
               });
               break;
             default:
