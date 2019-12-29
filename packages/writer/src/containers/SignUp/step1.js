@@ -1,30 +1,11 @@
 import React from 'react';
 import Input from '@iso/components/uielements/input';
-import Upload from '@iso/components/uielements/upload';
-import message from '@iso/components/uielements/message';
-import Icon from '@iso/components/uielements/icon';
+import Checkbox from '@iso/components/uielements/checkbox';
+import IntlMessages from '@iso/components/utility/intlMessages';
 import Form from '@iso/components/uielements/form';
 import Select, { SelectOption } from '@iso/components/uielements/select';
 
-const { Dragger } = Upload;
 const FormItem = Form.Item;
-
-const draggerProps = {
-  name: 'file',
-  multiple: true,
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
 
 function Step1({ form, dev }) {
   const { getFieldDecorator } = form;
@@ -56,8 +37,8 @@ function Step1({ form, dev }) {
 
   return (
     <>
-      <div className="isoInputWrapper">
-        <FormItem>
+      <div className="isoInputWrapper isoLeftRightComponent">
+        <FormItem label="First Name">
           {getFieldDecorator('name', {
             rules: [
               {
@@ -66,11 +47,9 @@ function Step1({ form, dev }) {
               },
             ],
             initialValue: dev ? 'Pravin' : '',
-          })(<Input size="large" placeholder="First name" />)}
+          })(<Input placeholder="First name" />)}
         </FormItem>
-      </div>
-      <div className="isoInputWrapper">
-        <FormItem>
+        <FormItem label="Last Name">
           {getFieldDecorator('lastName', {
             rules: [
               {
@@ -83,7 +62,7 @@ function Step1({ form, dev }) {
         </FormItem>
       </div>
       <div className="isoInputWrapper">
-        <FormItem>
+        <FormItem label="Phone">
           {getFieldDecorator('phoneNumber', {
             rules: [
               {
@@ -96,7 +75,7 @@ function Step1({ form, dev }) {
         </FormItem>
       </div>
       <div className="isoInputWrapper">
-        <FormItem hasFeedback>
+        <FormItem label="Email" hasFeedback>
           {getFieldDecorator('email', {
             rules: [
               {
@@ -113,7 +92,7 @@ function Step1({ form, dev }) {
         </FormItem>
       </div>
       <div className="isoInputWrapper">
-        <FormItem hasFeedback>
+        <FormItem label="Password" hasFeedback>
           {getFieldDecorator('password', {
             rules: [
               {
@@ -129,7 +108,7 @@ function Step1({ form, dev }) {
         </FormItem>
       </div>
       <div className="isoInputWrapper">
-        <FormItem hasFeedback>
+        <FormItem label="Confirm Password" hasFeedback>
           {getFieldDecorator('confirm', {
             rules: [
               {
@@ -150,19 +129,22 @@ function Step1({ form, dev }) {
           )}
         </FormItem>
       </div>
-      <div className="isoInputWrapper">
-        <FormItem
-          label="Please upload your CV"
-          help="Uploading your CV/Resume adds a lot of credibility to your
-    application and helps us evaluate better. Please upload
-    only PDF files."
-        >
-          <Dragger {...draggerProps}>
-            <p>
-              <Icon type="cloud-upload" />
-              <span>Drag & drop (or) choose file</span>
-            </p>
-          </Dragger>
+      <div className="isoInputWrapper" style={{ marginBottom: '20px' }}>
+        <FormItem>
+          {getFieldDecorator('agreement', {
+            valuePropName: 'checked',
+            rules: [
+              {
+                message: 'Please accept terms and conditions',
+                required: true,
+              },
+            ],
+            initialValue: dev ? true : false,
+          })(
+            <Checkbox>
+              <IntlMessages id="page.signUpTermsConditions" />
+            </Checkbox>
+          )}
         </FormItem>
       </div>
     </>

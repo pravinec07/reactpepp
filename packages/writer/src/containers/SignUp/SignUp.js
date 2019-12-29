@@ -8,6 +8,7 @@ import SignUpStyleWrapper from './SignUp.styles';
 import Notification from '@iso/components/Notification';
 import userActions from '../../redux/user/actions';
 import SignUpForm from './step1';
+import ThankYou from './step7';
 
 const { signUpRequest } = userActions;
 const FormItem = Form.Item;
@@ -39,62 +40,6 @@ function SignUp(props) {
     },
   };
 
-  const actionBution = step => {
-    switch (step) {
-      case 1: {
-        return (
-          <>
-            <FormItem {...tailFormItemLayout}></FormItem>
-            <FormItem {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit">
-                Next
-              </Button>
-            </FormItem>
-          </>
-        );
-      }
-      case 6: {
-        return (
-          <>
-            <FormItem {...tailFormItemLayout}>
-              <Button
-                onClick={() => setFormStep(formStep - 1)}
-                type="primary"
-                htmlType="button"
-              >
-                Back
-              </Button>
-            </FormItem>
-            <FormItem {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit">
-                <IntlMessages id="page.signUpButton" />
-              </Button>
-            </FormItem>
-          </>
-        );
-      }
-      default: {
-        return (
-          <>
-            <FormItem {...tailFormItemLayout}>
-              <Button
-                onClick={() => setFormStep(formStep - 1)}
-                type="primary"
-                htmlType="button"
-              >
-                Back
-              </Button>
-            </FormItem>
-            <FormItem {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit">
-                Next
-              </Button>
-            </FormItem>
-          </>
-        );
-      }
-    }
-  };
   useEffect(() => {
     if (response.signUpLoading !== null) {
       if (!response.signUpLoading && !response.signUpError) {
@@ -115,21 +60,24 @@ function SignUp(props) {
             </Link>
           </div>
           <div className="isoSignUpForm">
-            <Form layout="vertical" onSubmit={handleSubmit}>
-              <SignUpForm form={props.form} dev={dev} />
-              <>
-                <FormItem {...tailFormItemLayout}>
-                  <Button type="primary" htmlType="submit">
-                    <IntlMessages id="page.signUpButton" />
-                  </Button>
-                </FormItem>
-              </>
-              <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
-                <Link to="/signin">
-                  <IntlMessages id="page.signUpAlreadyAccount" />
-                </Link>
-              </div>
-            </Form>
+            {formStep === 1 && (
+              <Form layout="vertical" onSubmit={handleSubmit}>
+                <SignUpForm form={props.form} dev={dev} />
+                <>
+                  <FormItem {...tailFormItemLayout}>
+                    <Button type="primary" htmlType="submit">
+                      <IntlMessages id="page.signUpButton" />
+                    </Button>
+                  </FormItem>
+                </>
+                <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
+                  <Link to="/signin">
+                    <IntlMessages id="page.signUpAlreadyAccount" />
+                  </Link>
+                </div>
+              </Form>
+            )}
+            {formStep === 2 && <ThankYou />}
           </div>
         </div>
       </div>
