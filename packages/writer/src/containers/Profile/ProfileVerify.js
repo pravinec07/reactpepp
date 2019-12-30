@@ -309,7 +309,7 @@ class ProfileForm extends React.Component {
                       className="ant-form-item"
                       style={{ marginBottom: '0px', fontWeight: '600' }}
                     >
-                      <span style={{ color: 'red' }}>* </span>Perferred Payment
+                      <span style={{ color: 'red' }}>* </span>Preferred Payment
                       Options:
                     </p>
                   </Col>

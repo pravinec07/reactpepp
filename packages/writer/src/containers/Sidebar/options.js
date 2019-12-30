@@ -37,7 +37,17 @@ const options = [
   {
     key: 'profileVerify',
     label: 'Profile After Verification',
-    leftIcon: 'ion-person',
+    leftIcon: 'ion-checkmark',
+  },
+  {
+    key: 'profileUser',
+    label: 'Profile New',
+    leftIcon: 'ion-eye',
+  },
+  {
+    key: 'profileUserEdit',
+    label: 'Profile Edit',
+    leftIcon: 'ion-edit',
   },
 ];
 export default options;

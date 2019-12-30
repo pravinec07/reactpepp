@@ -26,6 +26,14 @@ const routes = [
     component: lazy(() => import('../Profile/UpdateProfile')),
   },
   {
+    path: 'profileUser',
+    component: lazy(() => import('../Profile/ProfileUser')),
+  },
+  {
+    path: 'profileUserEdit',
+    component: lazy(() => import('../Profile/ProfileUserEdit')),
+  },
+  {
     path: 'chat',
     component: lazy(() => import('@iso/containers/Chat/Chat')),
   },
