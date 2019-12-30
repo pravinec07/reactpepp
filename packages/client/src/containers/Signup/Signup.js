@@ -7,6 +7,7 @@ import Step2 from './Step2';
 import FormWrapper, { CardStyles } from './Signup.styles';
 import action from './actions';
 import { PUBLIC_ROUTE } from '../../route.constants';
+import OTPInput from './OTPInput';
 
 function Signup(props) {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function Signup(props) {
       signupResponse.isOtpSuccessful !== 'notStarted' &&
       signupResponse.isOtpSuccessful
     ) {
-      setOTPErr(false);
+      // setOTPErr(false);
       setShowThanks(true);
       // props.form.validateFieldsAndScroll((err, values) => {
       //   if (!err) {
@@ -40,29 +41,44 @@ function Signup(props) {
 
   React.useEffect(() => {
     if (showThanks) {
-      props.form.validateFieldsAndScroll((err, values) => {
-        if (!err) {
-          const ph = `${values.prefix}${values.phoneNumber}`;
-          dispatch(action.fetchSignUpSaveStart({ ...values, phoneNumber: ph }));
+      props.form.validateFieldsAndScroll(
+        [
+          'identifyType',
+          'companyName',
+          'email',
+          'phoneNumber',
+          'password',
+          'confirm',
+        ],
+        (err, values) => {
+          if (!err) {
+            const ph = `${values.prefix}${values.phoneNumber}`;
+            dispatch(
+              action.fetchSignUpSaveStart({ ...values, phoneNumber: ph })
+            );
+          }
         }
-      });
+      );
     }
   }, [showThanks]);
 
   function handleOTPProcess() {
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        dispatch(
-          action.verifyOTPStart({
-            params: {
-              email: values.email,
-              number: `${values.prefix}${values.phoneNumber}`,
-              otp: values.otp,
-            },
-          })
-        );
+    props.form.validateFieldsAndScroll(
+      ['email', 'phoneNumber', 'otp'],
+      (err, values) => {
+        if (!err) {
+          dispatch(
+            action.verifyOTPStart({
+              params: {
+                email: values.email,
+                number: `${values.prefix}${values.phoneNumber}`,
+                otp: values.otp,
+              },
+            })
+          );
+        }
       }
-    });
+    );
   }
 
   function handleResendOTP() {
@@ -74,19 +90,30 @@ function Signup(props) {
   }
 
   function handleNextBackAction() {
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        dispatch(
-          action.sendOTPStart({
-            params: {
-              email: values.email,
-              number: `${values.prefix}${values.phoneNumber}`,
-            },
-          })
-        );
-        setVisible(true);
+    console.log('--->', props, props.form);
+    props.form.validateFieldsAndScroll(
+      [
+        'identifyType',
+        'companyName',
+        'email',
+        'phoneNumber',
+        'password',
+        'confirm',
+      ],
+      (err, values) => {
+        if (!err) {
+          dispatch(
+            action.sendOTPStart({
+              params: {
+                email: values.email,
+                number: `${values.prefix}${values.phoneNumber}`,
+              },
+            })
+          );
+          setVisible(true);
+        }
       }
-    });
+    );
   }
 
   function handleRadioChange(e) {
@@ -127,6 +154,16 @@ function Signup(props) {
     const value = e.target.value;
     setConfirmDirty(confirmDirty => confirmDirty || !!value);
   };
+
+  const checkOTP = (rule, value, callback) => {
+    if (value && value.length === 6) {
+      return callback();
+    } else if (!value) {
+      callback('Please enter OTP');
+    } else if (value.length !== 6) {
+      callback('Please enter full otp');
+    }
+  };
   return (
     <FormWrapper>
       <Modal
@@ -136,7 +173,11 @@ function Signup(props) {
         footer={
           signupResponse.isOtpSuccessful &&
           !showThanks && [
-            <Button key="back" type="danger" onClick={() => handleResendOTP()}>
+            <Button
+              key="button"
+              type="danger"
+              onClick={() => handleResendOTP()}
+            >
               Resend OTP
             </Button>,
             <Button type="primary" loading={loading} onClick={handleOTPProcess}>
@@ -160,7 +201,8 @@ function Signup(props) {
                 marginBottom: '10px',
               }}
             >
-              We have sent you a verification code on your registered Email
+              We have sent you a verification code on your registered Email and
+              Phone Number
             </p>
             <p
               style={{
@@ -174,78 +216,11 @@ function Signup(props) {
               Please fill the code below
             </p>
             <Row gutter={24}>
-              <Col span={4}>
-                <Form.Item label="">
-                  {getFieldDecorator('otp', {
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please input otp',
-                      },
-                    ],
-                  })(<Input size="large" />)}
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Form.Item label="">
-                  {getFieldDecorator('otp', {
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please input otp',
-                      },
-                    ],
-                  })(<Input size="large" />)}
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Form.Item label="">
-                  {getFieldDecorator('otp', {
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please input otp',
-                      },
-                    ],
-                  })(<Input size="large" />)}
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Form.Item label="">
-                  {getFieldDecorator('otp', {
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please input otp',
-                      },
-                    ],
-                  })(<Input size="large" />)}
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Form.Item label="">
-                  {getFieldDecorator('otp', {
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please input otp',
-                      },
-                    ],
-                  })(<Input size="large" />)}
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Form.Item label="">
-                  {getFieldDecorator('otp', {
-                    rules: [
-                      {
-                        required: false,
-                        message: 'Please input otp',
-                      },
-                    ],
-                  })(<Input size="large" />)}
-                </Form.Item>
-              </Col>
+              <Form.Item>
+                {getFieldDecorator('otp', {
+                  rules: [{ validator: checkOTP }],
+                })(<OTPInput />)}
+              </Form.Item>
             </Row>
           </Form>
         )}
@@ -289,22 +264,62 @@ function Signup(props) {
       </Modal>
       <Card styles={{ CardStyles }}>
         <div className="isoSignupContentWrapper">
-          <Form
-            layout="vertical"
-            onSubmit={handleNextBackAction}
-            style={{ padding: '50px 50px' }}
-          >
-            <Step1
-              data={props}
-              identityType={identityType}
-              handleRadioChange={handleRadioChange}
-              handleNextBackAction={handleNextBackAction}
-              checkConfirm={checkConfirm}
-              handleConfirmBlur={handleConfirmBlur}
-              checkPassword={checkPassword}
-              isAgreement={isAgreement}
-            />
-          </Form>
+          {!showThanks ? (
+            <Form
+              layout="vertical"
+              onSubmit={handleNextBackAction}
+              style={{ padding: '50px 50px' }}
+            >
+              <Step1
+                data={props}
+                identityType={identityType}
+                handleRadioChange={handleRadioChange}
+                handleNextBackAction={handleNextBackAction}
+                checkConfirm={checkConfirm}
+                handleConfirmBlur={handleConfirmBlur}
+                checkPassword={checkPassword}
+                isAgreement={isAgreement}
+              />
+            </Form>
+          ) : (
+            <div>
+              <p
+                style={{
+                  color: '#16224F',
+                  fontWeight: '600',
+                  fontSize: '20px',
+                  textAlign: 'center',
+                  marginBottom: '10px',
+                }}
+              >
+                {' '}
+                <Icon
+                  type="check"
+                  style={{
+                    color: 'green',
+                    fontSize: '20px',
+                    fontWeight: '600',
+                  }}
+                />{' '}
+                Thanks for signing up Please login using your registered email
+                id & password
+              </p>
+              <Link to={PUBLIC_ROUTE.SIGN_IN}>
+                <p
+                  style={{
+                    fontWeight: '600',
+                    fontSize: '22px',
+                    textAlign: 'center',
+                    margin: '20px 50px ',
+                    border: '2px solid #096DD9',
+                    padding: '8px 11px',
+                  }}
+                >
+                  Login
+                </p>
+              </Link>
+            </div>
+          )}
         </div>
       </Card>
     </FormWrapper>

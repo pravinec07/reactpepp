@@ -87,6 +87,12 @@ export default function Step1(props) {
                   required: true,
                   message: 'Please input contact number',
                 },
+                {
+                  min: 10,
+                },
+                {
+                  max: 10,
+                },
               ],
             })(<Input addonBefore={prefixSelector} maxLength={10} />)}
           </Form.Item>
@@ -102,8 +108,11 @@ export default function Step1(props) {
                 {
                   validator: checkConfirm,
                 },
+                {
+                  min: 6,
+                },
               ],
-            })(<Input />)}
+            })(<Input.Password placeholder="password" />)}
           </Form.Item>
         </Col>
         <Col xs={24}>
@@ -116,6 +125,9 @@ export default function Step1(props) {
                 },
                 {
                   validator: checkPassword,
+                },
+                {
+                  min: 6,
                 },
               ],
             })(
