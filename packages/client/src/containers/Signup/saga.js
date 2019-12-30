@@ -46,37 +46,27 @@ function* sendOTPRequest() {
   try {
     yield takeEvery(actions.SEND_OTP_START, function*(payload) {
       let response = yield call(sendOTP, payload.payload);
-      switch (response.status) {
-        case 200:
-          const status =
-            response.data.metadata && response.data.metadata.status
-              ? response.data.metadata.status
-              : 'SUCCESS';
-          switch (status) {
-            case 'SUCCESS':
-              yield put({
-                type: actions.SEND_OTP_SUCCESS,
-                payload: true,
-              });
-              break;
-            default:
-              yield put({
-                type: actions.SEND_OTP_FAILURE,
-                payload: response.data.errors[0].message.split('(')[0],
-              });
-              break;
-          }
-
-          break;
-        case 500:
-          yield put({ type: actions.SEND_OTP_FAILURE });
-          break;
-        default:
-          yield put({ type: actions.SEND_OTP_FAILURE });
-          break;
+      console.log('response send', response);
+      if (response.status == 200) {
+        yield put({
+          type: actions.SEND_OTP_SUCCESS,
+          payload: true,
+        });
+      } else {
+        console.log('response send  fail', response);
+        yield put({
+          type: actions.SEND_OTP_FAILURE,
+          payload: response.message,
+        });
       }
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log('response send catch', error);
+    yield put({
+      type: actions.SEND_OTP_FAILURE,
+      payload: error,
+    });
+  }
 }
 
 function* resendOTPRequest() {
@@ -84,69 +74,42 @@ function* resendOTPRequest() {
     console.log('resend saga');
     yield takeEvery(actions.RESEND_OTP_START, function*(payload) {
       let response = yield call(resendOTP, payload.payload);
-      switch (response.status) {
-        case 200:
-          const status =
-            response.data.metadata && response.data.metadata.status
-              ? response.data.metadata.status
-              : 'SUCCESS';
-          switch (status) {
-            case 'SUCCESS':
-              yield put({
-                type: actions.RESEND_OTP_SUCCESS,
-              });
-              break;
-            default:
-              yield put({
-                type: actions.RESEND_OTP_FAILURE,
-                payload: response.data.errors[0].message.split('(')[0],
-              });
-              break;
-          }
-
-          break;
-        case 500:
-          yield put({ type: actions.RESEND_OTP_FAILURE });
-          break;
-        default:
-          yield put({ type: actions.RESEND_OTP_FAILURE });
-          break;
+      if (response.status == 200) {
+        yield put({
+          type: actions.RESEND_OTP_SUCCESS,
+          payload: true,
+        });
+      } else {
+        yield put({
+          type: actions.RESEND_OTP_FAILURE,
+          payload: response.message,
+        });
       }
     });
-  } catch (error) {}
+  } catch (error) {
+    yield put({
+      type: actions.RESEND_OTP_FAILURE,
+      payload: error,
+    });
+  }
 }
 
 function* verifyOTPRequest() {
   try {
     yield takeEvery(actions.VERIFY_OTP_START, function*(payload) {
+      console.log('payload', payload);
       let response = yield call(verifyOTP, payload.payload);
-      switch (response.status) {
-        case 200:
-          const status =
-            response.data.metadata && response.data.metadata.status
-              ? response.data.metadata.status
-              : 'SUCCESS';
-          switch (status) {
-            case 'SUCCESS':
-              yield put({
-                type: actions.RESEND_OTP_SUCCESS,
-              });
-              break;
-            default:
-              yield put({
-                type: actions.RESEND_OTP_FAILURE,
-                payload: response.data.errors[0].message.split('(')[0],
-              });
-              break;
-          }
-
-          break;
-        case 500:
-          yield put({ type: actions.RESEND_OTP_FAILURE });
-          break;
-        default:
-          yield put({ type: actions.RESEND_OTP_FAILURE });
-          break;
+      console.log('response', response);
+      if (response.status == 200) {
+        yield put({
+          type: actions.VERIFY_OTP_SUCCESS,
+          payload: true,
+        });
+      } else {
+        yield put({
+          type: actions.VERIFY_OTP_FAILURE,
+          payload: response.message,
+        });
       }
     });
   } catch (error) {}
