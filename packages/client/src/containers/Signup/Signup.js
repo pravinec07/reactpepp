@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Form, Card, Modal, Input, Button } from 'antd';
+import { Form, Card, Modal, Input, Button, Row, Col, Icon } from 'antd';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Step1 from './Step1';
@@ -136,8 +136,8 @@ function Signup(props) {
         footer={
           signupResponse.isOtpSuccessful &&
           !showThanks && [
-            <Button key="back" onClick={() => handleResendOTP()}>
-              Resend
+            <Button key="back" type="danger" onClick={() => handleResendOTP()}>
+              Resend OTP
             </Button>,
             <Button type="primary" loading={loading} onClick={handleOTPProcess}>
               Submit
@@ -149,18 +149,104 @@ function Signup(props) {
           <Form
             layout="vertical"
             onSubmit={handleOTPProcess}
-            style={{ padding: '50px 100px' }}
+            style={{ padding: '50px 30px' }}
           >
-            <Form.Item label="Please input OTP">
-              {getFieldDecorator('otp', {
-                rules: [
-                  {
-                    required: false,
-                    message: 'Please input otp',
-                  },
-                ],
-              })(<Input />)}
-            </Form.Item>
+            <p
+              style={{
+                color: '#16224F',
+                fontWeight: '600',
+                fontSize: '20px',
+                textAlign: 'center',
+                marginBottom: '10px',
+              }}
+            >
+              We have sent you a verification code on your registered Email
+            </p>
+            <p
+              style={{
+                color: '#333333',
+                fontWeight: '600',
+                fontSize: '16px',
+                textAlign: 'left',
+                marginBottom: '10px',
+              }}
+            >
+              Please fill the code below
+            </p>
+            <Row gutter={24}>
+              <Col span={4}>
+                <Form.Item label="">
+                  {getFieldDecorator('otp', {
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please input otp',
+                      },
+                    ],
+                  })(<Input size="large" />)}
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item label="">
+                  {getFieldDecorator('otp', {
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please input otp',
+                      },
+                    ],
+                  })(<Input size="large" />)}
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item label="">
+                  {getFieldDecorator('otp', {
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please input otp',
+                      },
+                    ],
+                  })(<Input size="large" />)}
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item label="">
+                  {getFieldDecorator('otp', {
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please input otp',
+                      },
+                    ],
+                  })(<Input size="large" />)}
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item label="">
+                  {getFieldDecorator('otp', {
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please input otp',
+                      },
+                    ],
+                  })(<Input size="large" />)}
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item label="">
+                  {getFieldDecorator('otp', {
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please input otp',
+                      },
+                    ],
+                  })(<Input size="large" />)}
+                </Form.Item>
+              </Col>
+            </Row>
           </Form>
         )}
         {!signupResponse.isOtpSuccessful && (
@@ -168,8 +254,36 @@ function Signup(props) {
         )}
         {signupResponse.isOtpSuccessful && showThanks && (
           <div>
-            <p>Thankyou for sign up!!!</p>
-            <Link to={PUBLIC_ROUTE.SIGN_IN}>Login</Link>
+            <p
+              style={{
+                color: '#16224F',
+                fontWeight: '600',
+                fontSize: '20px',
+                textAlign: 'center',
+                marginBottom: '10px',
+              }}
+            >
+              {' '}
+              <Icon
+                type="check"
+                style={{ color: 'green', fontSize: '20px', fontWeight: '600' }}
+              />{' '}
+              Please login using your registered email id & password
+            </p>
+            <Link to={PUBLIC_ROUTE.SIGN_IN}>
+              <p
+                style={{
+                  fontWeight: '600',
+                  fontSize: '22px',
+                  textAlign: 'center',
+                  margin: '20px 50px ',
+                  border: '2px solid #096DD9',
+                  padding: '8px 11px',
+                }}
+              >
+                Login
+              </p>
+            </Link>
           </div>
         )}
       </Modal>
