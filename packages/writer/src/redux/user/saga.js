@@ -18,13 +18,10 @@ export function* signUpRequest() {
             response.data.metadata && response.data.metadata.status
               ? response.data.metadata.status
               : 'SUCCESS';
-          console.log(status, '---->');
           switch (status) {
             case 'SUCCESS':
               yield put({
                 type: actions.SIGNUP_SUCCESS,
-                token: response.data.accessToken,
-                profile: response.data,
               });
               break;
             default:

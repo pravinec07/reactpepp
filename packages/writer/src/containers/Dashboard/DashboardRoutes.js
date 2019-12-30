@@ -4,8 +4,13 @@ import Loader from '@iso/components/utility/loader';
 
 const routes = [
   {
-    path: '',
+    path: 'completeProfile',
     component: lazy(() => import('../Profile/Profile')),
+    exact: true,
+  },
+  {
+    path: 'profileVerify',
+    component: lazy(() => import('../Profile/ProfileVerify')),
     exact: true,
   },
   {

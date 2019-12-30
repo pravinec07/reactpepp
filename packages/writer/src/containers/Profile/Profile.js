@@ -12,8 +12,10 @@ import {
   Modal,
   message,
   Radio,
+  Select,
 } from 'antd';
 
+const { Option } = Select;
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -118,219 +120,381 @@ class ProfileForm extends React.Component {
 
     return (
       <>
-        <Card
-          style={{
-            width: '100%',
-            display: 'flex',
-            flexFlow: 'row wrap',
-          }}
-        >
-          <Form
-            layout="vertical"
-            onSubmit={this.handleSubmit}
-            style={{ padding: '50px 100px' }}
-          >
-            <Row gutter={24}>
-              <Col span={24}>
-                <h2>Complete Writer Details</h2>
-              </Col>
-              <Col span={12}>
-                <p>Upload Picture</p>
-                <Upload
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  listType="picture-card"
-                  fileList={fileList}
-                  onPreview={this.handlePreview}
-                  onChange={this.handleChange}
-                >
-                  {fileList.length >= 1 ? null : this.uploadButton()}
-                </Upload>
-                <Modal
-                  visible={previewVisible}
-                  footer={null}
-                  onCancel={this.handleCancel}
-                >
-                  <img
-                    alt="example"
-                    style={{ width: '100%' }}
-                    src={previewImage}
-                  />
-                </Modal>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Description">
-                  {getFieldDecorator('description', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter description',
-                      },
-                    ],
-                  })(<TextArea />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Occupation">
-                  {getFieldDecorator('occupation', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter occupation',
-                        whitespace: true,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24}></Col>
-              <Col span={6}>
-                <p className="ant-form-item">Weekday Availability:</p>
-              </Col>
-              <Col span={18}>
-                <Checkbox>Mon</Checkbox>
-                <Checkbox>Tue</Checkbox>
-                <Checkbox>Wed</Checkbox>
-                <Checkbox>Thu</Checkbox>
-                <Checkbox>Fri</Checkbox>
-                <Checkbox>Sat</Checkbox>
-                <Checkbox>Sun</Checkbox>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24}></Col>
-              <Col span={6}>
-                <p className="ant-form-item">Daily Word Count:</p>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="">
-                  {getFieldDecorator('wordCount', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input word count',
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24}></Col>
-              <Col span={6}>
-                <p className="ant-form-item">Writer</p>
-              </Col>
-              <Col span={18}>
-                <Radio.Group onChange={null}>
-                  <Radio value={1}>Full Time</Radio>
-                  <Radio value={2}>Part Time</Radio>
-                </Radio.Group>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24}></Col>
-              <Col span={6}>
-                <p className="ant-form-item">Freelancer</p>
-              </Col>
-              <Col span={18}>
-                <Radio.Group onChange={null}>
-                  <Radio value={1}>Full Time</Radio>
-                  <Radio value={2}>Part Time</Radio>
-                </Radio.Group>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24}></Col>
-              <Col span={6}>
-                <p className="ant-form-item">Perferred Payment Options:</p>
-              </Col>
-              <Col span={18}>
-                <Checkbox>Account transfer</Checkbox>
-                <Checkbox>Cheque</Checkbox>
-                <Checkbox>Paytm</Checkbox>
-                <Checkbox>Google Pay</Checkbox>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24}>
-                <h2>Bank Details</h2>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="A/c Number">
-                  {getFieldDecorator('accNumber', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter A/c number',
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="A/c Name">
-                  {getFieldDecorator('accName', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter A/c Name',
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Bank Name">
-                  {getFieldDecorator('bankName', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter bank name.',
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Branch Name">
-                  {getFieldDecorator('branchName', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter branch name',
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="IFSC code">
-                  {getFieldDecorator('ifscCode', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter IFSC code',
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={24}>
-              <Col span={24}>
-                <Checkbox>I accept the terms and conditions.</Checkbox>
-              </Col>
-              <Col span={24} style={{ float: 'right' }}>
-                <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                    Submit
-                  </Button>
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
-        </Card>{' '}
+        <Row>
+          <Col span={5}></Col>
+          <Col span={14}>
+            <h2 style={{ margin: '10px 0px', textAlign: 'center' }}>
+              Basic Information & Experience
+            </h2>
+            <Card
+              type="inner"
+              title="Basic Information"
+              style={{ margin: '20px 0px' }}
+            >
+              <Form layout="vertical" onSubmit={this.handleSubmit}>
+                <Row gutter={24}>
+                  <Col span={24}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Please upload your CV
+                    </p>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item
+                      label=""
+                      help="Uploading your CV/Resume adds a lot of credibility to your application and helps us evaluate better. Please upload only PDF files."
+                    >
+                      {getFieldDecorator('dragger', {
+                        valuePropName: 'fileList',
+                        // getValueFromEvent: this.normFile,
+                      })(
+                        <Upload.Dragger name="files" action="/upload.do">
+                          <p className="ant-upload-drag-icon">
+                            <Icon type="inbox" />
+                          </p>
+                          <p className="ant-upload-text">
+                            Click or drag file to this area to upload
+                          </p>
+                          <p className="ant-upload-hint">
+                            Support for a single or bulk upload.
+                          </p>
+                        </Upload.Dragger>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Select your Most Prefered Genre
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('gender', {
+                        rules: [{ required: true, message: 'Please select!' }],
+                      })(
+                        <Select
+                          placeholder="-Select-"
+                          onChange={this.handleSelectChange}
+                        >
+                          <Option value=""></Option>
+                          <Option value=""></Option>
+                        </Select>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Select your second Most Prefered Genre
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('gender', {
+                        rules: [{ required: true, message: 'Please select!' }],
+                      })(
+                        <Select
+                          placeholder="-Select-"
+                          onChange={this.handleSelectChange}
+                        >
+                          <Option value=""></Option>
+                          <Option value=""></Option>
+                        </Select>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Select your Most Preferred Vertical
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('gender', {
+                        rules: [{ required: true, message: 'Please select!' }],
+                      })(
+                        <Select
+                          placeholder="-Select-"
+                          onChange={this.handleSelectChange}
+                        >
+                          <Option value=""></Option>
+                          <Option value=""></Option>
+                        </Select>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Select your Second Most Preferred Vertical
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('gender', {
+                        rules: [{ required: true, message: 'Please select!' }],
+                      })(
+                        <Select
+                          placeholder="-Select-"
+                          onChange={this.handleSelectChange}
+                        >
+                          <Option value=""></Option>
+                          <Option value=""></Option>
+                        </Select>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      What languages are you proficient in?
+                    </p>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="A">Assamese</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="B">English</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="C">Gujarati</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="D">Hindi</Checkbox>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={6}>
+                    <Checkbox value="E">Kannada</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="E">Malayalam</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="D">Mandarin </Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="E">Odia</Checkbox>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={6}>
+                    <Checkbox value="E">Punjabi</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="D">Tamil</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="E">Telugu</Checkbox>
+                  </Col>
+                  <Col span={6}>
+                    <Checkbox value="E">Urdu</Checkbox>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={6}>
+                    <Checkbox value="E">European Lang.</Checkbox>
+                  </Col>
+                  <Col span={12}>
+                    <Checkbox value="E">
+                      Other South-east Asian Languages
+                    </Checkbox>
+                  </Col>
+                  <Col span={8}></Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24} style={{ marginTop: '15px' }}></Col>
+                  <Col span={24}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Please upload Samples (Preferably in the categories that
+                      you have selected.)
+                    </p>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item
+                      label=""
+                      help="The more, the merrier. We will only be able to assign you assignments in verticals and genre that you can prove you have previous experience in. And these samples help us pinpoint these verticals and categories!"
+                    >
+                      {getFieldDecorator('dragger', {
+                        valuePropName: 'fileList',
+                        // getValueFromEvent: this.normFile,
+                      })(
+                        <Upload.Dragger name="files" action="/upload.do">
+                          <p className="ant-upload-drag-icon">
+                            <Icon type="inbox" />
+                          </p>
+                          <p className="ant-upload-text">
+                            Click or drag file to this area to upload
+                          </p>
+                          <p className="ant-upload-hint">
+                            Support for a single or bulk upload.
+                          </p>
+                        </Upload.Dragger>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24} style={{ marginTop: '15px' }}></Col>
+                  <Col span={14}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Please let us know your Expected Pay? (In Rupees per word)
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('gender', {
+                        rules: [{ required: true, message: 'Please select!' }],
+                      })(
+                        <Select
+                          placeholder="-Select-"
+                          onChange={this.handleSelectChange}
+                        >
+                          <Option value=""></Option>
+                          <Option value=""></Option>
+                        </Select>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24} style={{ marginTop: '15px' }}></Col>
+                  <Col span={24}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Please tell us a bit about your previous writing
+                      experiences and skillsets.
+                    </p>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item
+                      label=""
+                      help="Please tell us more about the types of content projects that you've worked on before."
+                    >
+                      {getFieldDecorator('audience', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input audience',
+                          },
+                        ],
+                      })(<TextArea style={{ height: '80px' }} />)}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24} style={{ marginTop: '15px' }}></Col>
+                  <Col span={24}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Please list down the companies that you've worked for in
+                      the past.
+                    </p>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item
+                      label=""
+                      help="It is not absolutely necessary but helps us decide better. It will also affect the pay scale that we offer you."
+                    >
+                      {getFieldDecorator('audience', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input audience',
+                          },
+                        ],
+                      })(<TextArea style={{ height: '80px' }} />)}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24} style={{ marginTop: '15px' }}></Col>
+                  <Col span={14}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      How did you hear about this position?
+                    </p>
+                    <Form.Item label="" help="">
+                      {getFieldDecorator('gender', {
+                        rules: [{ required: true, message: 'Please select!' }],
+                      })(
+                        <Select
+                          placeholder="-Select-"
+                          onChange={this.handleSelectChange}
+                        >
+                          <Option value=""></Option>
+                          <Option value=""></Option>
+                        </Select>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24} style={{ marginTop: '15px' }}></Col>
+                  <Col span={24}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      What profession are you in, apart from freelance writing?
+                    </p>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item label="">
+                      {getFieldDecorator('audience', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input audience',
+                          },
+                        ],
+                      })(<TextArea style={{ height: '80px' }} />)}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={12} style={{ textAlign: 'right' }}>
+                    <Form.Item>
+                      <Button type="primary" htmlType="submit">
+                        Save for Later
+                      </Button>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12} style={{ textAlign: 'left' }}>
+                    <Form.Item>
+                      <Button type="danger" htmlType="submit">
+                        Submit
+                      </Button>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Form>
+            </Card>
+          </Col>
+          <Col span={5}></Col>
+        </Row>{' '}
       </>
     );
   }
