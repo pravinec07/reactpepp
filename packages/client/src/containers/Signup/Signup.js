@@ -15,7 +15,6 @@ function Signup(props) {
   const [identityType, setIdentityType] = React.useState('business');
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
-  const [OTPErr, setOTPErr] = React.useState(false);
   const [showThanks, setShowThanks] = React.useState(false);
   const [isAgreement, setAgreement] = React.useState(false);
 

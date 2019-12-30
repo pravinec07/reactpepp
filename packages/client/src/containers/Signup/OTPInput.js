@@ -20,38 +20,35 @@ export default function OTPInput(props) {
   };
 
   function handleEnter(event) {
-    if (event.keyCode === 13) {
-      const form = event.target.form;
-      const index = Array.prototype.indexOf.call(form, event.target);
-      form.elements[index + 1].focus();
-      event.preventDefault();
-    }
+    const form = event.target.form;
+    const index = Array.prototype.indexOf.call(form, event.target);
+    index < 5 && form.elements[index + 1].focus();
   }
 
   return (
-    <span>
-      <Input.Group size="large">
+    <form>
+      <Input.Group size="large" className="otp-input-group">
         <Row gutter={8}>
           <Col span={4}>
-            <Input onKeyDown={handleEnter} onChange={handleNumberChange} />
+            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
           </Col>
           <Col span={4}>
-            <Input onKeyDown={handleEnter} onChange={handleNumberChange} />
+            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
           </Col>
           <Col span={4}>
-            <Input onKeyDown={handleEnter} onChange={handleNumberChange} />
+            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
           </Col>
           <Col span={4}>
-            <Input onKeyDown={handleEnter} onChange={handleNumberChange} />
+            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
           </Col>
           <Col span={4}>
-            <Input onKeyDown={handleEnter} onChange={handleNumberChange} />
+            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
           </Col>
           <Col span={4}>
-            <Input onKeyDown={handleEnter} onChange={handleNumberChange} />
+            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
           </Col>
         </Row>
       </Input.Group>
-    </span>
+    </form>
   );
 }
