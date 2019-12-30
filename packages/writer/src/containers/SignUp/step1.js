@@ -71,7 +71,13 @@ function Step1({ form, dev }) {
               },
             ],
             initialValue: dev ? '9012345678' : '',
-          })(<Input addonBefore={prefixSelector} placeholder="Phone number" />)}
+          })(
+            <Input
+              addonBefore={prefixSelector}
+              placeholder="Phone number"
+              maxLength={10}
+            />
+          )}
         </FormItem>
       </div>
       <div className="isoInputWrapper">

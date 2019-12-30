@@ -95,6 +95,7 @@ function Signup(props) {
   function handleCancel() {
     setVisible(false);
   }
+
   const checkPassword = (rule, value, callback) => {
     const form = props.form;
     if (value && value !== form.getFieldValue('password')) {
@@ -103,6 +104,7 @@ function Signup(props) {
       callback();
     }
   };
+
   const checkConfirm = (rule, value, callback) => {
     const form = props.form;
     if (value && confirmDirty) {
@@ -165,7 +167,7 @@ function Signup(props) {
           <Form
             layout="vertical"
             onSubmit={handleNextBackAction}
-            style={{ padding: '50px 100px' }}
+            style={{ padding: '50px 50px' }}
           >
             <Step1
               data={props}
