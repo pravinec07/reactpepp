@@ -29,6 +29,17 @@ function Signup(props) {
     ) {
       setOTPErr(false);
       setShowThanks(true);
+      // props.form.validateFieldsAndScroll((err, values) => {
+      //   if (!err) {
+      //     const ph = `${values.prefix}${values.phoneNumber}`;
+      //     dispatch(action.fetchSignUpSaveStart({ ...values, phoneNumber: ph }));
+      //   }
+      // });
+    }
+  }, [signupResponse.isOtpSuccessful]);
+
+  React.useEffect(() => {
+    if (showThanks) {
       props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           const ph = `${values.prefix}${values.phoneNumber}`;
@@ -36,7 +47,7 @@ function Signup(props) {
         }
       });
     }
-  }, [signupResponse.isOtpSuccessful]);
+  }, [showThanks]);
 
   function handleOTPProcess() {
     props.form.validateFieldsAndScroll((err, values) => {
