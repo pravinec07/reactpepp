@@ -5,4 +5,7 @@ export default {
   SIGN_UP: 'user/auth/SignUp',
   RESET_PASSWORD: 'user/auth/ResetPassword',
   CONFIRM_RESET_PASSWORD: 'user/auth/ConfirmResetPassword',
+  SEND_OTP: 'user/auth/sendOtp',
+  RESEND_OTP: 'user/auth/resendOtp',
+  VERIFY_OTP: 'user/auth/verifyOtp',
 };

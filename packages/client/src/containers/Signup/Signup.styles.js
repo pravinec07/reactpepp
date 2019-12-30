@@ -26,8 +26,7 @@ const FormWrapper = styled.div`
   }
   .isoSignupContentWrapper {
     width: 500px;
-    min-height: 400px;
-    max-height: 600px;
+    min-height: 500px;
     z-index: 10;
     position: relative;
     border-radius: 10px;
@@ -36,6 +35,10 @@ const FormWrapper = styled.div`
 
   label {
     font-weight: bold;
+  }
+
+  .full-width {
+    width: 100%;
   }
 `;
 

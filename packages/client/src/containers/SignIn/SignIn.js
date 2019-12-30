@@ -31,7 +31,7 @@ export default function SignIn() {
   function handleLogin(e, token = false) {
     e.preventDefault();
     if (userName && password) {
-      // dispatch(login({ username: userName, password }));
+      dispatch(login({ username: userName, password }));
       // dispatch(clearMenu());
       // history.push("/dashboard");
     }

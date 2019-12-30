@@ -1,7 +1,7 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 
 import actions from './actions';
-import { signUp } from '../../services/usersApi';
+import { signUp, sendOTP, resendOTP, verifyOTP } from '../../services/usersApi';
 import SignUpRequestModel from '../../models/signUp';
 export function* signUpRequest() {
   yield takeEvery('SIGNUP_REQUEST', function*({ payload }) {
@@ -45,7 +45,83 @@ export function* signUpRequest() {
     }
   });
 }
+function* sendOTPRequest() {
+  try {
+    yield takeEvery(actions.SEND_OTP_START, function*(payload) {
+      let response = yield call(sendOTP, payload.payload);
+      console.log('response send', response);
+      if (response.status == 200) {
+        yield put({
+          type: actions.SEND_OTP_SUCCESS,
+          payload: true,
+        });
+      } else {
+        console.log('response send  fail', response);
+        yield put({
+          type: actions.SEND_OTP_FAILURE,
+          payload: response.message,
+        });
+      }
+    });
+  } catch (error) {
+    console.log('response send catch', error);
+    yield put({
+      type: actions.SEND_OTP_FAILURE,
+      payload: error,
+    });
+  }
+}
 
+function* resendOTPRequest() {
+  try {
+    console.log('resend saga');
+    yield takeEvery(actions.RESEND_OTP_START, function*(payload) {
+      let response = yield call(resendOTP, payload.payload);
+      if (response.status == 200) {
+        yield put({
+          type: actions.RESEND_OTP_SUCCESS,
+          payload: true,
+        });
+      } else {
+        yield put({
+          type: actions.RESEND_OTP_FAILURE,
+          payload: response.message,
+        });
+      }
+    });
+  } catch (error) {
+    yield put({
+      type: actions.RESEND_OTP_FAILURE,
+      payload: error,
+    });
+  }
+}
+
+function* verifyOTPRequest() {
+  try {
+    yield takeEvery(actions.VERIFY_OTP_START, function*(payload) {
+      console.log('payload', payload);
+      let response = yield call(verifyOTP, payload.payload);
+      console.log('response', response);
+      if (response.status == 200) {
+        yield put({
+          type: actions.VERIFY_OTP_SUCCESS,
+          payload: true,
+        });
+      } else {
+        yield put({
+          type: actions.VERIFY_OTP_FAILURE,
+          payload: response.message,
+        });
+      }
+    });
+  } catch (error) {}
+}
 export default function* rootSaga() {
-  yield all([fork(signUpRequest)]);
+  yield all([
+    fork(signUpRequest),
+    fork(sendOTPRequest),
+    fork(verifyOTPRequest),
+    fork(resendOTPRequest),
+  ]);
 }

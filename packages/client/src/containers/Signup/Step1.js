@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Input, Checkbox, Row, Col, Button, Radio } from 'antd';
 import Select, { SelectOption } from '@iso/components/uielements/select';
+import IntlMessages from '@iso/components/utility/intlMessages';
 
 export default function Step1(props) {
   const { getFieldDecorator } = props.data.form;
@@ -81,7 +83,7 @@ export default function Step1(props) {
                   message: 'Please input contact number',
                 },
               ],
-            })(<Input addonBefore={prefixSelector} />)}
+            })(<Input addonBefore={prefixSelector} maxLength={10} />)}
           </Form.Item>
         </Col>
         <Col xs={24}>
@@ -132,7 +134,7 @@ export default function Step1(props) {
             })(
               <Checkbox name="agreement" onChange={handleRadioChange}>
                 {' '}
-                "By clicking Agree and Sign up, you agree to Pepper content's
+                By clicking Agree and Sign up, you agree to Pepper content's
                 Terms of use and Privacy Policy.
               </Checkbox>
             )}
@@ -140,17 +142,24 @@ export default function Step1(props) {
         </Col>
       </Row>
       <Row gutter={24}>
-        <Col span={24} style={{ textAlign: 'right' }}>
+        <Col span={24}>
           <Button
             type="primary"
             htmlType="button"
             onClick={handleNextBackAction}
             disabled={!isAgreement}
+            className="full-width"
           >
-            Submit
+            Agree and Sign Up
           </Button>
         </Col>
       </Row>
+
+      <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
+        <Link to="/signin">
+          <IntlMessages id="page.signUpAlreadyAccount" />
+        </Link>
+      </div>
     </Fragment>
   );
 }
