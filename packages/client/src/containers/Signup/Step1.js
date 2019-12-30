@@ -24,6 +24,11 @@ export default function Step1(props) {
   );
   return (
     <Fragment>
+      <h1
+        style={{ textAlign: 'center', marginBottom: '15px', color: '#16224F' }}
+      >
+        Sign Up as Client
+      </h1>
       <Row gutter={24}>
         <Col xs={24}>
           <Form.Item label="Please identify yourself">
