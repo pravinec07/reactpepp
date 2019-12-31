@@ -9,6 +9,7 @@ import {
   changePassword,
 } from '../../services/usersApi';
 import SignUpRequestModel from '../../models/signUp';
+import { LOCAL_MESSAGE } from '../../config/Constants';
 import { ChangePasswordModel } from '../../models/updateProfile';
 export function* signUpRequest() {
   yield takeEvery('SIGNUP_REQUEST', function*({ payload }) {
@@ -40,89 +41,142 @@ export function* signUpRequest() {
           }
 
           break;
-        case 500:
-          yield put({ type: actions.SIGNUP_ERROR });
-          break;
         default:
-          yield put({ type: actions.SIGNUP_ERROR });
-          break;
+          yield put({
+            type: actions.SIGNUP_ERROR,
+            payload: LOCAL_MESSAGE.somthingWrong,
+          });
       }
     } catch (e) {
-      yield put({ type: actions.SIGNUP_ERROR, payload: e });
+      console.log('Error ', e);
+      yield put({
+        type: actions.SIGNUP_ERROR,
+        payload: LOCAL_MESSAGE.somthingWrong,
+      });
     }
   });
 }
 function* sendOTPRequest() {
-  try {
-    yield takeEvery(actions.SEND_OTP_START, function*(payload) {
-      let response = yield call(sendOTP, payload.payload);
-      console.log('response send', response);
-      if (response.status == 200) {
-        yield put({
-          type: actions.SEND_OTP_SUCCESS,
-          payload: true,
-        });
-      } else {
-        console.log('response send  fail', response);
-        yield put({
-          type: actions.SEND_OTP_FAILURE,
-          payload: response.message,
-        });
+  yield takeEvery(actions.SEND_OTP_START, function*({ payload }) {
+    try {
+      const response = yield call(sendOTP, payload);
+      switch (response.status) {
+        case 200:
+          const status =
+            response.data.metadata && response.data.metadata.status
+              ? response.data.metadata.status
+              : 'SUCCESS';
+          switch (status) {
+            case 'SUCCESS':
+              yield put({
+                type: actions.SEND_OTP_SUCCESS,
+                payload: true,
+              });
+              break;
+            default:
+              yield put({
+                type: actions.SEND_OTP_FAILURE,
+                payload: response.data.errors[0].message.split('(')[0],
+              });
+              break;
+          }
+          break;
+        default:
+          yield put({
+            type: actions.SEND_OTP_FAILURE,
+            payload: LOCAL_MESSAGE.somthingWrong,
+          });
       }
-    });
-  } catch (error) {
-    console.log('response send catch', error);
-    yield put({
-      type: actions.SEND_OTP_FAILURE,
-      payload: error,
-    });
-  }
+    } catch (e) {
+      console.log('Error ', e);
+      yield put({
+        type: actions.SEND_OTP_FAILURE,
+        payload: LOCAL_MESSAGE.somthingWrong,
+      });
+    }
+  });
 }
 
 function* resendOTPRequest() {
-  try {
-    console.log('resend saga');
-    yield takeEvery(actions.RESEND_OTP_START, function*(payload) {
-      let response = yield call(resendOTP, payload.payload);
-      if (response.status == 200) {
-        yield put({
-          type: actions.RESEND_OTP_SUCCESS,
-          payload: true,
-        });
-      } else {
-        yield put({
-          type: actions.RESEND_OTP_FAILURE,
-          payload: response.message,
-        });
+  yield takeEvery(actions.RESEND_OTP_START, function*({ payload }) {
+    try {
+      const response = yield call(resendOTP, payload);
+      switch (response.status) {
+        case 200:
+          const status =
+            response.data.metadata && response.data.metadata.status
+              ? response.data.metadata.status
+              : 'SUCCESS';
+          switch (status) {
+            case 'SUCCESS':
+              yield put({
+                type: actions.RESEND_OTP_SUCCESS,
+                payload: true,
+              });
+              break;
+            default:
+              yield put({
+                type: actions.RESEND_OTP_FAILURE,
+                payload: response.data.errors[0].message.split('(')[0],
+              });
+              break;
+          }
+          break;
+        default:
+          yield put({
+            type: actions.RESEND_OTP_FAILURE,
+            payload: LOCAL_MESSAGE.somthingWrong,
+          });
       }
-    });
-  } catch (error) {
-    yield put({
-      type: actions.RESEND_OTP_FAILURE,
-      payload: error,
-    });
-  }
+    } catch (e) {
+      console.log('Error ', e);
+      yield put({
+        type: actions.RESEND_OTP_FAILURE,
+        payload: LOCAL_MESSAGE.somthingWrong,
+      });
+    }
+  });
 }
 
 function* verifyOTPRequest() {
-  try {
-    yield takeEvery(actions.VERIFY_OTP_START, function*(payload) {
-      console.log('payload', payload);
-      let response = yield call(verifyOTP, payload.payload);
-      console.log('response', response);
-      if (response.status == 200) {
-        yield put({
-          type: actions.VERIFY_OTP_SUCCESS,
-          payload: true,
-        });
-      } else {
-        yield put({
-          type: actions.VERIFY_OTP_FAILURE,
-          payload: response.message,
-        });
+  yield takeEvery(actions.VERIFY_OTP_START, function*({ payload }) {
+    try {
+      const response = yield call(verifyOTP, payload);
+      switch (response.status) {
+        case 200:
+          const status =
+            response.data.metadata && response.data.metadata.status
+              ? response.data.metadata.status
+              : 'SUCCESS';
+          switch (status) {
+            case 'SUCCESS':
+              yield put({
+                type: actions.VERIFY_OTP_SUCCESS,
+                payload: true,
+              });
+              break;
+            default:
+              yield put({
+                type: actions.VERIFY_OTP_FAILURE,
+                payload: response.data.errors[0].message.split('(')[0],
+              });
+              break;
+          }
+          break;
+        default:
+          yield put({
+            type: actions.VERIFY_OTP_FAILURE,
+            payload: LOCAL_MESSAGE.somthingWrong,
+          });
       }
-    });
-  } catch (error) {}
+    } catch (e) {
+      console.log('Error ', e);
+      yield put({
+        type: actions.VERIFY_OTP_FAILURE,
+        payload: LOCAL_MESSAGE.somthingWrong,
+      });
+    }
+  });
 }
 
 export function* changePasswordRequest() {
@@ -156,24 +210,19 @@ export function* changePasswordRequest() {
           }
 
           break;
-        case 500:
-          yield put({
-            type: actions.CHANGE_PASSWORD_FAILURE,
-            payload: 'Somthing went wrong.',
-          });
-          break;
+
         default:
           yield put({
-            type: actions.CHANGE_PASSWORD_FAILURE,
-            payload: 'Somthing went wrong.',
+            type: actions.CHANGE_PASSWORD_ERROR,
+            payload: LOCAL_MESSAGE.somthingWrong,
           });
           break;
       }
     } catch (e) {
-      console.log(e, 'error');
+      console.log('Error ', e);
       yield put({
-        type: actions.SIGNUP_ERROR,
-        payload: 'Somthing went wrong.',
+        type: actions.CHANGE_PASSWORD_ERROR,
+        payload: LOCAL_MESSAGE.somthingWrong,
       });
     }
   });

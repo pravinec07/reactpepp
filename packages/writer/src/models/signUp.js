@@ -13,7 +13,7 @@ export default class Model {
     this.companyName = data.companyName || 'Inherit';
     this.name = data.firstName || '';
     this.lastname = data.lastNmae || '';
-    this.phoneNumber = `${data.phoneNumber}` || '';
+    this.phoneNumber = `${data.prefix}${data.phoneNumber}` || '';
     this.identifyType = data.identifyType || '';
     this.industryType = data.industryType || '';
     this.cvUrl = data.cvUrl || '';

@@ -93,3 +93,7 @@ export const POSITION_SOURCE = [
   { value: 'Whatsapp Groups', label: 'Whatsapp Groups' },
   { value: 'Writer Referral', label: 'Writer Referral' },
 ];
+
+export const LOCAL_MESSAGE = {
+  somthingWrong: 'Something Wrong, Please check with adminstratior.',
+};

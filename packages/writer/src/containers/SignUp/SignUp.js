@@ -8,13 +8,15 @@ import Input from '@iso/components/uielements/input';
 import Spin from '@iso/components/uielements/spin';
 import Form from '@iso/components/uielements/form';
 import IntlMessages from '@iso/components/utility/intlMessages';
+
 import SignUpStyleWrapper from './SignUp.styles';
 import Notification from '@iso/components/Notification';
 import userActions from '../../redux/user/actions';
 import SignUpForm from './step1';
-import ThankYou from './step7';
+import ThankYou from './step2';
 import { PUBLIC_ROUTE } from '../../route.constants';
 import OTPInput from './OTPInput';
+
 const { signUpRequest } = userActions;
 const FormItem = Form.Item;
 
@@ -28,64 +30,53 @@ function SignUp(props) {
   const { getFieldDecorator } = props.form;
 
   const dispatch = useDispatch();
-  const signupResponse = useSelector(state => state.User);
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        // dispatch(signUpRequest(values));
-        dispatch(
-          userActions.sendOTPStart({
-            params: {
-              email: values.email,
-              number: `${values.prefix}${values.phoneNumber}`,
-            },
-          })
-        );
-        setVisible(true);
-      }
-    });
-  };
-
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 24,
-        offset: 0,
-      },
-    },
-  };
-
+  const {
+    signUpLoading,
+    signUpError,
+    sendOtpLoading,
+    sendOtpError,
+    verifyOtpLoading,
+    verifyOtpError,
+  } = useSelector(state => state.User);
   useEffect(() => {
-    if (signupResponse.signUpLoading !== null) {
-      if (!signupResponse.signUpLoading && !signupResponse.signUpError) {
-        setFormStep(formStep + 1);
-      } else if (signupResponse.signUpError) {
-        Notification('error', 'Error', signupResponse.signUpError);
+    if (sendOtpLoading !== null) {
+      if (!sendOtpLoading && !sendOtpError) {
+        setVisible(true);
+        Notification(
+          'success',
+          'Success',
+          'Please check your email/Mobile  inbox for OTP.'
+        );
+      } else if (sendOtpError) {
+        Notification('error', 'Error', sendOtpError);
       }
-      console.log('property changed', signupResponse.signUpLoading);
     }
-  }, [signupResponse.signUpLoading, signupResponse.signUpError]);
-
-  React.useEffect(() => {
-    if (
-      signupResponse.isOtpSuccessful !== 'notStarted' &&
-      signupResponse.isOtpSuccessful
-    ) {
-      setOTPErr(false);
-      setShowThanks(true);
-      props.form.validateFieldsAndScroll((err, values) => {
-        if (!err) {
-          const ph = `${values.prefix}${values.phoneNumber}`;
-          dispatch(userActions.signUpRequest({ ...values, phoneNumber: ph }));
-        }
-      });
+  }, [sendOtpLoading, sendOtpError]);
+  useEffect(() => {
+    if (verifyOtpLoading !== null) {
+      if (!verifyOtpLoading && !verifyOtpError) {
+        setOTPErr(false);
+        props.form.validateFieldsAndScroll((err, values) => {
+          if (!err) {
+            dispatch(userActions.signUpRequest({ ...values }));
+          }
+        });
+      } else if (verifyOtpError) {
+        Notification('error', 'Error', verifyOtpError);
+      }
     }
-  }, [signupResponse.isOtpSuccessful]);
+  }, [verifyOtpLoading, verifyOtpError]);
+  useEffect(() => {
+    if (signUpLoading !== null) {
+      if (!signUpLoading && !signUpError) {
+        setFormStep(2);
+        setShowThanks(true);
+        props.form.reset();
+      } else if (signUpError) {
+        Notification('error', 'Error', signUpError);
+      }
+    }
+  }, [signUpLoading, signUpError]);
 
   function handleOTPProcess() {
     props.form.validateFieldsAndScroll((err, values) => {
@@ -105,9 +96,9 @@ function SignUp(props) {
 
   function handleResendOTP() {
     const val = props.form.getFieldsValue();
-    const ph = `${val.prefix}${val.phoneNumber}`;
+    const number = `${val.prefix}${val.phoneNumber}`;
     dispatch(
-      userActions.resendOTPStart({ params: { email: val.email, number: ph } })
+      userActions.sendOTPStart({ params: { email: val.email, number } })
     );
   }
 
@@ -115,13 +106,14 @@ function SignUp(props) {
     e.preventDefault();
     props.form.validateFields(
       [
-        'identifyType',
-        'companyName',
+        'firstName',
+        'lastName',
         'email',
         'phoneNumber',
         'password',
         'confirm',
         'prefix',
+        'agreement',
       ],
       (err, values) => {
         if (!err) {
@@ -133,7 +125,6 @@ function SignUp(props) {
               },
             })
           );
-          setVisible(true);
         }
       }
     );
@@ -157,8 +148,9 @@ function SignUp(props) {
         visible={visible}
         onOk={handleOTPProcess}
         onCancel={() => handleCancel()}
+        maskClosable={false}
         footer={
-          signupResponse.isOtpSuccessful === 'notStarted' && [
+          !showThanks && [
             <Button
               key="button"
               type="danger"
@@ -172,7 +164,7 @@ function SignUp(props) {
           ]
         }
       >
-        {signupResponse.isOtpSuccessful === 'notStarted' && (
+        {!showThanks && (
           <Form
             layout="vertical"
             onSubmit={handleOTPProcess}
@@ -210,7 +202,7 @@ function SignUp(props) {
             </Row>
           </Form>
         )}
-        {!signupResponse.isOtpSuccessful && (
+        {verifyOtpError && (
           <p
             style={{
               fontWeight: '600',
@@ -222,12 +214,11 @@ function SignUp(props) {
             }}
           >
             OTP Doesn't match. Retry it.
-            {Notification('error', 'Error', signupResponse.error.message)}
           </p>
         )}
-        {signupResponse.isOtpSuccessful && showThanks && (
+        {showThanks && (
           <div>
-            <Spin tip="Loading..." spinning={signupResponse.verifyLoading}>
+            <Spin tip="Loading..." spinning={verifyOtpLoading}>
               <p
                 style={{
                   color: '#16224F',
@@ -266,49 +257,6 @@ function SignUp(props) {
           </div>
         )}
       </Modal>
-
-      {/* <Modal
-        visible={visible}
-        onOk={handleOTPProcess}
-        onCancel={() => handleCancel()}
-        footer={
-          signupResponse.isOtpSuccessful &&
-          !showThanks && [
-            <Button key="back" onClick={() => handleResendOTP()}>
-              Resend
-            </Button>,
-            <Button type="primary" loading={loading} onClick={handleOTPProcess}>
-              Submit
-            </Button>,
-          ]
-        }
-      >
-        {signupResponse.isOtpSuccessful === 'notStarted' && (
-          <Form
-            layout="vertical"
-            onSubmit={handleOTPProcess}
-            style={{ padding: '50px 100px' }}
-          >
-            <Form.Item label="Please input OTP">
-              {getFieldDecorator('otp', {
-                rules: [
-                  {
-                    required: false,
-                    message: 'Please input otp',
-                  },
-                ],
-              })(<Input />)}
-            </Form.Item>
-          </Form>
-        )}
-        {!signupResponse.isOtpSuccessful && <div>OTP doesn't match. retry it.</div>}
-        {signupResponse.isOtpSuccessful && showThanks && (
-          <div>
-            <p>Thankyou for sign up!!!</p>
-            <Link to={PUBLIC_ROUTE.SIGN_IN}>Login</Link>
-          </div>
-        )}
-      </Modal> */}
       <div className="isoSignUpContentWrapper">
         <div className="isoSignUpContent">
           <div className="isoLogoWrapper">
@@ -321,8 +269,14 @@ function SignUp(props) {
               <Form layout="vertical" onSubmit={handleNextBackAction}>
                 <SignUpForm form={props.form} dev={dev} />
                 <>
-                  <FormItem {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">
+                  <FormItem>
+                    <Button
+                      loading={
+                        sendOtpLoading || verifyOtpLoading || signUpLoading
+                      }
+                      type="primary"
+                      htmlType="submit"
+                    >
                       <IntlMessages id="page.signUpButton" />
                     </Button>
                   </FormItem>

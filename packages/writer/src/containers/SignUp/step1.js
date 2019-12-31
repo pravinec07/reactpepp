@@ -39,7 +39,7 @@ function Step1({ form, dev }) {
     <>
       <div className="isoInputWrapper isoLeftRightComponent">
         <FormItem label="First Name">
-          {getFieldDecorator('name', {
+          {getFieldDecorator('firstName', {
             rules: [
               {
                 required: true,
@@ -151,7 +151,6 @@ function Step1({ form, dev }) {
                 required: true,
               },
             ],
-            initialValue: dev ? true : false,
           })(
             <Checkbox>
               <IntlMessages id="page.signUpTermsConditions" />

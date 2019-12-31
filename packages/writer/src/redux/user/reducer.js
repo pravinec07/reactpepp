@@ -4,7 +4,12 @@ const initState = {
   signUpLoading: null,
   signUpData: null,
   signUpError: null,
-  isOtpSuccessful: 'notStarted',
+  sendOtpLoading: null,
+  sendOtpResponse: null,
+  sendOtpError: null,
+  verifyOtpLoading: null,
+  verifyOtpResponse: null,
+  verifyOtpError: null,
   changePasswordLoading: null,
   changePasswordResponse: null,
   changePasswordError: null,
@@ -31,66 +36,44 @@ export default function authReducer(state = initState, action) {
     case actions.SEND_OTP_START:
       return {
         ...state,
-        data: action.payload,
-        loading: true,
-        error: null,
+        sendOtpResponse: null,
+        sendOtpLoading: true,
+        sendOtpError: null,
       };
     case actions.SEND_OTP_SUCCESS:
       return {
         ...state,
-        data: action.payload,
-        loading: false,
-        error: null,
+        sendOtpResponse: action.payload,
+        sendOtpLoading: false,
+        sendOtpError: null,
       };
     case actions.SEND_OTP_FAILURE:
       return {
         ...state,
-        data: action.payload,
-        loading: false,
-        error: action.payload,
-      };
-    case actions.RESEND_OTP_START:
-      return {
-        ...state,
-        data: action.payload,
-        loading: true,
-        error: null,
-      };
-    case actions.RESEND_OTP_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        loading: false,
-        error: null,
-      };
-    case actions.RESEND_OTP_FAILURE:
-      return {
-        ...state,
-        data: action.payload,
-        loading: false,
-        error: action.payload,
+        sendOtpResponse: action.payload,
+        sendOtpLoading: false,
+        sendOtpError: action.payload,
       };
     case actions.VERIFY_OTP_START:
       return {
         ...state,
-        loading: true,
-        error: null,
-        isOtpSuccessful: 'started',
+        verifyOtpResponse: null,
+        verifyOtpLoading: true,
+        verifyOtpError: null,
       };
     case actions.VERIFY_OTP_SUCCESS:
       return {
         ...state,
-        data: action.payload,
-        loading: false,
-        error: null,
-        isOtpSuccessful: true,
+        verifyOtpResponse: action.payload,
+        verifyOtpLoading: false,
+        verifyOtpError: null,
       };
     case actions.VERIFY_OTP_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
-        isOtpSuccessful: false,
+        verifyOtpResponse: null,
+        verifyOtpLoading: false,
+        verifyOtpError: action.payload,
       };
     case actions.CHANGE_PASSWORD_START:
       return {
