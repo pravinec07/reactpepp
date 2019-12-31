@@ -97,18 +97,20 @@ function* resendOTPRequest() {
 function* verifyOTPRequest() {
   try {
     yield takeEvery(actions.VERIFY_OTP_START, function*(payload) {
-      console.log('payload', payload);
+      console.log('payload verify otp', payload);
       let response = yield call(verifyOTP, payload.payload);
-      console.log('response', response);
-      if (response.status == 200) {
+      console.log('response verify otp', response);
+      if (response.status == 200 && response.data.type !== 'error') {
+        console.log('verify otp process if', response);
         yield put({
           type: actions.VERIFY_OTP_SUCCESS,
-          payload: true,
+          payload: response,
         });
       } else {
+        console.log('verify otp process else', response);
         yield put({
           type: actions.VERIFY_OTP_FAILURE,
-          payload: response.message,
+          payload: response,
         });
       }
     });

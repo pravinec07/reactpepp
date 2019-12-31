@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
-import { Form, Card, Modal, Input, Button, Row, Col, Icon } from 'antd';
+import { Form, Card, Modal, Spin, Button, Row, Col, Icon } from 'antd';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Notification from '@iso/components/Notification';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import FormWrapper, { CardStyles } from './Signup.styles';
@@ -20,50 +21,52 @@ function Signup(props) {
 
   const [loading, setLoading] = React.useState(false);
   const { getFieldDecorator } = props.form;
+  console.log('store response', signupResponse);
+  console.log('show thanks', showThanks);
 
-  console.log('=====>>', signupResponse);
   React.useEffect(() => {
     if (
       signupResponse.isOtpSuccessful !== 'notStarted' &&
-      signupResponse.isOtpSuccessful
+      signupResponse.isOtpSuccessful === true
     ) {
       // setOTPErr(false);
-      setShowThanks(true);
-      // props.form.validateFieldsAndScroll((err, values) => {
-      //   if (!err) {
-      //     const ph = `${values.prefix}${values.phoneNumber}`;
-      //     dispatch(action.fetchSignUpSaveStart({ ...values, phoneNumber: ph }));
-      //   }
-      // });
+      signupResponse.isOtpSuccessful === true && setShowThanks(true);
+      props.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          const ph = `${values.prefix}${values.phoneNumber}`;
+          dispatch(action.fetchSignUpSaveStart({ ...values, phoneNumber: ph }));
+        }
+      });
     }
   }, [signupResponse.isOtpSuccessful]);
 
-  React.useEffect(() => {
-    if (showThanks) {
-      props.form.validateFieldsAndScroll(
-        [
-          'identifyType',
-          'companyName',
-          'email',
-          'phoneNumber',
-          'password',
-          'confirm',
-        ],
-        (err, values) => {
-          if (!err) {
-            const ph = `${values.prefix}${values.phoneNumber}`;
-            dispatch(
-              action.fetchSignUpSaveStart({ ...values, phoneNumber: ph })
-            );
-          }
-        }
-      );
-    }
-  }, [showThanks]);
+  // React.useEffect(() => {
+  //   if (showThanks) {
+  //     props.form.validateFieldsAndScroll(
+  //       [
+  //         'identifyType',
+  //         'companyName',
+  //         'email',
+  //         'phoneNumber',
+  //         'password',
+  //         'confirm',
+  //         'prefix'
+  //       ],
+  //       (err, values) => {
+  //         if (!err) {
+  //           const ph = `${values.prefix}${values.phoneNumber}`;
+  //           dispatch(
+  //             action.fetchSignUpSaveStart({ ...values, phoneNumber: ph })
+  //           );
+  //         }
+  //       }
+  //     );
+  //   }
+  // }, [showThanks]);
 
   function handleOTPProcess() {
-    props.form.validateFieldsAndScroll(
-      ['email', 'phoneNumber', 'otp'],
+    props.form.validateFields(
+      ['email', 'phoneNumber', 'otp', 'prefix'],
       (err, values) => {
         if (!err) {
           dispatch(
@@ -89,8 +92,7 @@ function Signup(props) {
   }
 
   function handleNextBackAction() {
-    console.log('--->', props, props.form);
-    props.form.validateFieldsAndScroll(
+    props.form.validateFields(
       [
         'identifyType',
         'companyName',
@@ -98,6 +100,7 @@ function Signup(props) {
         'phoneNumber',
         'password',
         'confirm',
+        'prefix',
       ],
       (err, values) => {
         if (!err) {
@@ -159,7 +162,7 @@ function Signup(props) {
       return callback();
     } else if (!value) {
       callback('Please enter OTP');
-    } else if (value.length !== 6) {
+    } else if (value.length < 7) {
       callback('Please enter full otp');
     }
   };
@@ -170,8 +173,7 @@ function Signup(props) {
         onOk={handleOTPProcess}
         onCancel={() => handleCancel()}
         footer={
-          signupResponse.isOtpSuccessful &&
-          !showThanks && [
+          signupResponse.isOtpSuccessful === 'notStarted' && [
             <Button
               key="button"
               type="danger"
@@ -224,40 +226,58 @@ function Signup(props) {
           </Form>
         )}
         {!signupResponse.isOtpSuccessful && (
-          <div>OTP doesn't match. retry it.</div>
+          <p
+            style={{
+              fontWeight: '600',
+              fontSize: '22px',
+              textAlign: 'center',
+              margin: '20px 50px ',
+              border: '2px solid red',
+              padding: '8px 11px',
+            }}
+          >
+            OTP Doesn't match. Retry it.
+            {Notification('error', 'Error', signupResponse.error.message)}
+          </p>
         )}
         {signupResponse.isOtpSuccessful && showThanks && (
           <div>
-            <p
-              style={{
-                color: '#16224F',
-                fontWeight: '600',
-                fontSize: '20px',
-                textAlign: 'center',
-                marginBottom: '10px',
-              }}
-            >
-              {' '}
-              <Icon
-                type="check"
-                style={{ color: 'green', fontSize: '20px', fontWeight: '600' }}
-              />{' '}
-              Please login using your registered email id & password
-            </p>
-            <Link to={PUBLIC_ROUTE.SIGN_IN}>
+            <Spin tip="Loading..." spinning={signupResponse.verifyLoading}>
               <p
                 style={{
+                  color: '#16224F',
                   fontWeight: '600',
-                  fontSize: '22px',
+                  fontSize: '20px',
                   textAlign: 'center',
-                  margin: '20px 50px ',
-                  border: '2px solid #096DD9',
-                  padding: '8px 11px',
+                  marginBottom: '10px',
                 }}
               >
-                Login
+                {' '}
+                <Icon
+                  type="check"
+                  style={{
+                    color: 'green',
+                    fontSize: '20px',
+                    fontWeight: '600',
+                  }}
+                />{' '}
+                Please login using your registered email id & password
               </p>
-            </Link>
+              <Link to={PUBLIC_ROUTE.SIGN_IN}>
+                <p
+                  style={{
+                    fontWeight: '600',
+                    fontSize: '22px',
+                    textAlign: 'center',
+                    margin: '20px 50px ',
+                    border: '2px solid #096DD9',
+                    padding: '8px 11px',
+                  }}
+                >
+                  Login
+                </p>
+              </Link>
+            </Spin>
           </div>
         )}
       </Modal>

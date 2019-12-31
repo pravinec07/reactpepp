@@ -5,6 +5,7 @@ const INITIAL_DATA = {
   loading: true,
   error: null,
   isOtpSuccessful: 'notStarted',
+  verifyLoading: true,
 };
 export default function signupReducer(state = INITIAL_DATA, action) {
   switch (action.type) {
@@ -34,6 +35,7 @@ export default function signupReducer(state = INITIAL_DATA, action) {
         data: action.payload,
         loading: true,
         error: null,
+        isOtpSuccessful: 'notStarted',
       };
     case Actions.SEND_OTP_SUCCESS:
       return {
@@ -76,6 +78,7 @@ export default function signupReducer(state = INITIAL_DATA, action) {
         loading: true,
         error: null,
         isOtpSuccessful: 'started',
+        verifyLoading: true,
       };
     case Actions.VERIFY_OTP_SUCCESS:
       return {
@@ -84,6 +87,7 @@ export default function signupReducer(state = INITIAL_DATA, action) {
         loading: false,
         error: null,
         isOtpSuccessful: true,
+        verifyLoading: false,
       };
     case Actions.VERIFY_OTP_FAILURE:
       return {
@@ -91,6 +95,7 @@ export default function signupReducer(state = INITIAL_DATA, action) {
         loading: false,
         error: action.payload,
         isOtpSuccessful: false,
+        verifyLoading: false,
       };
     default:
       return state;

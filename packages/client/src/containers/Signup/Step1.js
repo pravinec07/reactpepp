@@ -94,6 +94,7 @@ export default function Step1(props) {
                   max: 10,
                 },
               ],
+              initialValue: '8802621541',
             })(<Input addonBefore={prefixSelector} maxLength={10} />)}
           </Form.Item>
         </Col>
