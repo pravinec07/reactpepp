@@ -13,7 +13,10 @@ const SignUpStyleWrapper = styled.div`
   position: relative;
   background: url(${bgImage}) no-repeat center center;
   background-size: cover;
-
+  .hide {
+    opacity: 0;
+    height: 0;
+  }
   &:before {
     content: '';
     width: 100%;

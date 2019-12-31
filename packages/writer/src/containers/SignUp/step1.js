@@ -80,6 +80,12 @@ function Step1({ form, dev }) {
           )}
         </FormItem>
       </div>
+      {/* this is for remove autofill email and password by browser */}
+      <div className="hide">
+        <Input tabIndex="-1" id="email" type="email" />
+        <Input tabIndex="-1" type="password" />
+      </div>
+      {/* this is for remove autofill email and password by browser*/}
       <div className="isoInputWrapper">
         <FormItem label="Email" hasFeedback>
           {getFieldDecorator('email', {
@@ -94,7 +100,7 @@ function Step1({ form, dev }) {
               },
             ],
             initialValue: dev ? 'abc@abc.com' : '',
-          })(<Input name="email" placeholder="E-mail" id="email" />)}
+          })(<Input placeholder="E-mail" />)}
         </FormItem>
       </div>
       <div className="isoInputWrapper">
