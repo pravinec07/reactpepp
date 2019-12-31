@@ -16,7 +16,7 @@ const { login } = authAction;
 const { clearMenu } = appAction;
 const FormItem = Form.Item;
 function SignIn(props) {
-  const dev = true;
+  const dev = false;
   // let history = useHistory();
   let location = useLocation();
   const dispatch = useDispatch();
@@ -50,9 +50,9 @@ function SignIn(props) {
     });
   }
   const prefixSelector = showPassword ? (
-    <Icon onClick={() => setShowPassword(!showPassword)} type="eye-invisible" />
-  ) : (
     <Icon onClick={() => setShowPassword(!showPassword)} type="eye" />
+  ) : (
+    <Icon onClick={() => setShowPassword(!showPassword)} type="eye-invisible" />
   );
   let { from } = location.state || { from: { pathname: '/dashboard' } };
   const { getFieldDecorator, getFieldsError } = props.form;
@@ -82,7 +82,7 @@ function SignIn(props) {
                         message: 'Please enter user name/email.',
                       },
                     ],
-                    // initialValue: dev ? "pravin@gmail.com" : ""
+                    initialValue: dev ? 'pravin@gmail.com' : '',
                   })(<Input placeholder="Username" />)}
                 </FormItem>
               </div>
@@ -95,7 +95,7 @@ function SignIn(props) {
                         message: 'Please enter password.',
                       },
                     ],
-                    type: 'password',
+                    initialValue: dev ? 'Pravin@123' : '',
                   })(
                     <Input
                       addonAfter={prefixSelector}

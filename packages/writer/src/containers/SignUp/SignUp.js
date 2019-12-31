@@ -16,7 +16,7 @@ const { signUpRequest } = userActions;
 const FormItem = Form.Item;
 
 function SignUp(props) {
-  const dev = true;
+  const dev = false;
   const [formStep, setFormStep] = React.useState(1);
   const [visible, setVisible] = React.useState(false);
   const [OTPErr, setOTPErr] = React.useState(false);

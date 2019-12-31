@@ -26,6 +26,10 @@ const routes = [
     component: lazy(() => import('../Profile/UpdateProfile')),
   },
   {
+    path: 'manage-password',
+    component: lazy(() => import('../Profile/ManagePassword')),
+  },
+  {
     path: 'profileUser',
     component: lazy(() => import('../Profile/ProfileUser')),
   },

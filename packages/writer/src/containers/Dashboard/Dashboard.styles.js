@@ -5,7 +5,10 @@ export const DashboardGlobalStyles = createGlobalStyle`
 body {
   -webkit-overflow-scrolling: touch;
 }
-
+.hide{
+  opacity: 0;
+  height: 0;
+}
 html h1,
 html h2,
 html h3,

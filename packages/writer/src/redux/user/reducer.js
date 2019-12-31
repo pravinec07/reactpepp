@@ -5,6 +5,9 @@ const initState = {
   signUpData: null,
   signUpError: null,
   isOtpSuccessful: 'notStarted',
+  changePasswordLoading: null,
+  changePasswordResponse: null,
+  changePasswordError: null,
 };
 
 export default function authReducer(state = initState, action) {
@@ -88,6 +91,27 @@ export default function authReducer(state = initState, action) {
         loading: false,
         error: action.payload,
         isOtpSuccessful: false,
+      };
+    case actions.CHANGE_PASSWORD_START:
+      return {
+        ...state,
+        changePasswordLoading: true,
+        changePasswordResponse: null,
+        changePasswordError: null,
+      };
+    case actions.CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        changePasswordLoading: false,
+        changePasswordResponse: action.payload,
+        changePasswordError: null,
+      };
+
+    case actions.CHANGE_PASSWORD_FAILURE:
+      return {
+        ...initState,
+        changePasswordLoading: false,
+        changePasswordError: action.payload,
       };
     default:
       return state;

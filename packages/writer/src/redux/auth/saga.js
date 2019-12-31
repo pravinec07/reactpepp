@@ -27,7 +27,7 @@ export function* loginRequest() {
               );
               yield put({
                 type: actions.LOGIN_SUCCESS,
-                token,
+                token: response.data,
               });
               yield localStorage.setItem('id_token', token);
               break;
@@ -63,7 +63,12 @@ export function* logout() {
 }
 export function* checkAuthorization() {
   yield takeEvery(actions.CHECK_AUTHORIZATION, function*() {
-    const token = getToken().get('idToken');
+    const token =
+      getToken().get('idToken') &&
+      JSON.parse(
+        Buffer.from(getToken().get('idToken'), 'base64').toString('ascii')
+      );
+    // console.log(token,getToken().get("idToken"), "checkAuthorization");
     if (token) {
       yield put({
         type: actions.LOGIN_SUCCESS,

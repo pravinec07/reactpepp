@@ -1,8 +1,15 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 
 import actions from './actions';
-import { signUp, sendOTP, resendOTP, verifyOTP } from '../../services/usersApi';
+import {
+  signUp,
+  sendOTP,
+  resendOTP,
+  verifyOTP,
+  changePassword,
+} from '../../services/usersApi';
 import SignUpRequestModel from '../../models/signUp';
+import { ChangePasswordModel } from '../../models/updateProfile';
 export function* signUpRequest() {
   yield takeEvery('SIGNUP_REQUEST', function*({ payload }) {
     console.log(payload, 'saga');
@@ -117,11 +124,66 @@ function* verifyOTPRequest() {
     });
   } catch (error) {}
 }
+
+export function* changePasswordRequest() {
+  yield takeEvery(actions.CHANGE_PASSWORD_START, function*({ payload }) {
+    console.log(payload, 'saga');
+    const payloadData = new ChangePasswordModel(payload);
+    console.log(payload, payloadData, '-------->');
+
+    try {
+      const response = yield call(changePassword, payloadData);
+      console.log(response, payload, payloadData, '-------->');
+      switch (response.status) {
+        case 200:
+          const status =
+            response.data.metadata && response.data.metadata.status
+              ? response.data.metadata.status
+              : 'SUCCESS';
+          switch (status) {
+            case 'SUCCESS':
+              yield put({
+                type: actions.CHANGE_PASSWORD_SUCCESS,
+                payload: response.data,
+              });
+              break;
+            default:
+              yield put({
+                type: actions.CHANGE_PASSWORD_FAILURE,
+                payload: response.data.errors[0].message.split('(')[0],
+              });
+              break;
+          }
+
+          break;
+        case 500:
+          yield put({
+            type: actions.CHANGE_PASSWORD_FAILURE,
+            payload: 'Somthing went wrong.',
+          });
+          break;
+        default:
+          yield put({
+            type: actions.CHANGE_PASSWORD_FAILURE,
+            payload: 'Somthing went wrong.',
+          });
+          break;
+      }
+    } catch (e) {
+      console.log(e, 'error');
+      yield put({
+        type: actions.SIGNUP_ERROR,
+        payload: 'Somthing went wrong.',
+      });
+    }
+  });
+}
 export default function* rootSaga() {
   yield all([
     fork(signUpRequest),
     fork(sendOTPRequest),
     fork(verifyOTPRequest),
     fork(resendOTPRequest),
+    fork(changePasswordRequest),
   ]);
 }

@@ -49,5 +49,10 @@ const options = [
     label: 'Profile Edit',
     leftIcon: 'ion-edit',
   },
+  {
+    key: 'manage-password',
+    label: 'Manage Password',
+    leftIcon: 'ion-locked',
+  },
 ];
 export default options;

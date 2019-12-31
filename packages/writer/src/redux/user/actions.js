@@ -11,6 +11,9 @@ const actions = {
   RESEND_OTP_START: 'RESEND_OTP_START',
   RESEND_OTP_SUCCESS: 'RESEND_OTP_SUCCESS',
   RESEND_OTP_FAILURE: 'RESEND_OTP_FAILURE',
+  CHANGE_PASSWORD_START: 'CHANGE_PASSWORD_START',
+  CHANGE_PASSWORD_SUCCESS: 'CHANGE_PASSWORD_SUCCESS',
+  CHANGE_PASSWORD_FAILURE: 'CHANGE_PASSWORD_FAILURE',
   signUpRequest: payload => {
     console.log(payload, 'actions');
     return {
@@ -52,6 +55,18 @@ const actions = {
   }),
   resendOTPFailure: data => ({
     type: actions.RESEND_OTP_FAILURE,
+    payload: data,
+  }),
+  changePasswordStart: data => ({
+    type: actions.CHANGE_PASSWORD_START,
+    payload: data,
+  }),
+  changePasswordSuccess: data => ({
+    type: actions.CHANGE_PASSWORD_SUCCESS,
+    payload: data,
+  }),
+  changePasswordFailure: data => ({
+    type: actions.CHANGE_PASSWORD_FAILURE,
     payload: data,
   }),
 };
