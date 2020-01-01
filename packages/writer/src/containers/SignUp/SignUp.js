@@ -71,7 +71,7 @@ function SignUp(props) {
       if (!signUpLoading && !signUpError) {
         setFormStep(2);
         setShowThanks(true);
-        props.form.reset();
+        props.form.resetFields();
       } else if (signUpError) {
         Notification('error', 'Error', signUpError);
       }
