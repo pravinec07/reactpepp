@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import articleActions from '@iso/redux/article/actions';
 import { Tabs, Row, Col, Card } from 'antd';
-import ArticlesListing from '@iso/containers/Writer/Articles/ArticlesListing';
-import DisplayPageDetails from '@iso/containers/DisplayPageDetails/DisplayPageDetails';
+import ArticlesListing from './ArticlesListing';
+import ArticleDetails from './ArticleDetails';
 import BasicStyle from './Assignments.style';
 const STATUS = {
   IN_PROGRESS: 'In-Progress',
@@ -87,7 +87,7 @@ export default function AssignmentCantainer() {
 
         <Col span={12} style={colStyle}>
           <Card hoverable={true} style={cardStyle}>
-            <DisplayPageDetails />
+            <ArticleDetails />
           </Card>
         </Col>
       </Row>
