@@ -18,7 +18,9 @@ function ManagePassword(props) {
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const [confirmationCode, setConfirmationCode] = React.useState(false);
   const Auth = useSelector(state => state.Auth);
-  const User = useSelector(state => state.User);
+  const { changePasswordLoading, changePasswordError } = useSelector(
+    state => state.User
+  );
   // console.log(Auth.idToken, "user vale");
   const { form } = props;
   const { getFieldDecorator } = form;
@@ -38,8 +40,8 @@ function ManagePassword(props) {
   };
 
   React.useEffect(() => {
-    if (User.changePasswordLoading !== null) {
-      if (!User.changePasswordLoading && !User.changePasswordError) {
+    if (changePasswordLoading !== null) {
+      if (!changePasswordLoading && !changePasswordError) {
         if (confirmationCode) {
           Notification(
             'success',
@@ -55,12 +57,12 @@ function ManagePassword(props) {
           );
         }
         setConfirmationCode(!confirmationCode);
-      } else if (User.changePasswordError) {
-        Notification('error', 'Error', User.changePasswordError);
+      } else if (changePasswordError) {
+        Notification('error', 'Error', changePasswordError);
       }
-      console.log('Login api called changed', User.changePasswordLoading);
+      console.log('Login api called changed', changePasswordLoading);
     }
-  }, [User.changePasswordLoading, User.changePasswordError]);
+  }, [changePasswordLoading, changePasswordError]);
   const handleConfirmBlur = e => {
     const value = e.target.value;
     setConfirmDirty(confirmDirty => confirmDirty || !!value);
@@ -239,6 +241,7 @@ function ManagePassword(props) {
                       disabled={!confirmationCode}
                       type="danger"
                       htmlType="submit"
+                      loading={changePasswordLoading}
                     >
                       Change Password
                     </Button>

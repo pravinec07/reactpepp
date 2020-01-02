@@ -24,11 +24,11 @@ const options = [
     label: 'Message Center',
     leftIcon: 'ion-chatbubbles',
   },
-  // {
-  //   key: 'my-profile',
-  //   label: 'sidebar.profile',
-  //   leftIcon: 'ion-person',
-  // },
+  {
+    key: 'my-profile',
+    label: 'sidebar.profile',
+    leftIcon: 'ion-eye',
+  },
   {
     key: 'completeProfile',
     label: 'Complete Your Profile',
@@ -38,11 +38,6 @@ const options = [
     key: 'profileVerify',
     label: 'Profile After Verification',
     leftIcon: 'ion-checkmark',
-  },
-  {
-    key: 'profileUser',
-    label: 'Profile New',
-    leftIcon: 'ion-eye',
   },
   {
     key: 'profileUserEdit',

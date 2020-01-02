@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Form, Card, Modal, Input, Button, Row, Col, Icon } from 'antd';
+import React from 'react';
+import { Input, Row, Col } from 'antd';
 let completeOTP = '';
 export default function OTPInput(props) {
   const handleNumberChange = e => {
@@ -26,29 +26,53 @@ export default function OTPInput(props) {
   }
 
   return (
-    <form>
+    <>
       <Input.Group size="large" className="otp-input-group">
         <Row gutter={8}>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
         </Row>
       </Input.Group>
-    </form>
+    </>
   );
 }

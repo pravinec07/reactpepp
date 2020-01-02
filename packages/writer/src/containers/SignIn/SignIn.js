@@ -22,7 +22,7 @@ function SignIn(props) {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = React.useState(false);
   const isLoggedIn = useSelector(state => state.Auth.idToken);
-  const response = useSelector(state => state.Auth);
+  const { loginLoading, loginError } = useSelector(state => state.Auth);
 
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
   React.useEffect(() => {
@@ -31,14 +31,14 @@ function SignIn(props) {
     }
   }, [isLoggedIn]);
   React.useEffect(() => {
-    if (response.loginLoading !== null) {
-      if (!response.loginLoading && !response.loginError) {
-      } else if (response.loginError) {
-        Notification('error', 'Error', response.loginError);
+    if (loginLoading !== null) {
+      if (!loginLoading && !loginError) {
+      } else if (loginError) {
+        Notification('error', 'Error', loginError);
       }
-      console.log('Login api called changed', response.loginLoading);
+      console.log('Login api called changed', loginLoading);
     }
-  }, [response.loginLoading, response.loginError]);
+  }, [loginLoading, loginError]);
 
   function handleLogin(e) {
     e.preventDefault();
@@ -127,6 +127,7 @@ function SignIn(props) {
                   type="primary"
                   htmlType="submit"
                   disabled={hasErrors(getFieldsError())}
+                  loading={loginLoading}
                 >
                   <IntlMessages id="page.writer.signInButton" />
                 </Button>

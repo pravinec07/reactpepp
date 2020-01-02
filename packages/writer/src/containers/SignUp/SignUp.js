@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Modal, Row } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@iso/components/uielements/button';
@@ -21,6 +21,7 @@ const FormItem = Form.Item;
 
 function SignUp(props) {
   const dev = false;
+  const history = useHistory();
   const [formStep, setFormStep] = useState(1);
   const [visible, setVisible] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
@@ -54,6 +55,7 @@ function SignUp(props) {
       if (!verifyOtpLoading && !verifyOtpError) {
         props.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
+            props.form.resetFields(['otp']);
             dispatch(signUpRequest({ ...values }));
           }
         });
@@ -75,7 +77,6 @@ function SignUp(props) {
   }, [signUpLoading, signUpError]);
 
   function handleOTPProcess() {
-    props.form.resetFields(['otp']);
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch(
@@ -127,7 +128,7 @@ function SignUp(props) {
     );
   }
   const checkOTP = (rule, value, callback) => {
-    console.log(value, '--->');
+    console.log(rule, value, callback, '--->');
     if (value && value.length === 6) {
       return callback();
     } else if (!value) {
@@ -142,7 +143,7 @@ function SignUp(props) {
     setShowThanks(false);
   }
   function navigationTo(params) {
-    Navigation(params);
+    Navigation(params, history);
     props.form.resetFields();
     setVisible(false);
     setShowThanks(false);
@@ -175,7 +176,6 @@ function SignUp(props) {
           ]
         }
       >
-        {' '}
         <Spin tip="Loading..." spinning={verifyOtpLoading}>
           {!showThanks && (
             <Form
@@ -210,7 +210,7 @@ function SignUp(props) {
                 <Form.Item>
                   {getFieldDecorator('otp', {
                     rules: [{ validator: checkOTP }],
-                  })(<OTPInput otpLength={6} />)}
+                  })(<OTPInput />)}
                 </Form.Item>
               </Row>
             </Form>
@@ -230,7 +230,14 @@ function SignUp(props) {
             </p>
           )}
           {showThanks && (
-            <div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginBottom: '10px',
+              }}
+            >
               <p
                 style={{
                   color: '#16224F',
@@ -240,7 +247,6 @@ function SignUp(props) {
                   marginBottom: '10px',
                 }}
               >
-                {' '}
                 <Icon
                   type="check"
                   style={{
@@ -248,7 +254,7 @@ function SignUp(props) {
                     fontSize: '20px',
                     fontWeight: '600',
                   }}
-                />{' '}
+                />
                 Please login using your registered email id & password
               </p>
               <LoginButton navigationTo={navigationTo} />
