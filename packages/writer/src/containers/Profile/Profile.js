@@ -101,14 +101,12 @@ function CompleteProfileDetails({ ...props }) {
                   </p>
                   <FormItem>
                     {getFieldDecorator('genre1', {
-                      valuePropName: 'value',
                       rules: [
                         {
                           required: true,
                           message: 'Please select your Most Prefered Genre.',
                         },
                       ],
-                      initialValue: dev ? GENRE[0].value : '',
                     })(
                       <Select
                         showSearch
@@ -140,10 +138,7 @@ function CompleteProfileDetails({ ...props }) {
                     Select your second Most Prefered Genre
                   </p>
                   <FormItem>
-                    {getFieldDecorator('genre2', {
-                      valuePropName: 'value',
-                      initialValue: dev ? GENRE[0].value : '',
-                    })(
+                    {getFieldDecorator('genre2', {})(
                       <Select
                         showSearch
                         placeholder="Select a Genre"
@@ -176,10 +171,7 @@ function CompleteProfileDetails({ ...props }) {
                     Select your Most Preferred Vertical
                   </p>
                   <FormItem>
-                    {getFieldDecorator('vertical1', {
-                      valuePropName: 'value',
-                      initialValue: dev ? VERTICAL[0].value : '',
-                    })(
+                    {getFieldDecorator('vertical1', {})(
                       <Select
                         showSearch
                         placeholder="Select a Vertical"
@@ -210,10 +202,7 @@ function CompleteProfileDetails({ ...props }) {
                     Select your Second Most Preferred Vertical
                   </p>
                   <FormItem>
-                    {getFieldDecorator('vertical2', {
-                      valuePropName: 'value',
-                      initialValue: dev ? VERTICAL[0].value : '',
-                    })(
+                    {getFieldDecorator('vertical2', {})(
                       <Select
                         showSearch
                         placeholder="Select a Vertical"
@@ -246,64 +235,15 @@ function CompleteProfileDetails({ ...props }) {
                     What languages are you proficient in?
                   </p>
                 </Col>
-                <FormItem help="Please update the samples based on your proficiency in the different languages.">
-                  {getFieldDecorator('languages', {
-                    valuePropName: 'value',
-                    initialValue: dev ? [LANGUAGE[0].value] : [],
-                  })(<Checkbox.Group options={LANGUAGE} />)}
-                </FormItem>
-                {/* <Col span={6}>
-                  <Checkbox value="A">Assamese</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="B">English</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="C">Gujarati</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="D">Hindi</Checkbox>
-                </Col> */}
-              </Row>
-              {/*<Row gutter={24}>
-                <Col span={6}>
-                  <Checkbox value="E">Kannada</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="E">Malayalam</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="D">Mandarin </Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="E">Odia</Checkbox>
+                <Col span={24}>
+                  <FormItem help="Please update the samples based on your proficiency in the different languages.">
+                    {getFieldDecorator('languages', {
+                      valuePropName: 'value',
+                      initialValue: dev ? [LANGUAGE[0].value] : [],
+                    })(<Checkbox.Group options={LANGUAGE} />)}
+                  </FormItem>
                 </Col>
               </Row>
-              <Row gutter={24}>
-                <Col span={6}>
-                  <Checkbox value="E">Punjabi</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="D">Tamil</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="E">Telugu</Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox value="E">Urdu</Checkbox>
-                </Col>
-              </Row>
-              <Row gutter={24}> 
-                <Col span={6}>
-                  <Checkbox value="E">European Lang.</Checkbox>
-                </Col>
-                <Col span={12}>
-                  <Checkbox value="E">
-                    Other South-east Asian Languages
-                  </Checkbox>
-                </Col>
-                <Col span={8}></Col>
-                </Row>*/}
               <Row gutter={24}>
                 <Col span={24} style={{ marginTop: '15px' }}></Col>
                 <Col span={24}>
