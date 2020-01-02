@@ -7,6 +7,13 @@ export default function AddArticlesForm(props) {
   const { articlesData } = props;
   const { getFieldDecorator } = props.data.form;
   const { TextArea } = Input;
+  const prop = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    headers: {
+      authorization: 'authorization-text',
+    },
+  };
   let { sortedInfo, filteredInfo } = useSelector;
   sortedInfo = sortedInfo || {};
   filteredInfo = filteredInfo || {};
@@ -81,20 +88,6 @@ export default function AddArticlesForm(props) {
             style={{ marginBottom: '20px' }}
           >
             <Row gutter={24}>
-              <Col span={24}>
-                <Form.Item label="No. Of Articles">
-                  {getFieldDecorator('noOfArticles', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input no. of Articles',
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={24}>
               <Col span={18}>
                 <Form.Item label="Article Topic">
                   {getFieldDecorator('articleTopic', {
@@ -117,7 +110,7 @@ export default function AddArticlesForm(props) {
                         message: 'Please input word count',
                       },
                     ],
-                  })(<Input />)}
+                  })(<Input type="number" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -161,6 +154,13 @@ export default function AddArticlesForm(props) {
                 </Form.Item>
               </Col>
             </Row>
+            <Row>
+              <Col span={24} style={{ textAlign: 'right' }}>
+                <p style={{ color: '#929292' }}>
+                  Total Articles : <span style={{ color: '#333333' }}>0</span>
+                </p>
+              </Col>
+            </Row>
             <Row gutter={24}>
               <Col span={24} style={{ float: 'right' }}>
                 <Form.Item>
@@ -171,7 +171,7 @@ export default function AddArticlesForm(props) {
                 <hr />
                 <Row gutter={24}>
                   <Col span={12}>
-                    <Form.Item label="Download File">
+                    <Form.Item label="Download Sample File">
                       <Button type="primary" htmlType="Download CSV">
                         Download CSV
                       </Button>
@@ -183,21 +183,11 @@ export default function AddArticlesForm(props) {
                         valuePropName: 'fileList',
                         // getValueFromEvent: this.normFile,
                       })(
-                        <Upload.Dragger
-                          name="files"
-                          action="/upload.do"
-                          style={{ height: '100px' }}
-                        >
-                          <p className="ant-upload-drag-icon">
-                            <Icon type="inbox" />
-                          </p>
-                          <p className="ant-upload-text">
-                            Click or drag file to this area to upload
-                          </p>
-                          <p className="ant-upload-hint">
-                            Support for a single or bulk upload.
-                          </p>
-                        </Upload.Dragger>
+                        <Upload {...prop}>
+                          <Button>
+                            <Icon type="upload" /> Click to Upload
+                          </Button>
+                        </Upload>
                       )}
                     </Form.Item>
                   </Col>
@@ -205,6 +195,18 @@ export default function AddArticlesForm(props) {
                 <Row>
                   <Table columns={columns} dataSource={articlesData} />
                 </Row>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={12} style={{ textAlign: 'left', margin: '15px 0px' }}>
+                <Button type="primary" htmlType="submit">
+                  Previous
+                </Button>
+              </Col>
+              <Col span={12} style={{ textAlign: 'right', margin: '15px 0px' }}>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
               </Col>
             </Row>
           </Card>

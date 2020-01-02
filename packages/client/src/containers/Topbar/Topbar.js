@@ -44,9 +44,9 @@ export default function Topbar() {
         </div>
 
         <ul className="isoRight">
-          <li className="isoSearch">
+          {/* <li className="isoSearch">
             <TopbarSearch />
-          </li>
+          </li> */}
 
           <li
             onClick={() => setSelectedItem('notification')}

@@ -24,11 +24,11 @@ const options = [
     label: 'Message Center',
     leftIcon: 'ion-chatbubbles',
   },
-  {
-    key: 'my-profile',
-    label: 'sidebar.profile',
-    leftIcon: 'ion-person',
-  },
+  // {
+  //   key: 'my-profile',
+  //   label: 'sidebar.profile',
+  //   leftIcon: 'ion-person',
+  // },
   {
     key: 'completeProfile',
     label: 'Complete Your Profile',

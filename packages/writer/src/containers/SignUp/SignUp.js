@@ -22,7 +22,7 @@ const FormItem = Form.Item;
 function SignUp(props) {
   const dev = false;
   const [formStep, setFormStep] = useState(1);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const { getFieldDecorator } = props.form;
 

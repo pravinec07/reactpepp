@@ -126,7 +126,7 @@ class ProfileForm extends React.Component {
           onSubmit={this.handleSubmit}
           style={{ padding: '0px 20px 20px 20px' }}
         >
-          <h2 style={{ margin: '10px 0px' }}>Complete Client Details</h2>
+          <h2 style={{ margin: '10px 0px' }}>Edit Client Details</h2>
           <Row gutter={12}>
             <Col span={10}>
               <Card
@@ -182,7 +182,7 @@ class ProfileForm extends React.Component {
                 }
               >
                 <Form.Item label="Primary Industry">
-                  {getFieldDecorator('gender', {
+                  {getFieldDecorator('pIndustry', {
                     rules: [
                       { required: true, message: 'Please select your gender!' },
                     ],
@@ -191,13 +191,49 @@ class ProfileForm extends React.Component {
                       placeholder="Select Primary Industry"
                       onChange={this.handleSelectChange}
                     >
-                      <Option value="male"></Option>
-                      <Option value="female"></Option>
+                      <option value="Health and Medical">
+                        Health and Medical
+                      </option>
+                      <option value="Business and Finance">
+                        Business and Finance
+                      </option>
+                      <option value="Technical">Technical</option>
+                      <option value="Deep Technical- AI/ML/IoT/Cybersecurity">
+                        Deep Technical- AI/ML/IoT/Cybersecurity
+                      </option>
+                      <option value="Lifestyle and Fashion">
+                        Lifestyle and Fashion
+                      </option>
+                      <option value="Nutrition/ Food and Beverage">
+                        Nutrition/ Food and Beverage
+                      </option>
+                      <option value="News Content and/or Entertainment">
+                        News Content and/or Entertainment
+                      </option>
+                      <option value="Travel and Hospitality">
+                        Travel and Hospitality
+                      </option>
+                      <option value="Sports and Recreation">
+                        Sports and Recreation
+                      </option>
+                      <option value="Real Estate">Real Estate</option>
+                      <option value="Family-Parenting/Childcare">
+                        Family-Parenting/Childcare
+                      </option>
+                      <option value="Opinionated and Engaging Content">
+                        Opinionated and Engaging Content
+                      </option>
+                      <option value="Education">Education</option>
+                      <option value="Astrology and Spiritual">
+                        Astrology and Spiritual
+                      </option>
+                      <option value="Generic">Generic</option>
+                      <option value="Other">Other</option>
                     </Select>
                   )}
                 </Form.Item>
                 <Form.Item label="Secondary Industry">
-                  {getFieldDecorator('gender', {
+                  {getFieldDecorator('sIndustry', {
                     rules: [
                       { required: true, message: 'Please select your gender!' },
                     ],
@@ -206,8 +242,44 @@ class ProfileForm extends React.Component {
                       placeholder="Select Secondary Industry"
                       onChange={this.handleSelectChange}
                     >
-                      <Option value="male"></Option>
-                      <Option value="female"></Option>
+                      <option value="Health and Medical">
+                        Health and Medical
+                      </option>
+                      <option value="Business and Finance">
+                        Business and Finance
+                      </option>
+                      <option value="Technical">Technical</option>
+                      <option value="Deep Technical- AI/ML/IoT/Cybersecurity">
+                        Deep Technical- AI/ML/IoT/Cybersecurity
+                      </option>
+                      <option value="Lifestyle and Fashion">
+                        Lifestyle and Fashion
+                      </option>
+                      <option value="Nutrition/ Food and Beverage">
+                        Nutrition/ Food and Beverage
+                      </option>
+                      <option value="News Content and/or Entertainment">
+                        News Content and/or Entertainment
+                      </option>
+                      <option value="Travel and Hospitality">
+                        Travel and Hospitality
+                      </option>
+                      <option value="Sports and Recreation">
+                        Sports and Recreation
+                      </option>
+                      <option value="Real Estate">Real Estate</option>
+                      <option value="Family-Parenting/Childcare">
+                        Family-Parenting/Childcare
+                      </option>
+                      <option value="Opinionated and Engaging Content">
+                        Opinionated and Engaging Content
+                      </option>
+                      <option value="Education">Education</option>
+                      <option value="Astrology and Spiritual">
+                        Astrology and Spiritual
+                      </option>
+                      <option value="Generic">Generic</option>
+                      <option value="Other">Other</option>
                     </Select>
                   )}
                 </Form.Item>
@@ -247,7 +319,7 @@ class ProfileForm extends React.Component {
                   </a>
                 }
               >
-                <Form.Item label="Company Registered Name">
+                <Form.Item label="Company Name">
                   {getFieldDecorator('companyName', {
                     rules: [
                       {
@@ -255,7 +327,7 @@ class ProfileForm extends React.Component {
                         message: 'Please input your Company Name!',
                       },
                     ],
-                  })(<Input placeholder="Company Registered Name" />)}
+                  })(<Input placeholder="Company Name" />)}
                 </Form.Item>
                 <Form.Item label="Company Address">
                   {getFieldDecorator('companyName', {

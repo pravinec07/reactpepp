@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: 'chat',
-    component: lazy(() => import('../Chat/Chat')),
+    component: lazy(() => import('@iso/containers/Chat/Chat')),
   },
   {
     path: 'otherDetails',
@@ -33,9 +33,12 @@ const routes = [
     component: lazy(() => import('../Profile/EditProfile.js')),
   },
   {
-    path: 'payment',
-    component: lazy(() => import('../Payments/Payments')),
-    exact: false,
+    path: 'invoice/:invoiceId',
+    component: lazy(() => import('@iso/containers/Invoice/SingleInvoice')),
+  },
+  {
+    path: 'invoice',
+    component: lazy(() => import('@iso/containers/Invoice/Invoices')),
   },
   {
     path: 'SignUp',

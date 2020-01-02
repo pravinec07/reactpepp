@@ -58,7 +58,7 @@ export default function Step1(props) {
                     message: 'Please input name of Company',
                   },
                 ],
-              })(<Input />)}
+              })(<Input placeholder="Company Name" />)}
             </Form.Item>
           </Col>
         )}
@@ -75,7 +75,7 @@ export default function Step1(props) {
                   message: 'Please input your email',
                 },
               ],
-            })(<Input />)}
+            })(<Input placeholder="Email" />)}
           </Form.Item>
         </Col>
 
@@ -94,8 +94,15 @@ export default function Step1(props) {
                   max: 10,
                 },
               ],
-              initialValue: '8802621541',
-            })(<Input addonBefore={prefixSelector} maxLength={10} />)}
+              initialValue: '',
+            })(
+              <Input
+                placeholder="Phone Number"
+                addonBefore={prefixSelector}
+                maxLength={10}
+                type="number"
+              />
+            )}
           </Form.Item>
         </Col>
         <Col xs={24}>

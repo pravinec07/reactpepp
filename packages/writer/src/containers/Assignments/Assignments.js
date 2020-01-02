@@ -27,7 +27,7 @@ export default function AssignmentCantainer() {
   return (
     <Card>
       <Row span={24} gutter={16} style={rowStyle}>
-        <Col span={16} style={colStyle}>
+        <Col span={12} style={colStyle}>
           <Card hoverable={true} style={cardStyle}>
             <Tabs
               defaultActiveKey="1"
@@ -85,7 +85,7 @@ export default function AssignmentCantainer() {
           </Card>
         </Col>
 
-        <Col span={8} style={colStyle}>
+        <Col span={12} style={colStyle}>
           <Card hoverable={true} style={cardStyle}>
             <DisplayPageDetails />
           </Card>

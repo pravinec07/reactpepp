@@ -22,7 +22,7 @@ const FormItem = Form.Item;
 const { signUpRequest } = userActions;
 
 function CompleteProfileDetails({ ...props }) {
-  const dev = true;
+  const dev = false;
   const { getFieldDecorator } = props.form;
   const dispatch = useDispatch();
   const response = useSelector(state => state.User);

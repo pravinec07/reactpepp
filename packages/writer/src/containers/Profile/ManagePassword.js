@@ -85,8 +85,8 @@ function ManagePassword(props) {
   return (
     <>
       <Row>
-        <Col span={5}></Col>
-        <Col span={14}>
+        <Col span={7}></Col>
+        <Col span={10}>
           <h2 style={{ margin: '10px 0px', textAlign: 'center' }}>
             Manage Password
           </h2>
@@ -96,7 +96,7 @@ function ManagePassword(props) {
             style={{ margin: '20px 0px' }}
           >
             <Form layout="vertical" onSubmit={handleSubmit}>
-              <div className="isoInputWrapper">
+              {/* <div className="isoInputWrapper">
                 <FormItem label="">
                   {getFieldDecorator('username', {
                     initialValue: dev
@@ -104,13 +104,22 @@ function ManagePassword(props) {
                       : '',
                   })(<Input disabled />)}
                 </FormItem>
-              </div>
+              </div> */}
               {/* hide auto fill password by browser */}
               <div className="hide">
                 <Input type="password" />
               </div>
               <div className="isoInputWrapper">
-                <FormItem label="Old Password">
+                <p
+                  style={{
+                    color: '#16224F',
+                    fontWeight: '600',
+                    marginBottom: '10px',
+                  }}
+                >
+                  <span style={{ color: 'red' }}>* </span>Old Password
+                </p>
+                <FormItem label="">
                   {getFieldDecorator('oldPassword', {
                     rules: [
                       {
@@ -123,13 +132,23 @@ function ManagePassword(props) {
                     <Input
                       type="password"
                       showHide={true}
-                      placeholder="Password"
+                      placeholder="Old Password"
+                      size="large"
                     />
                   )}
                 </FormItem>
               </div>
               <div className="isoInputWrapper">
-                <FormItem label="Password">
+                <p
+                  style={{
+                    color: '#16224F',
+                    fontWeight: '600',
+                    marginBottom: '10px',
+                  }}
+                >
+                  <span style={{ color: 'red' }}>* </span>New Password
+                </p>
+                <FormItem label="">
                   {getFieldDecorator('password', {
                     rules: [
                       {
@@ -145,13 +164,23 @@ function ManagePassword(props) {
                     <Input
                       type="password"
                       showHide={true}
-                      placeholder="Password"
+                      placeholder="New Password"
+                      size="large"
                     />
                   )}
                 </FormItem>
               </div>
               <div className="isoInputWrapper">
-                <FormItem label="Confirm Password">
+                <p
+                  style={{
+                    color: '#16224F',
+                    fontWeight: '600',
+                    marginBottom: '10px',
+                  }}
+                >
+                  <span style={{ color: 'red' }}>* </span>Confirm Password
+                </p>
+                <FormItem label="">
                   {getFieldDecorator('confirm', {
                     rules: [
                       {
@@ -168,6 +197,7 @@ function ManagePassword(props) {
                       type="password"
                       showHide={true}
                       placeholder="Confirm Password"
+                      size="large"
                       onBlur={handleConfirmBlur}
                     />
                   )}

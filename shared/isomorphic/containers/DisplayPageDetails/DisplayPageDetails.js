@@ -31,13 +31,13 @@ const rawdata = [
   { label: 'Genre', value: 'Blog Post', class: 'value', type: 'plainLabel' },
   {
     label: 'Vertical',
-    value: ` do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-	Ut enim ad minim veniam, quis nostrud exercitation ullamco
-	laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-	irure dolor in reprehenderit in voluptate velit esse cillum
-	dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-	cupidatat non proident, sunt in culpa qui officia deserunt
-	mollit anim id est laborum.`,
+    value: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when 
+    an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    It has survived not only five centuries, but also the leap into electronic typesetting,
+     remaining essentially unchanged.
+
+    `,
     class: 'value',
     colLength: 24,
     type: 'plainLabel',
@@ -51,7 +51,10 @@ const rawdata = [
     colLength: 24,
     type: 'anchorDownload',
   },
-  { type: 'actions', value: [{ label: 'accept', action: () => {} }] },
+  { type: 'actions', value: [{ label: 'Accept', action: () => {} }] },
+  { type: 'actions', value: [{ label: 'Pass', action: () => {} }] },
+  { type: 'actions', value: [{ label: 'Reject', action: () => {} }] },
+  { type: 'actions', value: [{ label: 'Delete', action: () => {} }] },
 ];
 export default function DisplayPageDetails({ data }) {
   const modifiedData = new DisplayDetailsModel(rawdata);
