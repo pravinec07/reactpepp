@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Form, Card, Modal, Input, Button, Row, Col, Icon } from 'antd';
+import React, { useEffect } from 'react';
+import { Input, Row, Col } from 'antd';
 let completeOTP = '';
 export default function OTPInput(props) {
   const handleNumberChange = e => {
@@ -8,6 +8,8 @@ export default function OTPInput(props) {
       return;
     } else {
       completeOTP += number.toString();
+      console.log(completeOTP, 'handleNumberChange');
+
       triggerChange(completeOTP);
     }
   };
@@ -15,6 +17,7 @@ export default function OTPInput(props) {
   const triggerChange = changedValue => {
     const { onChange, value } = props;
     if (onChange) {
+      console.log(onChange, 'triggerChange');
       onChange(changedValue);
     }
   };
@@ -26,29 +29,53 @@ export default function OTPInput(props) {
   }
 
   return (
-    <form>
+    <>
       <Input.Group size="large" className="otp-input-group">
         <Row gutter={8}>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength={1}
+            />
           </Col>
         </Row>
       </Input.Group>
-    </form>
+    </>
   );
 }

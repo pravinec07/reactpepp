@@ -4,15 +4,18 @@ import { PUBLIC_ROUTE } from '../../route.constants';
 
 export function LoginButton(props) {
   return (
-    <Button onClick={() => props.navigationTo({ path: PUBLIC_ROUTE.SIGN_IN })}>
+    <Button
+      style={{
+        border: '2px solid #096DD9',
+        width: 200,
+      }}
+      onClick={() => props.navigationTo({ path: PUBLIC_ROUTE.SIGN_IN })}
+    >
       <p
         style={{
           fontWeight: '600',
           fontSize: '22px',
           textAlign: 'center',
-          margin: '20px 50px ',
-          border: '2px solid #096DD9',
-          padding: '8px 11px',
         }}
       >
         Login

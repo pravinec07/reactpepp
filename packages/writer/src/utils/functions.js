@@ -1,9 +1,4 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-
-export function Navigation(payload) {
-  const history = useHistory();
-
+export function Navigation(payload, history) {
   const navigate = {
     pathname: payload.path,
     search: payload.query,
