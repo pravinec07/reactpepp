@@ -13,6 +13,7 @@ import SignInStyleWrapper from './SignIn.styles';
 import authAction from './actions';
 
 const { login } = authAction;
+
 const { clearMenu } = appAction;
 const FormItem = Form.Item;
 function SignIn(props) {
@@ -80,11 +81,11 @@ function SignIn(props) {
                     rules: [
                       {
                         required: true,
-                        message: 'Please enter user name/email.',
+                        message: 'Please enter Email.',
                       },
                     ],
                     // initialValue: dev ? "pravin@gmail.com" : ""
-                  })(<Input placeholder="Username" />)}
+                  })(<Input placeholder="Email" size="large" />)}
                 </FormItem>
               </div>
               <div className="isoInputWrapper">
@@ -102,6 +103,7 @@ function SignIn(props) {
                       addonAfter={prefixSelector}
                       type={showPassword ? 'text' : 'password'}
                       placeholder="Password"
+                      size="large"
                     />
                   )}
                 </FormItem>

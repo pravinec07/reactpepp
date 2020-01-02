@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import siteConfig from '@iso/config/site.config';
-
+// import logopic from '@iso/assets/images/.png';
 export default ({ collapsed, type }) => {
   switch (type) {
     case siteConfig.panelType.writer:
@@ -10,9 +10,7 @@ export default ({ collapsed, type }) => {
           {collapsed ? (
             <div>
               <h3>
-                <Link to="/dashboard">
-                  <i className={siteConfig.writer.siteIcon} />
-                </Link>
+                <Link to="/dashboard">{/* <img src={logopic}></img> */}</Link>
               </h3>
             </div>
           ) : (

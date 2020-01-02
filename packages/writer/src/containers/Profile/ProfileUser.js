@@ -129,12 +129,12 @@ class ProfileForm extends React.Component {
         >
           <h2 style={{ margin: '10px 0px' }}>Writer Details</h2>
           <Row gutter={12}>
-            <Col span={10}>
+            <Col span={11}>
               <Card
                 type="inner"
                 title="Profile Details"
                 extra={
-                  <a href="./editDetails">
+                  <a href="./profileUserEdit">
                     <Icon type="edit" />
                   </a>
                 }
@@ -366,12 +366,12 @@ class ProfileForm extends React.Component {
                 </Row>
               </Card>
             </Col>
-            <Col span={10}>
+            <Col span={11}>
               <Card
                 type="inner"
                 title="Basic Information"
                 extra={
-                  <a href="./editDetails">
+                  <a href="./profileUserEdit">
                     <Icon type="edit" />
                   </a>
                 }
@@ -576,7 +576,7 @@ class ProfileForm extends React.Component {
                 type="inner"
                 title="Experience"
                 extra={
-                  <a href="./editDetails">
+                  <a href="./profileUserEdit">
                     <Icon type="edit" />
                   </a>
                 }

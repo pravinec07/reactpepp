@@ -158,7 +158,80 @@ class ProfileForm extends React.Component {
             <Col span={10}>
               <Card
                 type="inner"
-                style={{ height: '304px' }}
+                title="POC Details"
+                extra={
+                  <a href="./editDetails">
+                    <Icon type="edit" />
+                  </a>
+                }
+              >
+                <Form.Item label="">
+                  <Row>
+                    <Col span={24}>
+                      <Checkbox checked>I am the POC</Checkbox>
+                    </Col>
+                  </Row>
+                </Form.Item>
+                <Form.Item label="Name">
+                  <p style={{ color: '#16224F', fontWeight: '600' }}>
+                    Rahul Sharma
+                  </p>
+                </Form.Item>
+                <Form.Item label="Email">
+                  <p style={{ color: '#16224F', fontWeight: '600' }}>
+                    rahulsharma888@gmail.com
+                  </p>
+                </Form.Item>
+                <Form.Item label="Phone">
+                  <p style={{ color: '#16224F', fontWeight: '600' }}>
+                    +91-8586047534
+                  </p>
+                </Form.Item>
+                <Collapse accordion>
+                  <Panel header="Add Alternate POC" key="1">
+                    <Form.Item label="Alternate POC Name">
+                      {getFieldDecorator('companyName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input your Company Name!',
+                          },
+                        ],
+                      })(<Input placeholder="Enter POC Name" />)}
+                    </Form.Item>
+                    <Form.Item label="Alternate POC Email">
+                      {getFieldDecorator('companyName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input your Company Name!',
+                          },
+                        ],
+                      })(<Input placeholder="Enter POC Email" />)}
+                    </Form.Item>
+                    <Form.Item label="Alternate POC Phone">
+                      {getFieldDecorator('companyName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input your Company Name!',
+                          },
+                        ],
+                      })(<Input placeholder="Enter POC Phone" />)}
+                    </Form.Item>
+                  </Panel>
+                </Collapse>
+              </Card>
+            </Col>
+          </Row>
+          {/*  */}
+          <Row>
+            <Col span={24} style={{ marginTop: '20px' }}></Col>
+          </Row>
+          <Row gutter={12}>
+            <Col span={10}>
+              <Card
+                type="inner"
                 title="Industry & Audience"
                 extra={
                   <a href="./editDetails">
@@ -194,14 +267,35 @@ class ProfileForm extends React.Component {
                     </Col>
                   </Row>
                 </Form.Item>
+
+                <Form.Item label="Preferred Language">
+                  <Row>
+                    <Col span={12}>
+                      <Checkbox checked>English</Checkbox>
+                    </Col>
+                    <Col span={12}>
+                      <Checkbox checked>Hindi</Checkbox>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span={12}>
+                      <Checkbox checked>French</Checkbox>
+                    </Col>
+                    <Col span={12}>
+                      <Checkbox checked>Spanish</Checkbox>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span={12}>
+                      <Checkbox checked>Punjabi</Checkbox>
+                    </Col>
+                    <Col span={12}>
+                      <Checkbox checked>German</Checkbox>
+                    </Col>
+                  </Row>
+                </Form.Item>
               </Card>
             </Col>
-          </Row>
-          {/*  */}
-          <Row>
-            <Col span={24} style={{ marginTop: '20px' }}></Col>
-          </Row>
-          <Row gutter={12}>
             <Col span={10}>
               <Card
                 type="inner"
@@ -271,74 +365,6 @@ class ProfileForm extends React.Component {
                     MHNC89787SJS9
                   </p>
                 </Form.Item>
-              </Card>
-            </Col>
-            <Col span={10}>
-              <Card
-                type="inner"
-                title="POC Details"
-                extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
-                  </a>
-                }
-              >
-                <Form.Item label="">
-                  <Row>
-                    <Col span={24}>
-                      <Checkbox checked>I am the POC</Checkbox>
-                    </Col>
-                  </Row>
-                </Form.Item>
-                <Form.Item label="Name">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Rahul Sharma
-                  </p>
-                </Form.Item>
-                <Form.Item label="Email">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    rahulsharma888@gmail.com
-                  </p>
-                </Form.Item>
-                <Form.Item label="Phone">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    +91-8586047534
-                  </p>
-                </Form.Item>
-                <Collapse accordion>
-                  <Panel header="Add Alternate POC" key="1">
-                    <Form.Item label="Alternate POC Name">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Name" />)}
-                    </Form.Item>
-                    <Form.Item label="Alternate POC Email">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Email" />)}
-                    </Form.Item>
-                    <Form.Item label="Alternate POC Phone">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Phone" />)}
-                    </Form.Item>
-                  </Panel>
-                </Collapse>
               </Card>
             </Col>
           </Row>

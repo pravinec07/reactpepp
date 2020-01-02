@@ -9,7 +9,7 @@ export default {
   },
   dashboard: '/dashboard',
   writer: {
-    siteName: 'Dashboard',
+    siteName: 'Pepper',
     siteIcon: 'ion-flash',
     footerText: `Pepper @ ${new Date().getFullYear()}, All rights reserved.`,
     enableAnimatedRoute: false,

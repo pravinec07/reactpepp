@@ -94,7 +94,26 @@ const CardWrapper = styled.div`
     }
   }
 `;
+const rowStyle = {
+  width: '100%',
+  display: 'flex',
+  flexFlow: 'row wrap',
+};
+const colStyle = {
+  marginBottom: '16px',
+};
+const gutter = 16;
 
+const cardStyle = {
+  minHeight: '726px',
+};
+
+const basicStyle = {
+  rowStyle,
+  colStyle,
+  gutter,
+  cardStyle,
+};
 const Box = WithDirection(BoxWrapper);
 export { Box, StatusTag };
-export default WithDirection(CardWrapper);
+export default WithDirection(CardWrapper, basicStyle);

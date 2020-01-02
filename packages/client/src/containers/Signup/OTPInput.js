@@ -30,22 +30,52 @@ export default function OTPInput(props) {
       <Input.Group size="large" className="otp-input-group">
         <Row gutter={8}>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength="1"
+              type="number"
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength="1"
+              type="number"
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength="1"
+              type="number"
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength="1"
+              type="number"
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength="1"
+              type="number"
+            />
           </Col>
           <Col span={4}>
-            <Input onKeyUp={handleEnter} onChange={handleNumberChange} />
+            <Input
+              onKeyUp={handleEnter}
+              onChange={handleNumberChange}
+              maxLength="1"
+              type="number"
+            />
           </Col>
         </Row>
       </Input.Group>
