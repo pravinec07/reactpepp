@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Table, Button, Select } from 'antd';
 
 import { ArticlesContainer, ArticlesStyles } from './Articles.styles';
-import Constants from '../../../../common/Utilities/Constants';
+import { Constants } from '../../config/Constants';
 
 export default function ArticlesListing(props) {
   let { sortedInfo, filteredInfo } = useSelector;
+  const [currentArticle, setCurrentArticle] = useState(null);
   sortedInfo = sortedInfo || {};
   filteredInfo = filteredInfo || {};
   const { status, colors } = Constants;
@@ -22,15 +23,15 @@ export default function ArticlesListing(props) {
       title: 'Article Code',
       dataIndex: 'articleCode',
       key: 'articleCode',
-      sorter: (a, b) => a.articleCode - b.articleCode,
+      // sorter: (a, b) => a.articleCode - b.articleCode,
       sortOrder: sortedInfo.columnKey === 'articleCode' && sortedInfo.order,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: 'Topic',
       dataIndex: 'articleTopic',
       key: 'articleTopic',
-      sorter: (a, b) => a.articleTopic - b.articleTopic,
+      // sorter: (a, b) => a.articleTopic - b.articleTopic,
       sortOrder: sortedInfo.columnKey === 'articleTopic' && sortedInfo.order,
       ellipsis: true,
     },
@@ -38,39 +39,37 @@ export default function ArticlesListing(props) {
       title: 'Words',
       dataIndex: 'word',
       key: 'word',
-      sorter: (a, b) => a.word - b.word,
+      // sorter: (a, b) => a.word - b.word,
       sortOrder: sortedInfo.columnKey === 'word' && sortedInfo.order,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: 'Submission Date',
-      dataIndex: 'deadline',
+      dataIndex: 'deadLineDate',
       key: 'deadline',
-      sorter: (a, b) => a.deadline - b.deadline,
+      // sorter: (a, b) => a.deadline - b.deadline,
       sortOrder: sortedInfo.columnKey === 'deadline' && sortedInfo.order,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      sorter: (a, b) => a.status - b.status,
+      // sorter: (a, b) => a.status - b.status,
       sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
-      ellipsis: true,
+      ellipsis: false,
       render: key => {
         return (() => {
           console.log(key, status);
-          switch (key) {
-            case status.INPROGRESS:
-              return <span style={{ color: colors.INPROGRESS }}>{key}</span>;
-            case status.REJECTED:
-              return <span style={{ color: colors.REJECTED }}>{key}</span>;
-            case status.COMPLETED:
-              return <span style={{ color: colors.COMPLETED }}>{key}</span>;
-            case status.SUBMITTED:
-              return <span style={{ color: colors.SUBMITTED }}>{key}</span>;
-            case status.REWORK:
-              return <span style={{ color: colors.REWORK }}>{key}</span>;
+          switch (key.toLowerCase()) {
+            case 'on_going':
+              return <span style={{ color: 'blue' }}>Ongoing</span>;
+            case 'open':
+              return <span style={{ color: colors.REJECTED }}>Open</span>;
+            case 'sumited':
+              return <span style={{ color: colors.SUBMITTED }}>Submited</span>;
+            case 'rework':
+              return <span style={{ color: colors.REWORK }}>Rework</span>;
             default:
               return <span style={{ color: colors.ALL }}>{key}</span>;
           }
@@ -79,37 +78,38 @@ export default function ArticlesListing(props) {
     },
     {
       title: 'Payment Status',
-      dataIndex: 'paymentStatus',
+      dataIndex: 'transactionStatus',
       key: 'paymentStatus',
-      sorter: (a, b) => a.paymentStatus - b.paymentStatus,
+      // sorter: (a, b) => a.paymentStatus - b.paymentStatus,
       sortOrder: sortedInfo.columnKey === 'paymentStatus' && sortedInfo.order,
-      ellipsis: true,
+      ellipsis: false,
       render: key => {
         return (() => {
-          switch (key) {
-            case status.INPROGRESS:
-              return <span style={{ color: colors.INPROGRESS }}>{key}</span>;
-            case status.REJECTED:
-              return <span style={{ color: colors.REJECTED }}>{key}</span>;
-            case status.COMPLETED:
-              return <span style={{ color: colors.COMPLETED }}>{key}</span>;
-            case status.SUBMITTED:
-              return <span style={{ color: colors.SUBMITTED }}>{key}</span>;
-            case status.REWORK:
-              return <span style={{ color: colors.REWORK }}>{key}</span>;
+          switch (key.toLowerCase()) {
+            case 'un-paid':
+              return <span style={{ color: colors.REJECTED }}>UnPaid</span>;
+            case 'paid':
+              return <span style={{ color: colors.COMPLETED }}>Paid</span>;
             default:
-              return <span style={{ color: colors.ALL }}>{key}</span>;
+              return <span style={{ color: colors.ALL }}>N/A</span>;
           }
         })();
       },
     },
     {
       title: 'Rework',
-      dataIndex: 'deadline',
+      dataIndex: 'revisions',
       key: 'deadline',
       sorter: (a, b) => a.deadline - b.deadline,
       sortOrder: sortedInfo.columnKey === 'deadline' && sortedInfo.order,
       ellipsis: true,
+      render: data => (
+        <span>
+          {data && data.length
+            ? data[data.length - 1].revisionCreatedDate
+            : '--'}
+        </span>
+      ),
     },
   ];
 
@@ -125,8 +125,8 @@ export default function ArticlesListing(props) {
       <Table
         columns={columns}
         dataSource={props.data}
-        onRow={(val, row) => {
-          props.onStatusChange(val, row);
+        onRowClick={(row, index) => {
+          props.onChangeArticle(row, index);
         }}
       />
     </ArticlesContainer>

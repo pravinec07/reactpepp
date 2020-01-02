@@ -4,11 +4,11 @@ const options = [
     label: 'Dashboard',
     leftIcon: 'ion-speedometer',
   },
-  {
-    key: 'assignments',
-    label: 'sidebar.assignments',
-    leftIcon: 'ion-person',
-  },
+  // {
+  //   key: 'assignments',
+  //   label: 'sidebar.assignments',
+  //   leftIcon: 'ion-person',
+  // },
   {
     key: 'my-assignments',
     label: 'My Project',

@@ -2,7 +2,7 @@ import { all, takeEvery, put } from 'redux-saga/effects';
 import actions from './actions';
 import fakeData from './fakeData';
 
-const fakeDataList = new fakeData(5).getAll();
+const fakeDataList = new fakeData(10).getAll();
 
 function* getArticles() {
   try {

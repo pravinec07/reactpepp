@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import articleActions from '@iso/redux/article/actions';
+import articleActions from '../../redux/articles/actions';
 import { Tabs, Row, Col, Card } from 'antd';
 import ArticlesListing from './ArticlesListing';
 import ArticleDetails from './ArticleDetails';
