@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Input, Row, Col } from 'antd';
 let completeOTP = '';
 export default function OTPInput(props) {
@@ -8,8 +8,6 @@ export default function OTPInput(props) {
       return;
     } else {
       completeOTP += number.toString();
-      console.log(completeOTP, 'handleNumberChange');
-
       triggerChange(completeOTP);
     }
   };
@@ -17,7 +15,6 @@ export default function OTPInput(props) {
   const triggerChange = changedValue => {
     const { onChange, value } = props;
     if (onChange) {
-      console.log(onChange, 'triggerChange');
       onChange(changedValue);
     }
   };
