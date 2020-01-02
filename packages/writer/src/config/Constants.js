@@ -95,5 +95,6 @@ export const POSITION_SOURCE = [
 ];
 
 export const LOCAL_MESSAGE = {
-  somthingWrong: 'Something Wrong, Please check with adminstratior.',
+  somthingWrong:
+    'Something Wrong!!! Please check your internet connection and retry.',
 };

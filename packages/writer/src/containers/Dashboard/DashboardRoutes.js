@@ -5,7 +5,7 @@ import Loader from '@iso/components/utility/loader';
 const routes = [
   {
     path: 'completeProfile',
-    component: lazy(() => import('../Profile/Profile')),
+    component: lazy(() => import('../Profile/CompleteProfile')),
     exact: true,
   },
   {
@@ -23,19 +23,15 @@ const routes = [
   },
   {
     path: 'my-profile',
-    component: lazy(() => import('../Profile/UpdateProfile')),
-  },
-  {
-    path: 'manage-password',
-    component: lazy(() => import('../Profile/ManagePassword')),
-  },
-  {
-    path: 'profileUser',
     component: lazy(() => import('../Profile/ProfileUser')),
   },
   {
     path: 'profileUserEdit',
     component: lazy(() => import('../Profile/ProfileUserEdit')),
+  },
+  {
+    path: 'manage-password',
+    component: lazy(() => import('../Profile/ManagePassword')),
   },
   {
     path: 'chat',

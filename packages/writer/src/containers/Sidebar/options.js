@@ -27,7 +27,7 @@ const options = [
   {
     key: 'my-profile',
     label: 'sidebar.profile',
-    leftIcon: 'ion-person',
+    leftIcon: 'ion-eye',
   },
   {
     key: 'completeProfile',
@@ -38,11 +38,6 @@ const options = [
     key: 'profileVerify',
     label: 'Profile After Verification',
     leftIcon: 'ion-checkmark',
-  },
-  {
-    key: 'profileUser',
-    label: 'Profile New',
-    leftIcon: 'ion-eye',
   },
   {
     key: 'profileUserEdit',
