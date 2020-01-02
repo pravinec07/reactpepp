@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal, Row } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@iso/components/uielements/button';
 import Icon from '@iso/components/uielements/icon';
-import Input from '@iso/components/uielements/input';
 import Spin from '@iso/components/uielements/spin';
 import Form from '@iso/components/uielements/form';
 import IntlMessages from '@iso/components/utility/intlMessages';
@@ -14,19 +13,17 @@ import Notification from '@iso/components/Notification';
 import userActions from '../../redux/user/actions';
 import SignUpForm from './step1';
 import ThankYou from './step2';
-import { PUBLIC_ROUTE } from '../../route.constants';
 import OTPInput from './OTPInput';
-
+import { Navigation } from '../../utils/functions';
+import { LoginButton } from './LoginButton';
 const { signUpRequest } = userActions;
 const FormItem = Form.Item;
 
 function SignUp(props) {
   const dev = false;
-  const [formStep, setFormStep] = React.useState(1);
-  const [visible, setVisible] = React.useState(false);
-  const [OTPErr, setOTPErr] = React.useState(false);
-  const [showThanks, setShowThanks] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [formStep, setFormStep] = useState(1);
+  const [visible, setVisible] = useState(true);
+  const [showThanks, setShowThanks] = useState(false);
   const { getFieldDecorator } = props.form;
 
   const dispatch = useDispatch();
@@ -55,10 +52,9 @@ function SignUp(props) {
   useEffect(() => {
     if (verifyOtpLoading !== null) {
       if (!verifyOtpLoading && !verifyOtpError) {
-        setOTPErr(false);
         props.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
-            dispatch(userActions.signUpRequest({ ...values }));
+            dispatch(signUpRequest({ ...values }));
           }
         });
       } else if (verifyOtpError) {
@@ -79,6 +75,7 @@ function SignUp(props) {
   }, [signUpLoading, signUpError]);
 
   function handleOTPProcess() {
+    props.form.resetFields(['otp']);
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch(
@@ -130,6 +127,7 @@ function SignUp(props) {
     );
   }
   const checkOTP = (rule, value, callback) => {
+    console.log(value, '--->');
     if (value && value.length === 6) {
       return callback();
     } else if (!value) {
@@ -139,9 +137,17 @@ function SignUp(props) {
     }
   };
   function handleCancel() {
+    props.form.resetFields(['otp']);
     setVisible(false);
+    setShowThanks(false);
   }
-
+  function navigationTo(params) {
+    Navigation(params);
+    props.form.resetFields();
+    setVisible(false);
+    setShowThanks(false);
+    setFormStep(1);
+  }
   return (
     <SignUpStyleWrapper className="isoSignUpPage">
       <Modal
@@ -155,70 +161,76 @@ function SignUp(props) {
               key="button"
               type="danger"
               onClick={() => handleResendOTP()}
+              loading={verifyOtpLoading}
             >
               Resend OTP
             </Button>,
-            <Button type="primary" loading={loading} onClick={handleOTPProcess}>
-              Submit
+            <Button
+              type="primary"
+              loading={verifyOtpLoading}
+              onClick={handleOTPProcess}
+            >
+              Verify
             </Button>,
           ]
         }
       >
-        {!showThanks && (
-          <Form
-            layout="vertical"
-            onSubmit={handleOTPProcess}
-            style={{ padding: '50px 30px' }}
-          >
+        {' '}
+        <Spin tip="Loading..." spinning={verifyOtpLoading}>
+          {!showThanks && (
+            <Form
+              layout="vertical"
+              onSubmit={handleOTPProcess}
+              style={{ padding: '50px 30px' }}
+            >
+              <p
+                style={{
+                  color: '#16224F',
+                  fontWeight: '600',
+                  fontSize: '20px',
+                  textAlign: 'center',
+                  marginBottom: '10px',
+                }}
+              >
+                We have sent you a verification code on your registered Email
+                and Phone Number
+              </p>
+              <p
+                style={{
+                  color: '#333333',
+                  fontWeight: '600',
+                  fontSize: '16px',
+                  textAlign: 'left',
+                  marginBottom: '10px',
+                }}
+              >
+                Please fill the code below
+              </p>
+              <Row gutter={24}>
+                <Form.Item>
+                  {getFieldDecorator('otp', {
+                    rules: [{ validator: checkOTP }],
+                  })(<OTPInput otpLength={6} />)}
+                </Form.Item>
+              </Row>
+            </Form>
+          )}
+          {verifyOtpError && (
             <p
               style={{
-                color: '#16224F',
                 fontWeight: '600',
-                fontSize: '20px',
+                fontSize: '22px',
                 textAlign: 'center',
-                marginBottom: '10px',
+                margin: '20px 50px ',
+                border: '2px solid red',
+                padding: '8px 11px',
               }}
             >
-              We have sent you a verification code on your registered Email and
-              Phone Number
+              OTP Doesn't match. Retry it.
             </p>
-            <p
-              style={{
-                color: '#333333',
-                fontWeight: '600',
-                fontSize: '16px',
-                textAlign: 'left',
-                marginBottom: '10px',
-              }}
-            >
-              Please fill the code below
-            </p>
-            <Row gutter={24}>
-              <Form.Item>
-                {getFieldDecorator('otp', {
-                  rules: [{ validator: checkOTP }],
-                })(<OTPInput />)}
-              </Form.Item>
-            </Row>
-          </Form>
-        )}
-        {verifyOtpError && (
-          <p
-            style={{
-              fontWeight: '600',
-              fontSize: '22px',
-              textAlign: 'center',
-              margin: '20px 50px ',
-              border: '2px solid red',
-              padding: '8px 11px',
-            }}
-          >
-            OTP Doesn't match. Retry it.
-          </p>
-        )}
-        {showThanks && (
-          <div>
-            <Spin tip="Loading..." spinning={verifyOtpLoading}>
+          )}
+          {showThanks && (
+            <div>
               <p
                 style={{
                   color: '#16224F',
@@ -239,23 +251,10 @@ function SignUp(props) {
                 />{' '}
                 Please login using your registered email id & password
               </p>
-              <Link to={PUBLIC_ROUTE.SIGN_IN}>
-                <p
-                  style={{
-                    fontWeight: '600',
-                    fontSize: '22px',
-                    textAlign: 'center',
-                    margin: '20px 50px ',
-                    border: '2px solid #096DD9',
-                    padding: '8px 11px',
-                  }}
-                >
-                  Login
-                </p>
-              </Link>
-            </Spin>
-          </div>
-        )}
+              <LoginButton navigationTo={navigationTo} />
+            </div>
+          )}
+        </Spin>
       </Modal>
       <div className="isoSignUpContentWrapper">
         <div className="isoSignUpContent">
@@ -288,7 +287,10 @@ function SignUp(props) {
                 </div>
               </Form>
             )}
-            {formStep === 2 && <ThankYou />}
+            {formStep === 2 && [
+              <ThankYou />,
+              <LoginButton navigationTo={navigationTo} />,
+            ]}
           </div>
         </div>
       </div>
