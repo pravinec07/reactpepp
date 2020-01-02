@@ -42,12 +42,8 @@ const routes = [
     component: lazy(() => import('@iso/containers/Chat/Chat')),
   },
   {
-    path: 'invoice/:invoiceId',
-    component: lazy(() => import('@iso/containers/Invoice/SingleInvoice')),
-  },
-  {
-    path: 'invoice',
-    component: lazy(() => import('@iso/containers/Invoice/Invoices')),
+    path: 'payments',
+    component: lazy(() => import('../Payments/Invoices')),
   },
 ];
 

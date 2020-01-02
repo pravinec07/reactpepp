@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Table, Button } from 'antd';
 
-import { ArticlesContainer, ArticlesStyles } from './Articles.styles';
+import { PaymentContainer, PaymentStyles } from './Invoice.styles';
 import { Constants } from '../../config/Constants';
 
-export default function ArticlesListing(props) {
+export default function PaymentListing(props) {
   let { sortedInfo } = useSelector;
   sortedInfo = sortedInfo || {};
   const { status, colors } = Constants;
@@ -49,71 +49,20 @@ export default function ArticlesListing(props) {
       sortOrder: sortedInfo.columnKey === 'deadline' && sortedInfo.order,
       ellipsis: false,
     },
+
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      // sorter: (a, b) => a.status - b.status,
-      sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
-      ellipsis: false,
-      render: key => {
-        return (() => {
-          console.log(key, status);
-          switch (key.toLowerCase()) {
-            case 'on_going':
-              return <span style={{ color: 'blue' }}>Ongoing</span>;
-            case 'open':
-              return <span style={{ color: colors.REJECTED }}>Open</span>;
-            case 'sumited':
-              return <span style={{ color: colors.SUBMITTED }}>Submited</span>;
-            case 'rework':
-              return <span style={{ color: colors.REWORK }}>Rework</span>;
-            default:
-              return <span style={{ color: colors.ALL }}>{key}</span>;
-          }
-        })();
-      },
-    },
-    {
-      title: 'Payment Status',
-      dataIndex: 'transactionStatus',
+      title: 'Payment Date',
+      dataIndex: 'transactionDate',
       key: 'paymentStatus',
       // sorter: (a, b) => a.paymentStatus - b.paymentStatus,
       sortOrder: sortedInfo.columnKey === 'paymentStatus' && sortedInfo.order,
       ellipsis: false,
-      render: key => {
-        return (() => {
-          switch (key.toLowerCase()) {
-            case 'un-paid':
-              return <span style={{ color: colors.REJECTED }}>UnPaid</span>;
-            case 'paid':
-              return <span style={{ color: colors.COMPLETED }}>Paid</span>;
-            default:
-              return <span style={{ color: colors.ALL }}>N/A</span>;
-          }
-        })();
-      },
-    },
-    {
-      title: 'Rework',
-      dataIndex: 'revisions',
-      key: 'deadline',
-      sorter: (a, b) => a.deadline - b.deadline,
-      sortOrder: sortedInfo.columnKey === 'deadline' && sortedInfo.order,
-      ellipsis: true,
-      render: data => (
-        <span>
-          {data && data.length
-            ? data[data.length - 1].revisionCreatedDate
-            : '--'}
-        </span>
-      ),
     },
   ];
 
   return (
-    <ArticlesContainer>
-      <ArticlesStyles />
+    <PaymentContainer>
+      <PaymentStyles />
       {props.filters && (
         <div className="table-operations">
           <Button onClick={props.clearFilters}>Clear filters</Button>
@@ -127,6 +76,6 @@ export default function ArticlesListing(props) {
           props.onChangeArticle(row, index);
         }}
       />
-    </ArticlesContainer>
+    </PaymentContainer>
   );
 }

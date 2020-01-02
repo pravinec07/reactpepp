@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { palette } from 'styled-theme';
 import BoxComponent from '@iso/components/utility/box';
 import WithDirection from '@iso/lib/helpers/rtl';
@@ -117,3 +117,23 @@ const basicStyle = {
 const Box = WithDirection(BoxWrapper);
 export { Box, StatusTag };
 export default WithDirection(CardWrapper, basicStyle);
+
+export const PaymentStyles = createGlobalStyle`
+.table-operations {
+    margin-bottom: 16px;
+  }
+  
+  .table-operations > button {
+    margin-right: 8px;
+  }`;
+
+export const PaymentContainer = styled.div`
+  padding: 10px;
+  .table-operations {
+    margin-bottom: 16px;
+  }
+
+  .table-operations > button {
+    margin-right: 8px;
+  }
+`;

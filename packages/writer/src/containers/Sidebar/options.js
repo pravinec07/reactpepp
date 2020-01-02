@@ -15,7 +15,7 @@ const options = [
     leftIcon: 'ion-person',
   },
   {
-    key: 'invoice',
+    key: 'payments',
     label: 'sidebar.payment',
     leftIcon: 'ion-clipboard',
   },
