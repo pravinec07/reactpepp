@@ -23,6 +23,7 @@ import modal from '@iso/redux/modal/reducer';
 import profile from '@iso/redux/profile/reducer';
 import githubSearch from '@iso/redux/githubSearch/reducers';
 import signup from '../containers/Signup/reducer';
+import articleReducer from '../redux/articles/reducers';
 
 export default combineReducers({
   Auth,
@@ -49,4 +50,5 @@ export default combineReducers({
   profile,
   githubSearch,
   signup,
+  articleReducer,
 });
