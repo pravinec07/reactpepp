@@ -14,9 +14,42 @@ import {
   Radio,
   Select,
   Collapse,
+  Slider,
 } from 'antd';
 const { Panel } = Collapse;
 const { Option } = Select;
+const marks = {
+  0: {
+    label: <strong>Tropical</strong>,
+  },
+  5: {
+    label: <strong>Promotional</strong>,
+  },
+};
+const marks2 = {
+  0: {
+    label: <strong>Concise</strong>,
+  },
+  5: {
+    label: <strong>Explanatory</strong>,
+  },
+};
+const marks3 = {
+  0: {
+    label: <strong>Formal</strong>,
+  },
+  5: {
+    label: <strong>Casual</strong>,
+  },
+};
+const marks4 = {
+  0: {
+    label: <strong>Niche</strong>,
+  },
+  5: {
+    label: <strong>Generic</strong>,
+  },
+};
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -132,6 +165,7 @@ class ProfileForm extends React.Component {
               <Card
                 type="inner"
                 title="Company Information"
+                style={{ height: '385px' }}
                 extra={
                   <a href="./my-profile">
                     <Icon type="close" />
@@ -173,7 +207,95 @@ class ProfileForm extends React.Component {
             <Col span={10}>
               <Card
                 type="inner"
-                style={{ height: '304px' }}
+                title="POC Details"
+                extra={
+                  <a href="./my-profile">
+                    <Icon type="close" />
+                  </a>
+                }
+              >
+                <Form.Item label="">
+                  <Row>
+                    <Col span={24}>
+                      <Checkbox>I am the POC</Checkbox>
+                    </Col>
+                  </Row>
+                </Form.Item>
+                <Form.Item label="Name">
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter POC Name" />)}
+                </Form.Item>
+                <Form.Item label="Email">
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter POC Email" />)}
+                </Form.Item>
+                <Form.Item label="Phone">
+                  {getFieldDecorator('companyName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input your Company Name!',
+                      },
+                    ],
+                  })(<Input placeholder="Enter POC Phone" />)}
+                </Form.Item>
+                <Collapse accordion>
+                  <Panel header="Add Alternate POC" key="1">
+                    <Form.Item label="Alternate POC Name">
+                      {getFieldDecorator('companyName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input your Company Name!',
+                          },
+                        ],
+                      })(<Input placeholder="Enter POC Name" />)}
+                    </Form.Item>
+                    <Form.Item label="Alternate POC Email">
+                      {getFieldDecorator('companyName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input your Company Name!',
+                          },
+                        ],
+                      })(<Input placeholder="Enter POC Email" />)}
+                    </Form.Item>
+                    <Form.Item label="Alternate POC Phone">
+                      {getFieldDecorator('companyName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input your Company Name!',
+                          },
+                        ],
+                      })(<Input placeholder="Enter POC Phone" />)}
+                    </Form.Item>
+                  </Panel>
+                </Collapse>
+              </Card>
+            </Col>
+          </Row>
+          {/*  */}
+          <Row>
+            <Col span={24} style={{ marginTop: '20px' }}></Col>
+          </Row>
+          <Row gutter={12}>
+            <Col span={10}>
+              <Card
+                type="inner"
                 title="Industry & Audience"
                 extra={
                   <a href="./my-profile">
@@ -301,14 +423,57 @@ class ProfileForm extends React.Component {
                     </Col>
                   </Row>
                 </Form.Item>
+                <Row>
+                  <Col span={24}>
+                    <p>Tonality</p>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          defaultValue={4}
+                          min={0}
+                          max={5}
+                          marks={marks}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          defaultValue={2}
+                          min={0}
+                          max={5}
+                          marks={marks2}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          defaultValue={3}
+                          min={0}
+                          max={5}
+                          marks={marks3}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          defaultValue={4}
+                          min={0}
+                          max={5}
+                          marks={marks4}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
               </Card>
             </Col>
-          </Row>
-          {/*  */}
-          <Row>
-            <Col span={24} style={{ marginTop: '20px' }}></Col>
-          </Row>
-          <Row gutter={12}>
             <Col span={10}>
               <Card
                 type="inner"
@@ -420,89 +585,6 @@ class ProfileForm extends React.Component {
                     ],
                   })(<Input placeholder="Enter GST Details" />)}
                 </Form.Item>
-              </Card>
-            </Col>
-            <Col span={10}>
-              <Card
-                type="inner"
-                title="POC Details"
-                extra={
-                  <a href="./my-profile">
-                    <Icon type="close" />
-                  </a>
-                }
-              >
-                <Form.Item label="">
-                  <Row>
-                    <Col span={24}>
-                      <Checkbox>I am the POC</Checkbox>
-                    </Col>
-                  </Row>
-                </Form.Item>
-                <Form.Item label="Name">
-                  {getFieldDecorator('companyName', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input your Company Name!',
-                      },
-                    ],
-                  })(<Input placeholder="Enter POC Name" />)}
-                </Form.Item>
-                <Form.Item label="Email">
-                  {getFieldDecorator('companyName', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input your Company Name!',
-                      },
-                    ],
-                  })(<Input placeholder="Enter POC Email" />)}
-                </Form.Item>
-                <Form.Item label="Phone">
-                  {getFieldDecorator('companyName', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input your Company Name!',
-                      },
-                    ],
-                  })(<Input placeholder="Enter POC Phone" />)}
-                </Form.Item>
-                <Collapse accordion>
-                  <Panel header="Add Alternate POC" key="1">
-                    <Form.Item label="Alternate POC Name">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Name" />)}
-                    </Form.Item>
-                    <Form.Item label="Alternate POC Email">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Email" />)}
-                    </Form.Item>
-                    <Form.Item label="Alternate POC Phone">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Phone" />)}
-                    </Form.Item>
-                  </Panel>
-                </Collapse>
               </Card>
             </Col>
           </Row>

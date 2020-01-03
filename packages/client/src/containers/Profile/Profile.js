@@ -14,9 +14,42 @@ import {
   Radio,
   Select,
   Collapse,
+  Slider,
 } from 'antd';
 const { Panel } = Collapse;
 const { Option } = Select;
+const marks = {
+  0: {
+    label: <strong>Tropical</strong>,
+  },
+  5: {
+    label: <strong>Promotional</strong>,
+  },
+};
+const marks2 = {
+  0: {
+    label: <strong>Concise</strong>,
+  },
+  5: {
+    label: <strong>Explanatory</strong>,
+  },
+};
+const marks3 = {
+  0: {
+    label: <strong>Formal</strong>,
+  },
+  5: {
+    label: <strong>Casual</strong>,
+  },
+};
+const marks4 = {
+  0: {
+    label: <strong>Niche</strong>,
+  },
+  5: {
+    label: <strong>Generic</strong>,
+  },
+};
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -137,6 +170,7 @@ class ProfileForm extends React.Component {
                     <Icon type="edit" />
                   </a>
                 }
+                style={{ height: '353px' }}
               >
                 <Form.Item label="Company Name">
                   <p style={{ color: '#16224F', fontWeight: '600' }}>
@@ -294,6 +328,59 @@ class ProfileForm extends React.Component {
                     </Col>
                   </Row>
                 </Form.Item>
+                <Row>
+                  <Col span={24}>
+                    <p>Tonality</p>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          disabled
+                          defaultValue={4}
+                          min={0}
+                          max={5}
+                          marks={marks}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          disabled
+                          defaultValue={2}
+                          min={0}
+                          max={5}
+                          marks={marks2}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          disabled
+                          defaultValue={3}
+                          min={0}
+                          max={5}
+                          marks={marks3}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                    <Row gutter={24}>
+                      <Col span={24}>
+                        <Slider
+                          disabled
+                          defaultValue={4}
+                          min={0}
+                          max={5}
+                          marks={marks4}
+                          style={{ width: '80%' }}
+                        />
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
               </Card>
             </Col>
             <Col span={10}>

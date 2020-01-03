@@ -33,12 +33,8 @@ const routes = [
     component: lazy(() => import('../Profile/EditProfile.js')),
   },
   {
-    path: 'invoice/:invoiceId',
-    component: lazy(() => import('@iso/containers/Invoice/SingleInvoice')),
-  },
-  {
-    path: 'invoice',
-    component: lazy(() => import('@iso/containers/Invoice/Invoices')),
+    path: 'payments',
+    component: lazy(() => import('../Payments/Payments')),
   },
   {
     path: 'SignUp',

@@ -20,7 +20,7 @@ const marks = {
   0: {
     label: <strong>Tropical</strong>,
   },
-  100: {
+  5: {
     label: <strong>Promotional</strong>,
   },
 };
@@ -28,7 +28,7 @@ const marks2 = {
   0: {
     label: <strong>Concise</strong>,
   },
-  100: {
+  5: {
     label: <strong>Explanatory</strong>,
   },
 };
@@ -36,7 +36,7 @@ const marks3 = {
   0: {
     label: <strong>Formal</strong>,
   },
-  100: {
+  5: {
     label: <strong>Casual</strong>,
   },
 };
@@ -44,7 +44,7 @@ const marks4 = {
   0: {
     label: <strong>Niche</strong>,
   },
-  100: {
+  5: {
     label: <strong>Generic</strong>,
   },
 };

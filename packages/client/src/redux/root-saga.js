@@ -15,7 +15,7 @@ import investors from '@iso/redux/investors/sagas';
 import scrumBoardSaga from '@iso/redux/scrumBoard/saga';
 import profileSaga from '@iso/redux/profile/saga';
 import signUpSaga from '../containers/Signup/saga';
-
+import articleSaga from '../redux/articles/sagas';
 export default function* rootSaga(getState) {
   yield all([
     authSagas(),
@@ -34,5 +34,6 @@ export default function* rootSaga(getState) {
     scrumBoardSaga(),
     profileSaga(),
     signUpSaga(),
+    articleSaga(),
   ]);
 }
