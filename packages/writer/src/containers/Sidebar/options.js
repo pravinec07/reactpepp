@@ -39,11 +39,11 @@ const options = [
     label: 'Profile After Verification',
     leftIcon: 'ion-checkmark',
   },
-  {
-    key: 'profileUserEdit',
-    label: 'Profile Edit',
-    leftIcon: 'ion-edit',
-  },
+  // {
+  //   key: 'profileUserEdit',
+  //   label: 'Profile Edit',
+  //   leftIcon: 'ion-edit',
+  // },
   {
     key: 'manage-password',
     label: 'Manage Privacy',

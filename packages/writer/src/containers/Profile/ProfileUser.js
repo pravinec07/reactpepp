@@ -583,12 +583,21 @@ class ProfileForm extends React.Component {
                 </Row>
                 <Row>
                   <Col span={12}>
-                    <Form.Item label="Bank & Branch">
+                    <Form.Item label="Bank Name">
                       <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        ICICI Bank Sadar Bazar Delhi
+                        ICICI Bank
                       </p>
                     </Form.Item>
                   </Col>
+                  <Col span={12}>
+                    <Form.Item label="Branch Name">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Sadar Bazar Delhi-110006
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
                   <Col span={12}>
                     <Form.Item label="IFSC Code">
                       <p style={{ color: '#16224F', fontWeight: '600' }}>
@@ -596,8 +605,6 @@ class ProfileForm extends React.Component {
                       </p>
                     </Form.Item>
                   </Col>
-                </Row>
-                <Row>
                   <Col span={12}>
                     <Form.Item label="PAN Card">
                       <p style={{ color: '#16224F', fontWeight: '600' }}>
@@ -605,7 +612,6 @@ class ProfileForm extends React.Component {
                       </p>
                     </Form.Item>
                   </Col>
-                  <Col span={12}></Col>
                 </Row>
               </Card>
             </Col>
