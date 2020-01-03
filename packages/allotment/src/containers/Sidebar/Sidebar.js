@@ -9,6 +9,7 @@ import appActions from '@iso/redux/app/actions';
 import Logo from '@iso/components/utility/logo';
 import SidebarWrapper from './Sidebar.styles';
 import SidebarMenu from './SidebarMenu';
+import siteConfig from '@iso/config/site.config';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const { Sider } = Layout;
@@ -104,7 +105,7 @@ export default function Sidebar() {
         onMouseLeave={onMouseLeave}
         style={styling}
       >
-        <Logo collapsed={isCollapsed} />
+        <Logo collapsed={isCollapsed} type={siteConfig.panelType.writer} />
         <Scrollbars style={{ height: height - 70 }}>
           <Menu
             onClick={handleClick}

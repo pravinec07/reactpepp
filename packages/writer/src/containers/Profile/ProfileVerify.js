@@ -203,7 +203,7 @@ class ProfileForm extends React.Component {
                             whitespace: true,
                           },
                         ],
-                      })(<Input />)}
+                      })(<Input placeholder="Occupation" />)}
                     </Form.Item>
                   </Col>
                   <Col span={12}>
@@ -259,7 +259,9 @@ class ProfileForm extends React.Component {
                             message: 'Please input word count',
                           },
                         ],
-                      })(<Input />)}
+                      })(
+                        <Input type="number" placeholder="Daily Word Count" />
+                      )}
                     </Form.Item>
                   </Col>
                 </Row>
@@ -302,34 +304,6 @@ class ProfileForm extends React.Component {
                     </Row>
                   </Col>
                 </Row>
-                <Row gutter={24}>
-                  <Col span={24} style={{ marginTop: '15px' }}></Col>
-                  <Col span={24}>
-                    <p
-                      className="ant-form-item"
-                      style={{ marginBottom: '0px', fontWeight: '600' }}
-                    >
-                      <span style={{ color: 'red' }}>* </span>Preferred Payment
-                      Options:
-                    </p>
-                  </Col>
-                  <Col span={24}>
-                    <Row>
-                      <Col span={6}>
-                        <Checkbox>Cheque</Checkbox>
-                      </Col>
-                      <Col span={6}>
-                        <Checkbox>Paytm</Checkbox>
-                      </Col>
-                      <Col span={6}>
-                        <Checkbox>Google Pay</Checkbox>
-                      </Col>
-                      <Col span={6}>
-                        <Checkbox>Account transfer</Checkbox>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
               </Form>
             </Card>
             <Card
@@ -353,7 +327,7 @@ class ProfileForm extends React.Component {
                           message: 'Please enter A/c number',
                         },
                       ],
-                    })(<Input />)}
+                    })(<Input placeholder="A/c Number" />)}
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -361,7 +335,7 @@ class ProfileForm extends React.Component {
                     className="ant-form-item"
                     style={{ marginBottom: '0px', fontWeight: '600' }}
                   >
-                    <span style={{ color: 'red' }}>* </span>A/c Name
+                    <span style={{ color: 'red' }}>* </span>A/c Holder Name
                   </p>
                   <Form.Item label="">
                     {getFieldDecorator('accName', {
@@ -371,7 +345,7 @@ class ProfileForm extends React.Component {
                           message: 'Please enter A/c Name',
                         },
                       ],
-                    })(<Input />)}
+                    })(<Input placeholder="A/c Holder Name" />)}
                   </Form.Item>
                 </Col>
               </Row>
@@ -391,7 +365,7 @@ class ProfileForm extends React.Component {
                           message: 'Please enter bank name.',
                         },
                       ],
-                    })(<Input />)}
+                    })(<Input placeholder="Bank Name" />)}
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -409,7 +383,7 @@ class ProfileForm extends React.Component {
                           message: 'Please enter branch name',
                         },
                       ],
-                    })(<Input />)}
+                    })(<Input placeholder="Branch Name" />)}
                   </Form.Item>
                 </Col>
               </Row>
@@ -429,10 +403,27 @@ class ProfileForm extends React.Component {
                           message: 'Please enter IFSC code',
                         },
                       ],
-                    })(<Input />)}
+                    })(<Input placeholder="IFSC Code" />)}
                   </Form.Item>
                 </Col>
-                <Col span={12}></Col>
+                <Col span={12}>
+                  <p
+                    className="ant-form-item"
+                    style={{ marginBottom: '0px', fontWeight: '600' }}
+                  >
+                    <span style={{ color: 'red' }}>* </span>PAN Card
+                  </p>
+                  <Form.Item label="">
+                    {getFieldDecorator('panCard', {
+                      rules: [
+                        {
+                          required: true,
+                          message: 'Please enter PAN Card',
+                        },
+                      ],
+                    })(<Input placeholder="PAN Card" />)}
+                  </Form.Item>
+                </Col>
               </Row>
             </Card>
             <Row>

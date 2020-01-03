@@ -132,6 +132,118 @@ class ProfileForm extends React.Component {
             <Col span={11}>
               <Card
                 type="inner"
+                title="Basic Information"
+                extra={
+                  <a href="./profileUserEdit">
+                    <Icon type="edit" />
+                  </a>
+                }
+              >
+                <Row>
+                  <Col span={12}>
+                    <Form.Item label="Most Prefered Genre">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Lifestyle & Music
+                      </p>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="Second Most Prefered Genre">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Politics & News
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={12}>
+                    <Form.Item label="Most Prefered Vertical">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Technology
+                      </p>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="Second Most Prefered Vertical">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Human Resourse
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col span={24}>
+                    <p style={{ color: '#000000d9' }}> Uploaded CV</p>
+                  </Col>
+                  <Col span={18}>
+                    <hr />
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      Abdul_resume.docx -{' '}
+                      <span
+                        style={{
+                          color: '#adadad',
+                          fontSize: '12px',
+                          fontWeight: '400',
+                        }}
+                      >
+                        {' '}
+                        Uploaded on May 20, 2019
+                      </span>
+                    </p>
+                  </Col>
+                  <Col span={6}>
+                    <hr />
+                    <ButtonGroup>
+                      <Button>
+                        <Icon type="download" />
+                      </Button>
+                      <Button>
+                        <Icon type="delete" />
+                      </Button>
+                    </ButtonGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <p
+                      style={{
+                        color: '#000000d9',
+                        marginBottom: '10px',
+                        marginTop: '12px',
+                      }}
+                    >
+                      Languages you are proficient in
+                    </p>
+                  </Col>
+                  <Col span={12}>
+                    <Checkbox checked>English</Checkbox>
+                  </Col>
+                  <Col span={12}>
+                    <Checkbox checked>Hindi</Checkbox>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={12}>
+                    <Checkbox checked>Punjabi</Checkbox>
+                  </Col>
+                  <Col span={12}>
+                    <Checkbox checked>Urdu</Checkbox>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={12}>
+                    <Checkbox checked>French</Checkbox>
+                  </Col>
+                  <Col span={12}>
+                    <Checkbox checked>Spanish</Checkbox>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+            <Col span={11}>
+              <Card
+                type="inner"
                 title="Profile Details"
                 extra={
                   <a href="./profileUserEdit">
@@ -258,7 +370,7 @@ class ProfileForm extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col span={24} style={{ marginTop: '15px' }}></Col>
+                  <Col span={24} style={{ marginTop: '10px' }}></Col>
                   <Col span={5}>
                     <p
                       className="ant-form-item"
@@ -296,173 +408,24 @@ class ProfileForm extends React.Component {
                     </Radio.Group>
                   </Col>
                 </Row>
-                <Row>
-                  <Col span={24}>
-                    {' '}
-                    <p style={{ color: '#000000a6', marginBottom: '0px' }}>
-                      Preferred Payment Options
-                    </p>
-                  </Col>
-                  <Col span={7}>
-                    <Checkbox
-                      value="Wed"
-                      checked
-                      style={{ color: '#16224F', fontWeight: '600' }}
-                    >
-                      Cheque
-                    </Checkbox>
-                  </Col>
-                  <Col span={7}>
-                    <Checkbox
-                      value="Fri"
-                      checked
-                      style={{ color: '#16224F', fontWeight: '600' }}
-                    >
-                      Paytm
-                    </Checkbox>
-                  </Col>
-                  <Col span={7}>
-                    <Checkbox
-                      value="Sat"
-                      checked
-                      style={{ color: '#16224F', fontWeight: '600' }}
-                    >
-                      GooglePay
-                    </Checkbox>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={24} style={{ marginTop: '10px' }}></Col>
-                  <Col span={12}>
-                    <Form.Item label="A/c Number">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        00910100020876
-                      </p>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item label="A/c Holder Name">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        Rahul Sharma
-                      </p>
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={12}>
-                    <Form.Item label="Bank & Branch">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        ICICI Bank Sadar Bazar Delhi
-                      </p>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item label="IFSC Code">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        ICIC0SADARB
-                      </p>
-                    </Form.Item>
-                  </Col>
-                </Row>
               </Card>
             </Col>
+          </Row>
+          {/*  */}
+          <Row>
+            <Col span={24} style={{ marginTop: '20px' }}></Col>
+          </Row>
+          <Row gutter={12}>
             <Col span={11}>
               <Card
                 type="inner"
-                title="Basic Information"
+                title="Experience"
                 extra={
                   <a href="./profileUserEdit">
                     <Icon type="edit" />
                   </a>
                 }
               >
-                <Row>
-                  <Col span={12}>
-                    <Form.Item label="Most Prefered Genre">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        Lifestyle & Music
-                      </p>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item label="Second Most Prefered Genre">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        Politics & News
-                      </p>
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={12}>
-                    <Form.Item label="Most Prefered Vertical">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        Technology
-                      </p>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item label="Second Most Prefered Vertical">
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        Human Resourse
-                      </p>
-                    </Form.Item>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col span={24}>
-                    <p style={{ color: '#000000d9' }}> Uploaded CV</p>
-                  </Col>
-                  <Col span={18}>
-                    <hr />
-                    <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Abdul_resume.docx -{' '}
-                      <span
-                        style={{
-                          color: '#adadad',
-                          fontSize: '12px',
-                          fontWeight: '400',
-                        }}
-                      >
-                        {' '}
-                        Uploaded on May 20, 2019
-                      </span>
-                    </p>
-                  </Col>
-                  <Col span={6}>
-                    <hr />
-                    <ButtonGroup>
-                      <Button>
-                        <Icon type="download" />
-                      </Button>
-                      <Button>
-                        <Icon type="delete" />
-                      </Button>
-                    </ButtonGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={24}>
-                    <p style={{ color: '#000000d9', marginBottom: '10px' }}>
-                      Languages you are proficient in
-                    </p>
-                  </Col>
-                  <Col span={12}>
-                    <Checkbox checked>English</Checkbox>
-                  </Col>
-                  <Col span={12}>
-                    <Checkbox checked>Hindi</Checkbox>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={12}>
-                    <Checkbox checked>Punjabi</Checkbox>
-                  </Col>
-                  <Col span={12}>
-                    <Checkbox checked>Urdu</Checkbox>
-                  </Col>
-                </Row>
-
                 <Row>
                   <Col span={24}>
                     <p style={{ color: '#000000d9', marginTop: '10px' }}>
@@ -527,34 +490,6 @@ class ProfileForm extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col span={24} style={{ marginTop: '3px' }}></Col>
-                  <Col span={18}>
-                    <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      File3.docx -{' '}
-                      <span
-                        style={{
-                          color: '#adadad',
-                          fontSize: '12px',
-                          fontWeight: '400',
-                        }}
-                      >
-                        {' '}
-                        Uploaded on May 20, 2019
-                      </span>
-                    </p>
-                  </Col>
-                  <Col span={6}>
-                    <ButtonGroup>
-                      <Button>
-                        <Icon type="download" />
-                      </Button>
-                      <Button>
-                        <Icon type="delete" />
-                      </Button>
-                    </ButtonGroup>
-                  </Col>
-                </Row>
-                <Row>
                   <Col span={24}>
                     <Form.Item label="Expected Pay? (In Rupees per word)">
                       <p style={{ color: '#16224F', fontWeight: '600' }}>
@@ -563,69 +498,117 @@ class ProfileForm extends React.Component {
                     </Form.Item>
                   </Col>
                 </Row>
+                <Row>
+                  <Col span={24}>
+                    <Form.Item label="Previous writing experiences and skillsets.">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and
+                        scrambled it <a href="">Read more..</a>
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <Form.Item label=" companies that you've worked for in the past">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        ABA Infotech Pvt. Ltd.{' '}
+                        <span
+                          style={{
+                            color: '#adadad',
+                            fontSize: '12px',
+                            fontWeight: '400',
+                          }}
+                        >
+                          (Delhi)
+                        </span>
+                      </p>
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Tata Consultancy Service{' '}
+                        <span
+                          style={{
+                            color: '#adadad',
+                            fontSize: '12px',
+                            fontWeight: '400',
+                          }}
+                        >
+                          (Gurgaon)
+                        </span>
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <Form.Item label="Profession you are in, apart from freelance writing">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's <a href="">Read more..</a>
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
               </Card>
             </Col>
-          </Row>
-          {/*  */}
-          <Row>
-            <Col span={24} style={{ marginTop: '20px' }}></Col>
-          </Row>
-          <Row gutter={12}>
-            <Col span={10}>
+            <Col span={11}>
               <Card
                 type="inner"
-                title="Experience"
+                title="Bank Details"
                 extra={
                   <a href="./profileUserEdit">
                     <Icon type="edit" />
                   </a>
                 }
               >
-                <Form.Item label="Previous writing experiences and skillsets.">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it{' '}
-                    <a href="">Read more..</a>
-                  </p>
-                </Form.Item>
-                <Form.Item label=" companies that you've worked for in the past">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    ABA Infotech Pvt. Ltd.{' '}
-                    <span
-                      style={{
-                        color: '#adadad',
-                        fontSize: '12px',
-                        fontWeight: '400',
-                      }}
-                    >
-                      (Delhi)
-                    </span>
-                  </p>
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Tata Consultancy Service{' '}
-                    <span
-                      style={{
-                        color: '#adadad',
-                        fontSize: '12px',
-                        fontWeight: '400',
-                      }}
-                    >
-                      (Gurgaon)
-                    </span>
-                  </p>
-                </Form.Item>
-                <Form.Item label="Profession you are in, apart from freelance writing">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's{' '}
-                    <a href="">Read more..</a>
-                  </p>
-                </Form.Item>
+                <Row>
+                  <Col span={24} style={{ marginTop: '10px' }}></Col>
+                  <Col span={12}>
+                    <Form.Item label="A/c Number">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        00910100020876
+                      </p>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="A/c Holder Name">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        Rahul Sharma
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={12}>
+                    <Form.Item label="Bank & Branch">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        ICICI Bank Sadar Bazar Delhi
+                      </p>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="IFSC Code">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        ICIC0SADARB
+                      </p>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={12}>
+                    <Form.Item label="PAN Card">
+                      <p style={{ color: '#16224F', fontWeight: '600' }}>
+                        FJOPS3886L
+                      </p>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}></Col>
+                </Row>
               </Card>
             </Col>
-            <Col span={10}></Col>
           </Row>
         </Form>{' '}
       </>

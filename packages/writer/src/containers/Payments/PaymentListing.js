@@ -42,6 +42,12 @@ export default function PaymentListing(props) {
       ellipsis: false,
     },
     {
+      title: 'Genre',
+      dataIndex: 'genre',
+      key: 'genre',
+      ellipsis: false,
+    },
+    {
       title: 'Submission Date',
       dataIndex: 'deadLineDate',
       key: 'deadline',
@@ -75,6 +81,7 @@ export default function PaymentListing(props) {
         onRowClick={(row, index) => {
           props.onChangeArticle(row, index);
         }}
+        bordered
       />
     </PaymentContainer>
   );

@@ -132,341 +132,9 @@ class ProfileForm extends React.Component {
             <Col span={11}>
               <Card
                 type="inner"
-                title="Profile Details"
-                extra={
-                  <a href="./profileUser">
-                    <Icon type="close" />
-                  </a>
-                }
-              >
-                <Row gutter={24}>
-                  <Col span={7}>
-                    <p
-                      className="ant-form-item"
-                      style={{ marginBottom: '0px', fontWeight: '600' }}
-                    >
-                      Upload Photo
-                    </p>
-                    <Upload
-                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                      listType="picture-card"
-                      fileList={fileList}
-                      onPreview={this.handlePreview}
-                      onChange={this.handleChange}
-                    >
-                      {fileList.length >= 1 ? null : this.uploadButton()}
-                    </Upload>
-                    <Modal
-                      visible={previewVisible}
-                      footer={null}
-                      onCancel={this.handleCancel}
-                    >
-                      <img
-                        alt="example"
-                        style={{ width: '100%' }}
-                        src={previewImage}
-                      />
-                    </Modal>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label="First Name">
-                      {getFieldDecorator('wordCount', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input word count',
-                          },
-                        ],
-                      })(<Input placeholder="Rahul" />)}
-                    </Form.Item>
-                    <Form.Item label="Phone">
-                      {getFieldDecorator('wordCount', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input word count',
-                          },
-                        ],
-                      })(<Input placeholder="+91-8586047534" />)}
-                    </Form.Item>
-                  </Col>
-                  <Col span={9}>
-                    <Form.Item label="Last Name">
-                      {getFieldDecorator('wordCount', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input word count',
-                          },
-                        ],
-                      })(<Input placeholder="Sharma" />)}
-                    </Form.Item>
-                    <Form.Item label="Email">
-                      {getFieldDecorator('wordCount', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input word count',
-                          },
-                        ],
-                      })(<Input placeholder="rhlsharma8@gmail.com" />)}
-                    </Form.Item>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col span={24}></Col>
-                </Row>
-                <Row gutter={24}>
-                  <Col span={12}>
-                    <Form.Item label="Occupation">
-                      {getFieldDecorator('wordCount', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input word count',
-                          },
-                        ],
-                      })(<Input placeholder="Content Writer" />)}
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item label="Daily Word Count">
-                      {getFieldDecorator('wordCount', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input word count',
-                          },
-                        ],
-                      })(<Input placeholder="15000 WPD" />)}
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={24}>
-                    {' '}
-                    <p style={{ color: '#000000a6', marginBottom: '10px' }}>
-                      Weekday Availability
-                    </p>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="Mon">Mon</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="Tue">Tue</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="Wed" checked>
-                      Wed
-                    </Checkbox>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={8}>
-                    <Checkbox value="Thu">Thu</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="Fri" checked>
-                      Fri
-                    </Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="Sat" checked>
-                      Sat
-                    </Checkbox>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={8}>
-                    <Checkbox value="Sun" checked>
-                      Sun
-                    </Checkbox>
-                  </Col>
-                </Row>
-                <Row gutter={24}>
-                  <Col span={24} style={{ marginTop: '15px' }}></Col>
-                  <Col span={12}>
-                    <Row>
-                      <Col span={8}>
-                        <p
-                          className="ant-form-item"
-                          style={{ marginBottom: '0px', fontWeight: '600' }}
-                        >
-                          Writer
-                        </p>
-                      </Col>
-                      <Col span={16}>
-                        <Radio.Group onChange={null}>
-                          <Radio value={1} checked>
-                            Full Time
-                          </Radio>
-                          <Radio value={2}>Part Time</Radio>
-                        </Radio.Group>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={12}>
-                    <Row>
-                      <Col span={9}>
-                        <p
-                          className="ant-form-item"
-                          style={{ marginBottom: '0px', fontWeight: '600' }}
-                        >
-                          Freelancer
-                        </p>
-                      </Col>
-                      <Col span={15}>
-                        <Radio.Group onChange={null}>
-                          <Radio value={1}>Full Time</Radio>
-                          <Radio value={2} checked>
-                            Part Time
-                          </Radio>
-                        </Radio.Group>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={24}>
-                    {' '}
-                    <p
-                      style={{ color: '#000000a6', margin: '10px 0px 0px 0px' }}
-                    >
-                      Preferred Payment Options
-                    </p>
-                  </Col>
-                  <Col span={6}>
-                    <Checkbox
-                      value=""
-                      checked
-                      style={{ color: '#16224F', fontWeight: '600' }}
-                    >
-                      Cheque
-                    </Checkbox>
-                  </Col>
-                  <Col span={6}>
-                    <Checkbox
-                      value=""
-                      checked
-                      style={{ color: '#16224F', fontWeight: '600' }}
-                    >
-                      Paytm
-                    </Checkbox>
-                  </Col>
-                  <Col span={6}>
-                    <Checkbox
-                      value=""
-                      checked
-                      style={{ color: '#16224F', fontWeight: '600' }}
-                    >
-                      GooglePay
-                    </Checkbox>
-                  </Col>
-                  <Col span={6}>
-                    <Checkbox
-                      value=""
-                      style={{ color: '#16224F', fontWeight: '600' }}
-                    >
-                      Transfer
-                    </Checkbox>
-                  </Col>
-                </Row>
-
-                <Row gutter={24}>
-                  <Col span={24}>
-                    <p
-                      style={{
-                        color: '#000000a6',
-                        margin: '10px 0px 10px 0px',
-                      }}
-                    >
-                      Bank Details
-                    </p>
-                  </Col>
-                  <Col span={12}>
-                    <p
-                      className="ant-form-item"
-                      style={{ marginBottom: '0px', fontWeight: '600' }}
-                    >
-                      <span style={{ color: 'red' }}>* </span>A/c Number
-                    </p>
-                    <Form.Item label="">
-                      {getFieldDecorator('accNumber', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please enter A/c number',
-                          },
-                        ],
-                      })(<Input />)}
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <p
-                      className="ant-form-item"
-                      style={{ marginBottom: '0px', fontWeight: '600' }}
-                    >
-                      <span style={{ color: 'red' }}>* </span>A/c Name
-                    </p>
-                    <Form.Item label="">
-                      {getFieldDecorator('accName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please enter A/c Name',
-                          },
-                        ],
-                      })(<Input />)}
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={24}>
-                  <Col span={12}>
-                    <p
-                      className="ant-form-item"
-                      style={{ marginBottom: '0px', fontWeight: '600' }}
-                    >
-                      <span style={{ color: 'red' }}>* </span>Bank & Branch Name
-                    </p>
-                    <Form.Item label="">
-                      {getFieldDecorator('bankName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please enter bank name.',
-                          },
-                        ],
-                      })(<Input />)}
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <p
-                      className="ant-form-item"
-                      style={{ marginBottom: '0px', fontWeight: '600' }}
-                    >
-                      <span style={{ color: 'red' }}>* </span>IFSC Code
-                    </p>
-                    <Form.Item label="">
-                      {getFieldDecorator('branchName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please enter branch name',
-                          },
-                        ],
-                      })(<Input />)}
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
-            <Col span={11}>
-              <Card
-                type="inner"
                 title="Basic Information"
                 extra={
-                  <a href="./profileUser">
+                  <a href="./my-profile">
                     <Icon type="close" />
                   </a>
                 }
@@ -686,7 +354,13 @@ class ProfileForm extends React.Component {
                   </Col>
                   <Col span={18}>
                     <hr />
-                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                    <p
+                      style={{
+                        color: '#16224F',
+                        fontWeight: '600',
+                        paddingTop: '5px',
+                      }}
+                    >
                       Abdul_resume.docx -{' '}
                       <span
                         style={{
@@ -716,7 +390,7 @@ class ProfileForm extends React.Component {
                   <Col span={24}>
                     <p
                       className="ant-form-item"
-                      style={{ marginBottom: '0px' }}
+                      style={{ marginBottom: '0px', marginTop: '15px' }}
                     >
                       What languages are you proficient in?
                     </p>
@@ -782,7 +456,224 @@ class ProfileForm extends React.Component {
                     </Checkbox>
                   </Col>
                 </Row>
+              </Card>
+            </Col>
+            <Col span={11}>
+              <Card
+                type="inner"
+                title="Profile Details"
+                extra={
+                  <a href="./my-profile">
+                    <Icon type="close" />
+                  </a>
+                }
+              >
+                <Row gutter={24}>
+                  <Col span={7}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      Upload Photo
+                    </p>
+                    <Upload
+                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                      listType="picture-card"
+                      fileList={fileList}
+                      onPreview={this.handlePreview}
+                      onChange={this.handleChange}
+                    >
+                      {fileList.length >= 1 ? null : this.uploadButton()}
+                    </Upload>
+                    <Modal
+                      visible={previewVisible}
+                      footer={null}
+                      onCancel={this.handleCancel}
+                    >
+                      <img
+                        alt="example"
+                        style={{ width: '100%' }}
+                        src={previewImage}
+                      />
+                    </Modal>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item label="First Name">
+                      {getFieldDecorator('wordCount', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input word count',
+                          },
+                        ],
+                      })(<Input placeholder="Rahul" />)}
+                    </Form.Item>
+                    <Form.Item label="Phone">
+                      {getFieldDecorator('wordCount', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input word count',
+                          },
+                        ],
+                      })(<Input placeholder="+91-8586047534" />)}
+                    </Form.Item>
+                  </Col>
+                  <Col span={9}>
+                    <Form.Item label="Last Name">
+                      {getFieldDecorator('wordCount', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input word count',
+                          },
+                        ],
+                      })(<Input placeholder="Sharma" />)}
+                    </Form.Item>
+                    <Form.Item label="Email">
+                      {getFieldDecorator('wordCount', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input word count',
+                          },
+                        ],
+                      })(<Input placeholder="rhlsharma8@gmail.com" />)}
+                    </Form.Item>
+                  </Col>
+                </Row>
 
+                <Row>
+                  <Col span={24}></Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <Form.Item label="Occupation">
+                      {getFieldDecorator('wordCount', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input word count',
+                          },
+                        ],
+                      })(<Input placeholder="Content Writer" />)}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label="Daily Word Count">
+                      {getFieldDecorator('wordCount', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input word count',
+                          },
+                        ],
+                      })(<Input placeholder="15000 WPD" />)}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    {' '}
+                    <p style={{ color: '#000000a6', marginBottom: '10px' }}>
+                      Weekday Availability
+                    </p>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="Mon">Mon</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="Tue">Tue</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="Wed" checked>
+                      Wed
+                    </Checkbox>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={8}>
+                    <Checkbox value="Thu">Thu</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="Fri" checked>
+                      Fri
+                    </Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="Sat" checked>
+                      Sat
+                    </Checkbox>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={8}>
+                    <Checkbox value="Sun" checked>
+                      Sun
+                    </Checkbox>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={24} style={{ marginTop: '7px' }}></Col>
+                  <Col span={12}>
+                    <Row>
+                      <Col span={8}>
+                        <p
+                          className="ant-form-item"
+                          style={{ marginBottom: '0px', fontWeight: '600' }}
+                        >
+                          Writer
+                        </p>
+                      </Col>
+                      <Col span={16}>
+                        <Radio.Group onChange={null}>
+                          <Radio value={1} checked>
+                            Full Time
+                          </Radio>
+                          <Radio value={2}>Part Time</Radio>
+                        </Radio.Group>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col span={12}>
+                    <Row>
+                      <Col span={9}>
+                        <p
+                          className="ant-form-item"
+                          style={{ marginBottom: '0px', fontWeight: '600' }}
+                        >
+                          Freelancer
+                        </p>
+                      </Col>
+                      <Col span={15}>
+                        <Radio.Group onChange={null}>
+                          <Radio value={1}>Full Time</Radio>
+                          <Radio value={2} checked>
+                            Part Time
+                          </Radio>
+                        </Radio.Group>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          </Row>
+          {/*  */}
+          <Row>
+            <Col span={24} style={{ marginTop: '20px' }}></Col>
+          </Row>
+          <Row gutter={12}>
+            <Col span={11}>
+              <Card
+                type="inner"
+                title="Experience"
+                extra={
+                  <a href="./my-profile">
+                    <Icon type="close" />
+                  </a>
+                }
+              >
                 <Row>
                   <Col span={24}>
                     <p style={{ color: '#000000d9', marginTop: '10px' }}>
@@ -847,34 +738,6 @@ class ProfileForm extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col span={24} style={{ marginTop: '3px' }}></Col>
-                  <Col span={18}>
-                    <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      File3.docx -{' '}
-                      <span
-                        style={{
-                          color: '#adadad',
-                          fontSize: '12px',
-                          fontWeight: '400',
-                        }}
-                      >
-                        {' '}
-                        Uploaded on May 20, 2019
-                      </span>
-                    </p>
-                  </Col>
-                  <Col span={6}>
-                    <ButtonGroup>
-                      <Button>
-                        <Icon type="download" />
-                      </Button>
-                      <Button>
-                        <Icon type="delete" />
-                      </Button>
-                    </ButtonGroup>
-                  </Col>
-                </Row>
-                <Row>
                   <Col span={24}>
                     <Form.Item label="Expected Pay? (In Rupees per word)">
                       {getFieldDecorator('gender', {
@@ -891,66 +754,169 @@ class ProfileForm extends React.Component {
                     </Form.Item>
                   </Col>
                 </Row>
+                <Row>
+                  <Col span={24}>
+                    <Form.Item label="Previous writing experiences and skillsets.">
+                      {getFieldDecorator('audience', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input audience',
+                          },
+                        ],
+                      })(
+                        <TextArea
+                          style={{ height: '80px' }}
+                          placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.."
+                        />
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <Form.Item label=" companies that you've worked for in the past">
+                      {getFieldDecorator('audience', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input audience',
+                          },
+                        ],
+                      })(
+                        <TextArea placeholder="ABA Infotech Pvt. Ltd. (Delhi) Tata Consultancy Service (Gurgaon)" />
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <Form.Item label="Profession you are in, apart from freelance writing">
+                      {getFieldDecorator('audience', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input audience',
+                          },
+                        ],
+                      })(
+                        <TextArea placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's" />
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
               </Card>
             </Col>
-          </Row>
-          {/*  */}
-          <Row>
-            <Col span={24} style={{ marginTop: '20px' }}></Col>
-          </Row>
-          <Row gutter={12}>
-            <Col span={11}>
+            <Col span={10}>
               <Card
                 type="inner"
-                title="Experience"
+                title="Bank Details"
                 extra={
-                  <a href="./profileUser">
+                  <a href="./my-profile">
                     <Icon type="close" />
                   </a>
                 }
               >
-                <Form.Item label="Previous writing experiences and skillsets.">
-                  {getFieldDecorator('audience', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input audience',
-                      },
-                    ],
-                  })(
-                    <TextArea
-                      style={{ height: '80px' }}
-                      placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.."
-                    />
-                  )}
-                </Form.Item>
-                <Form.Item label=" companies that you've worked for in the past">
-                  {getFieldDecorator('audience', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input audience',
-                      },
-                    ],
-                  })(
-                    <TextArea placeholder="ABA Infotech Pvt. Ltd. (Delhi) Tata Consultancy Service (Gurgaon)" />
-                  )}
-                </Form.Item>
-                <Form.Item label="Profession you are in, apart from freelance writing">
-                  {getFieldDecorator('audience', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input audience',
-                      },
-                    ],
-                  })(
-                    <TextArea placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's" />
-                  )}
-                </Form.Item>
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      <span style={{ color: 'red' }}>* </span>A/c Number
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('accNumber', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please enter A/c number',
+                          },
+                        ],
+                      })(<Input />)}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      <span style={{ color: 'red' }}>* </span>A/c Name
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('accName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please enter A/c Name',
+                          },
+                        ],
+                      })(<Input />)}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      <span style={{ color: 'red' }}>* </span>Bank & Branch Name
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('bankName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please enter bank name.',
+                          },
+                        ],
+                      })(<Input />)}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      <span style={{ color: 'red' }}>* </span>IFSC Code
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('branchName', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please enter branch name',
+                          },
+                        ],
+                      })(<Input />)}
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <p
+                      className="ant-form-item"
+                      style={{ marginBottom: '0px', fontWeight: '600' }}
+                    >
+                      <span style={{ color: 'red' }}>* </span>PAN Card
+                    </p>
+                    <Form.Item label="">
+                      {getFieldDecorator('panCard', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please enter PAN Card.',
+                          },
+                        ],
+                      })(<Input />)}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}></Col>
+                </Row>
               </Card>
             </Col>
-            <Col span={10}></Col>
           </Row>
         </Form>{' '}
       </>

@@ -90,7 +90,7 @@ function ManagePassword(props) {
         <Col span={7}></Col>
         <Col span={10}>
           <h2 style={{ margin: '10px 0px', textAlign: 'center' }}>
-            Manage Password
+            Manage Privacy
           </h2>
           <Card
             type="inner"

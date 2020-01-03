@@ -21,7 +21,7 @@ const options = [
   },
   {
     key: 'chat',
-    label: 'Message Center',
+    label: 'Chat',
     leftIcon: 'ion-chatbubbles',
   },
   {
@@ -46,7 +46,7 @@ const options = [
   },
   {
     key: 'manage-password',
-    label: 'Manage Password',
+    label: 'Manage Privacy',
     leftIcon: 'ion-locked',
   },
 ];

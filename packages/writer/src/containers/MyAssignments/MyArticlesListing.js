@@ -15,7 +15,7 @@ export default function ArticlesListing(props) {
       title: 'Sr.No.',
       dataIndex: 'id',
       key: 'srNo',
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: 'Article Code',
@@ -31,7 +31,7 @@ export default function ArticlesListing(props) {
       key: 'articleTopic',
       // sorter: (a, b) => a.articleTopic - b.articleTopic,
       sortOrder: sortedInfo.columnKey === 'articleTopic' && sortedInfo.order,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: 'Words',
@@ -42,7 +42,7 @@ export default function ArticlesListing(props) {
       ellipsis: false,
     },
     {
-      title: 'Submission Date',
+      title: 'Deadline',
       dataIndex: 'deadLineDate',
       key: 'deadline',
       // sorter: (a, b) => a.deadline - b.deadline,
@@ -50,64 +50,22 @@ export default function ArticlesListing(props) {
       ellipsis: false,
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      // sorter: (a, b) => a.status - b.status,
-      sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
+      title: 'Genre',
+      dataIndex: 'genre',
+      key: 'genre',
       ellipsis: false,
-      render: key => {
-        return (() => {
-          console.log(key, status);
-          switch (key.toLowerCase()) {
-            case 'on_going':
-              return <span style={{ color: 'blue' }}>Ongoing</span>;
-            case 'open':
-              return <span style={{ color: colors.REJECTED }}>Open</span>;
-            case 'sumited':
-              return <span style={{ color: colors.SUBMITTED }}>Submited</span>;
-            case 'rework':
-              return <span style={{ color: colors.REWORK }}>Rework</span>;
-            default:
-              return <span style={{ color: colors.ALL }}>{key}</span>;
-          }
-        })();
-      },
     },
     {
-      title: 'Payment Status',
-      dataIndex: 'transactionStatus',
-      key: 'paymentStatus',
-      // sorter: (a, b) => a.paymentStatus - b.paymentStatus,
-      sortOrder: sortedInfo.columnKey === 'paymentStatus' && sortedInfo.order,
-      ellipsis: false,
-      render: key => {
-        return (() => {
-          switch (key.toLowerCase()) {
-            case 'un-paid':
-              return <span style={{ color: colors.REJECTED }}>UnPaid</span>;
-            case 'paid':
-              return <span style={{ color: colors.COMPLETED }}>Paid</span>;
-            default:
-              return <span style={{ color: colors.ALL }}>N/A</span>;
-          }
-        })();
-      },
-    },
-    {
-      title: 'Rework',
-      dataIndex: 'revisions',
+      title: 'Vertical',
+      dataIndex: 'vertical',
       key: 'deadline',
-      sorter: (a, b) => a.deadline - b.deadline,
-      sortOrder: sortedInfo.columnKey === 'deadline' && sortedInfo.order,
-      ellipsis: true,
-      render: data => (
-        <span>
-          {data && data.length
-            ? data[data.length - 1].revisionCreatedDate
-            : '--'}
-        </span>
-      ),
+      ellipsis: false,
+    },
+    {
+      title: 'Time Remaining',
+      dataIndex: 'time',
+      key: 'time',
+      ellipsis: false,
     },
   ];
 
@@ -126,6 +84,7 @@ export default function ArticlesListing(props) {
         onRowClick={(row, index) => {
           props.onChangeArticle(row, index);
         }}
+        bordered
       />
     </ArticlesContainer>
   );
