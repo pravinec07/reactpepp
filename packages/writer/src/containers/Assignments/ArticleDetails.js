@@ -7,7 +7,7 @@ export default function({ data }) {
     <ArticleDetailsWrapper className="articleDetailsWrapper">
       <PageHeader
         // onBack={() => window.history.back()}
-        title="Artcle Details"
+        title="Article Details"
         extra={[
           <Button key="3">
             <Icon type="printer" />

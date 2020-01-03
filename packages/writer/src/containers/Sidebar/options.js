@@ -1,14 +1,14 @@
 const options = [
+  // {
+  //   key: 'dashboard',
+  //   label: 'Dashboard',
+  //   leftIcon: 'ion-speedometer',
+  // },
   {
-    key: 'dashboard',
+    key: 'assignments',
     label: 'Dashboard',
     leftIcon: 'ion-speedometer',
   },
-  // {
-  //   key: 'assignments',
-  //   label: 'sidebar.assignments',
-  //   leftIcon: 'ion-person',
-  // },
   {
     key: 'my-assignments',
     label: 'My Project',
