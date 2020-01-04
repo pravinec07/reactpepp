@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
-import bgImage from '@iso/assets/images/work.jpg';
+import bgImage from '@iso/assets/images/signUp2.svg';
 import WithDirection from '@iso/lib/helpers/rtl';
 
 const SignUpStyleWrapper = styled.div`
@@ -13,16 +13,17 @@ const SignUpStyleWrapper = styled.div`
   position: relative;
   background: url(${bgImage}) no-repeat center center;
   background-size: cover;
+  background-size: 850px;
+  background-position: 0px 14px;
   .hide {
     opacity: 0;
     height: 0;
   }
   &:before {
     content: '';
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
-    background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
     z-index: 1;
     top: 0;
@@ -31,20 +32,22 @@ const SignUpStyleWrapper = styled.div`
   }
 
   .isoSignUpContentWrapper {
-    width: 500px;
-    height: 100%;
+    width: 400px;
+    height: 83%;
     overflow-y: auto;
     z-index: 10;
     position: relative;
+    box-shadow: 0 3px 11px -1px rgba(69, 90, 100, 0.59);
+    margin: 0px 20px 0px 0px;
   }
 
   .isoSignUpContent {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 30px 50px;
+    padding: 16px 50px 0px 50px;
     position: relative;
-    background-color: #ffffff;
+    background-color: #fff;
 
     @media only screen and (max-width: 767px) {
       width: 100%;
@@ -179,6 +182,25 @@ const SignUpStyleWrapper = styled.div`
         }
       }
     }
+  }
+  .customInput {
+    border: none;
+    border-bottom: 1px solid #5d5b5bd9;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 12px 16px 12px 0px;
+    height: 47px;
+    background: transparent;
+    font-size: 14px;
+  }
+  .customInput:focus {
+    border-bottom: 2px solid #3f9cb5;
+    box-shadow: none;
+  }
+  .customInput:invalid {
+    border: none;
+    box-shadow: none;
+    background: transparent;
   }
 `;
 
