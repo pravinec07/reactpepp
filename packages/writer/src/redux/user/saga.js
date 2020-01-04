@@ -7,10 +7,11 @@ import {
   resendOTP,
   verifyOTP,
   changePassword,
+  updateProfile,
 } from '../../services/usersApi';
 import SignUpRequestModel from '../../models/signUp';
 import { LOCAL_MESSAGE } from '../../config/Constants';
-import { ChangePasswordModel } from '../../models/updateProfile';
+import { ChangePasswordModel, ProfileModel } from '../../models/updateProfile';
 export function* signUpRequest() {
   yield takeEvery('SIGNUP_REQUEST', function*({ payload }) {
     console.log(payload, 'saga');
@@ -227,6 +228,54 @@ export function* changePasswordRequest() {
     }
   });
 }
+
+export function* updateProfileRequest() {
+  yield takeEvery(actions.UPDATE_PROFILE_START, function*({ payload }) {
+    const payloadData = new ProfileModel(payload);
+    console.log(payload, payloadData, 'saga');
+
+    try {
+      const response = yield call(updateProfile, payloadData);
+      console.log(response, payload, payloadData, '-------->');
+      switch (response.status) {
+        case 200:
+          const status =
+            response.data.metadata && response.data.metadata.status
+              ? response.data.metadata.status
+              : 'SUCCESS';
+          switch (status) {
+            case 'SUCCESS':
+              yield put({
+                type: actions.UPDATE_PROFILE_SUCCESS,
+                payload: response.data,
+              });
+              break;
+            default:
+              yield put({
+                type: actions.UPDATE_PROFILE_FAILURE,
+                payload: response.data.errors[0].message.split('(')[0],
+              });
+              break;
+          }
+
+          break;
+
+        default:
+          yield put({
+            type: actions.UPDATE_PROFILE_FAILURE,
+            payload: LOCAL_MESSAGE.somthingWrong,
+          });
+          break;
+      }
+    } catch (e) {
+      console.log('Error ', e);
+      yield put({
+        type: actions.UPDATE_PROFILE_FAILURE,
+        payload: LOCAL_MESSAGE.somthingWrong,
+      });
+    }
+  });
+}
 export default function* rootSaga() {
   yield all([
     fork(signUpRequest),
@@ -234,5 +283,6 @@ export default function* rootSaga() {
     fork(verifyOTPRequest),
     fork(resendOTPRequest),
     fork(changePasswordRequest),
+    fork(updateProfileRequest),
   ]);
 }

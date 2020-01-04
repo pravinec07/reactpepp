@@ -19,31 +19,43 @@ import {
 } from '../../config/Constants';
 const { Dragger } = Upload;
 const FormItem = Form.Item;
-const { signUpRequest } = userActions;
+const { updateProfileStart } = userActions;
 
 function CompleteProfileDetails({ ...props }) {
-  const dev = true;
-  const { getFieldDecorator } = props.form;
+  const { getFieldDecorator, getFieldsError } = props.form;
   const dispatch = useDispatch();
-  const response = useSelector(state => state.User);
+  const Auth = useSelector(state => state.Auth);
+
+  const { updateProfileLoading, updateProfileError } = useSelector(
+    state => state.User
+  );
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        dispatch(signUpRequest(values));
+        console.log(Auth.idToken, '------>');
+        dispatch(
+          updateProfileStart({
+            ...values,
+            accessToken: Auth.idToken.sessionToken,
+          })
+        );
       }
     });
   };
-
+  function hasErrors(fieldsError) {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
   useEffect(() => {
-    if (response.signUpLoading !== null) {
-      if (!response.signUpLoading && !response.signUpError) {
-      } else if (response.signUpError) {
-        Notification('error', 'Error', response.signUpError);
+    if (updateProfileLoading !== null) {
+      if (!updateProfileLoading && !updateProfileError) {
+        Notification('success', 'Success', 'Profile Completed Successfully.');
+      } else if (updateProfileError) {
+        Notification('error', 'Error', updateProfileError);
       }
-      console.log('property changed', response.signUpLoading);
+      console.log('property changed', updateProfileLoading);
     }
-  }, [response.signUpLoading, response.signUpError]);
+  }, [updateProfileLoading, updateProfileError]);
   return (
     <>
       <Row>
@@ -93,13 +105,16 @@ function CompleteProfileDetails({ ...props }) {
               </Row>
               <Row gutter={24}>
                 <Col span={12}>
-                  <p
-                    className="ant-form-item"
-                    style={{ marginBottom: '0px', fontWeight: '600' }}
+                  <FormItem
+                    label={
+                      <span
+                        className="ant-form-item"
+                        style={{ marginBottom: '0px', fontWeight: '600' }}
+                      >
+                        Select your Most Prefered Genre
+                      </span>
+                    }
                   >
-                    Select your Most Prefered Genre
-                  </p>
-                  <FormItem>
                     {getFieldDecorator('genre1', {
                       rules: [
                         {
@@ -237,10 +252,9 @@ function CompleteProfileDetails({ ...props }) {
                 </Col>
                 <Col span={24}>
                   <FormItem help="Please update the samples based on your proficiency in the different languages.">
-                    {getFieldDecorator('languages', {
-                      valuePropName: 'value',
-                      initialValue: dev ? [LANGUAGE[0].value] : [],
-                    })(<Checkbox.Group options={LANGUAGE} />)}
+                    {getFieldDecorator('languages', {})(
+                      <Checkbox.Group options={LANGUAGE} />
+                    )}
                   </FormItem>
                 </Col>
               </Row>
@@ -291,7 +305,6 @@ function CompleteProfileDetails({ ...props }) {
                   <FormItem>
                     {getFieldDecorator('expectedPay', {
                       valuePropName: 'value',
-                      initialValue: dev ? PAY_RANGE[0].value : '',
                     })(
                       <Select
                         showSearch
@@ -366,7 +379,6 @@ function CompleteProfileDetails({ ...props }) {
                   <FormItem help="Please quote a minimum working price for your content services. We will keep this in mind while we evaluate and negotiate.">
                     {getFieldDecorator('socialMedia', {
                       valuePropName: 'value',
-                      initialValue: dev ? POSITION_SOURCE[0].value : '',
                     })(
                       <Select
                         showSearch
@@ -410,16 +422,15 @@ function CompleteProfileDetails({ ...props }) {
                 </Col>
               </Row>
               <Row gutter={24}>
-                <Col span={12} style={{ textAlign: 'right' }}>
+                <Col span={12} style={{ textAlign: 'center' }}>
                   <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                      Save for Later
-                    </Button>
-                  </Form.Item>
-                </Col>
-                <Col span={12} style={{ textAlign: 'left' }}>
-                  <Form.Item>
-                    <Button type="danger" htmlType="submit">
+                    <Button
+                      disabled={hasErrors(getFieldsError())}
+                      loading={updateProfileLoading}
+                      type="danger"
+                      htmlType="submit"
+                      style={{ textAlign: 'center', marginBottom: '10px' }}
+                    >
                       Submit
                     </Button>
                   </Form.Item>
@@ -429,7 +440,7 @@ function CompleteProfileDetails({ ...props }) {
           </Card>
         </Col>
         <Col span={5}></Col>
-      </Row>{' '}
+      </Row>
     </>
   );
 }
