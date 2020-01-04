@@ -73,67 +73,69 @@ function SignIn(props) {
             </Link>
           </div>
           <div className="isoSignUpForm">
-            <div className="isoInputWrapper">
-              <FormItem>
-                {getFieldDecorator('username', {
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter user name/email.',
-                    },
-                  ],
-                  initialValue: dev ? 'pravin@gmail.com' : '',
-                })(<Input placeholder="Username" className="customInput" />)}
-              </FormItem>
-            </div>
-            <div className="isoInputWrapper" style={{ marginTop: '15px' }}>
-              <FormItem>
-                {getFieldDecorator('password', {
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter password.',
-                    },
-                  ],
-                  initialValue: dev ? 'Pravin@123' : '',
-                })(
-                  <Input
-                    // addonAfter={prefixSelector}
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                    className="customInput"
-                  />
-                )}
-              </FormItem>
-            </div>
-            <div className="isoInputWrapper">
-              <FormItem>
-                {getFieldDecorator('remeberMe', {
-                  valuePropName: 'checked',
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter user name/email.',
-                    },
-                  ],
-                  initialValue: dev ? true : false,
-                })(
-                  <Checkbox>
-                    <IntlMessages id="page.writer.signInRememberMe" />
-                  </Checkbox>
-                )}
-              </FormItem>
-            </div>
-            <div className="isoInputWrapper">
-              <Button
-                type="primary"
-                htmlType="submit"
-                disabled={hasErrors(getFieldsError())}
-                loading={loginLoading}
-              >
-                <IntlMessages id="page.writer.signInButton" />
-              </Button>
-            </div>
+            <Form onSubmit={handleLogin}>
+              <div className="isoInputWrapper">
+                <FormItem>
+                  {getFieldDecorator('username', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please enter user name/email.',
+                      },
+                    ],
+                    initialValue: dev ? 'pravin@gmail.com' : '',
+                  })(<Input placeholder="Username" className="customInput" />)}
+                </FormItem>
+              </div>
+              <div className="isoInputWrapper" style={{ marginTop: '15px' }}>
+                <FormItem>
+                  {getFieldDecorator('password', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please enter password.',
+                      },
+                    ],
+                    initialValue: dev ? 'Pravin@123' : '',
+                  })(
+                    <Input
+                      // addonAfter={prefixSelector}
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                      className="customInput"
+                    />
+                  )}
+                </FormItem>
+              </div>
+              <div className="isoInputWrapper">
+                <FormItem>
+                  {getFieldDecorator('remeberMe', {
+                    valuePropName: 'checked',
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please enter user name/email.',
+                      },
+                    ],
+                    initialValue: dev ? true : false,
+                  })(
+                    <Checkbox>
+                      <IntlMessages id="page.writer.signInRememberMe" />
+                    </Checkbox>
+                  )}
+                </FormItem>
+              </div>
+              <div className="isoInputWrapper">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={hasErrors(getFieldsError())}
+                  loading={loginLoading}
+                >
+                  <IntlMessages id="page.writer.signInButton" />
+                </Button>
+              </div>
+            </Form>
             <div
               className="isoCenterComponent isoHelperWrapper"
               style={{ marginTop: '10px' }}
