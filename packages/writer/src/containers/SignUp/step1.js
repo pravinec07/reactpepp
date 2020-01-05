@@ -76,6 +76,7 @@ function Step1({ ...props }) {
                 placeholder="Country Code"
                 className="customInput"
                 maxLength={3}
+                style={{ width: '30%' }}
               />
             )}
           </FormItem>{' '}
@@ -92,6 +93,7 @@ function Step1({ ...props }) {
                 placeholder="Phone Number"
                 className="customInput"
                 maxLength={10}
+                style={{ width: '170%', marginLeft: '-65%' }}
               />
             )}
           </FormItem>
