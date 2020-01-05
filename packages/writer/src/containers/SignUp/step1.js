@@ -1,40 +1,41 @@
 import React from 'react';
+import Button from '@iso/components/uielements/button';
 import Input from '@iso/components/uielements/input';
 import Checkbox from '@iso/components/uielements/checkbox';
 import IntlMessages from '@iso/components/utility/intlMessages';
 import Form from '@iso/components/uielements/form';
-import Select, { SelectOption } from '@iso/components/uielements/select';
-
+import { PASSWORD_REGX } from '../../config/Constants';
 const FormItem = Form.Item;
 
-function Step1({ form, dev }) {
-  const { getFieldDecorator } = form;
+function Step1({ ...props }) {
+  const { getFieldDecorator, getFieldsError } = props.form;
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const handleConfirmBlur = e => {
     const value = e.target.value;
     setConfirmDirty(confirmDirty => confirmDirty || !!value);
   };
   const checkPassword = (rule, value, callback) => {
-    if (value && value !== form.getFieldValue('password')) {
+    if (value && !PASSWORD_REGX.regx.test(value)) {
+      callback(PASSWORD_REGX.error);
+    } else if (value && value !== props.form.getFieldValue('password')) {
       callback('Two passwords that you enter is inconsistent.');
     } else {
       callback();
     }
   };
   const checkConfirm = (rule, value, callback) => {
-    if (value && confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
+    if (value && !PASSWORD_REGX.regx.test(value)) {
+      callback(PASSWORD_REGX.error);
+    } else {
+      if (value && confirmDirty) {
+        props.form.validateFields(['confirm'], { force: true });
+      }
+      callback();
     }
-    callback();
   };
-  const prefixSelector = getFieldDecorator('prefix', {
-    initialValue: '+91',
-  })(
-    <Select style={{ width: 70 }}>
-      <SelectOption value="+91">+91</SelectOption>
-    </Select>
-  );
-
+  function hasErrors(fieldsError) {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
   return (
     <>
       <div className="boxSignUp">
@@ -47,7 +48,6 @@ function Step1({ form, dev }) {
                   message: 'Please enter first name.',
                 },
               ],
-              initialValue: dev ? 'Pravin' : '',
             })(<Input placeholder="First name" className="customInput" />)}
           </FormItem>
           <FormItem label="">
@@ -58,11 +58,27 @@ function Step1({ form, dev }) {
                   message: 'Please enter last name.',
                 },
               ],
-              initialValue: dev ? 'kumar' : '',
             })(<Input placeholder="Last name" className="customInput" />)}
           </FormItem>
         </div>
-        <div className="isoInputWrapper">
+        <div className="isoInputWrapper isoLeftRightComponent">
+          <FormItem label="">
+            {getFieldDecorator('prefix', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please enter country code.',
+                },
+              ],
+              initialValue: '+91',
+            })(
+              <Input
+                placeholder="Country Code"
+                className="customInput"
+                maxLength={3}
+              />
+            )}
+          </FormItem>{' '}
           <FormItem label="">
             {getFieldDecorator('phoneNumber', {
               rules: [
@@ -71,13 +87,12 @@ function Step1({ form, dev }) {
                   message: 'Please enter Phone number.',
                 },
               ],
-              initialValue: dev ? '9012345678' : '',
             })(
               <Input
-                // addonBefore={prefixSelector}
-                placeholder="Phone number"
+                placeholder="Phone Number"
                 className="customInput"
-                maxLength={10}
+                maxLength={13}
+                type="number"
               />
             )}
           </FormItem>
@@ -101,7 +116,6 @@ function Step1({ form, dev }) {
                   message: 'Please input your E-mail.',
                 },
               ],
-              initialValue: dev ? 'abc@abc.com' : '',
             })(<Input placeholder="E-mail" className="customInput" />)}
           </FormItem>
         </div>
@@ -117,7 +131,6 @@ function Step1({ form, dev }) {
                   validator: checkConfirm,
                 },
               ],
-              initialValue: dev ? 'Pravin@123' : '',
             })(
               <Input
                 type="password"
@@ -139,7 +152,6 @@ function Step1({ form, dev }) {
                   validator: checkPassword,
                 },
               ],
-              initialValue: dev ? 'Pravin@123' : '',
             })(
               <Input
                 type="password"
@@ -167,6 +179,23 @@ function Step1({ form, dev }) {
             )}
           </FormItem>
         </div>
+        <>
+          <FormItem>
+            <Button
+              loading={props.loading}
+              disabled={
+                !(
+                  props.form.getFieldsValue().agreement &&
+                  !hasErrors(getFieldsError())
+                )
+              }
+              type="primary"
+              htmlType="submit"
+            >
+              <IntlMessages id="page.signUpButton" />
+            </Button>
+          </FormItem>
+        </>
       </div>
     </>
   );
