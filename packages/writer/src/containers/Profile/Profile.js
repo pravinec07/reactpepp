@@ -11,7 +11,7 @@ import Radio from '@iso/components/uielements/radio';
 import Form from '@iso/components/uielements/form';
 import Notification from '@iso/components/Notification';
 import userActions from '../../redux/user/actions';
-import { DAYS } from '../../config/Constants';
+import { DAYS, NO_DATA } from '../../config/Constants';
 const { Panel } = Collapse;
 const { Option } = Select;
 const ButtonGroup = Button.Group;
@@ -26,7 +26,7 @@ function getBase64(file) {
 function ProfileDetails({ ...props }) {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   const dispatch = useDispatch();
   const handleCancel = () => setPreviewVisible(false);
   const handlePreview = async file => {
@@ -114,7 +114,7 @@ function ProfileDetails({ ...props }) {
               type="inner"
               title="Basic Information"
               extra={
-                <a href="./profileUserEdit">
+                <a href="#">
                   <Icon type="edit" />
                 </a>
               }
@@ -123,14 +123,14 @@ function ProfileDetails({ ...props }) {
                 <Col span={12}>
                   <Form.Item label="Most Prefered Genre">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Lifestyle & Music
+                      {userData.genre1 || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label="Second Most Prefered Genre">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Politics & News
+                      {userData.genre2 || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
@@ -139,14 +139,14 @@ function ProfileDetails({ ...props }) {
                 <Col span={12}>
                   <Form.Item label="Most Prefered Vertical">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Technology
+                      {userData.vertical1 || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label="Second Most Prefered Vertical">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Human Resourse
+                      {userData.vertical2 || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
@@ -196,29 +196,12 @@ function ProfileDetails({ ...props }) {
                     Languages you are proficient in
                   </p>
                 </Col>
-                <Col span={12}>
-                  <Checkbox checked>English</Checkbox>
-                </Col>
-                <Col span={12}>
-                  <Checkbox checked>Hindi</Checkbox>
-                </Col>
               </Row>
-              <Row>
-                <Col span={12}>
-                  <Checkbox checked>Punjabi</Checkbox>
+              {(userData.languages || []).map((item, key) => (
+                <Col key={`language${key}`} span={12}>
+                  <Checkbox checked>{item}</Checkbox>
                 </Col>
-                <Col span={12}>
-                  <Checkbox checked>Urdu</Checkbox>
-                </Col>
-              </Row>
-              <Row>
-                <Col span={12}>
-                  <Checkbox checked>French</Checkbox>
-                </Col>
-                <Col span={12}>
-                  <Checkbox checked>Spanish</Checkbox>
-                </Col>
-              </Row>
+              ))}
             </Card>
           </Col>
           <Col span={11}>
@@ -226,7 +209,7 @@ function ProfileDetails({ ...props }) {
               type="inner"
               title="Profile Details"
               extra={
-                <a href="./profileUserEdit">
+                <a href="#">
                   <Icon type="edit" />
                 </a>
               }
@@ -262,23 +245,26 @@ function ProfileDetails({ ...props }) {
                 </Col>
                 <Col span={8}>
                   <Form.Item label="First Name">
-                    <p style={{ color: '#16224F', fontWeight: '600' }}>Rahul</p>
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.name || NO_DATA.na}{' '}
+                      {userData.lastname || NO_DATA.na}
+                    </p>
                   </Form.Item>
                   <Form.Item label="Phone">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      +91-8586047534
+                      {userData.phoneNumber || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
                 <Col span={9}>
                   <Form.Item label="Last Name">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Sharma
+                      {userData.lastname || NO_DATA.na}
                     </p>
                   </Form.Item>
                   <Form.Item label="Email">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      rhlsharma8@gmail.com
+                      {userData.email || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
@@ -291,14 +277,14 @@ function ProfileDetails({ ...props }) {
                 <Col span={12}>
                   <Form.Item label="Occupation">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Content Writer
+                      {userData.occupation || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label="Daily Word Count">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      15000 WPD
+                      {userData.dailyWordCount || NO_DATA.na} WPD
                     </p>
                   </Form.Item>
                 </Col>
@@ -310,42 +296,17 @@ function ProfileDetails({ ...props }) {
                     Weekday Availability
                   </p>
                 </Col>
-                <Col span={6}>
-                  <Checkbox
-                    value="Wed"
-                    checked
-                    style={{ color: '#16224F', fontWeight: '600' }}
-                  >
-                    Wed
-                  </Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox
-                    value="Fri"
-                    checked
-                    style={{ color: '#16224F', fontWeight: '600' }}
-                  >
-                    Fri
-                  </Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox
-                    value="Sat"
-                    checked
-                    style={{ color: '#16224F', fontWeight: '600' }}
-                  >
-                    Sat
-                  </Checkbox>
-                </Col>
-                <Col span={6}>
-                  <Checkbox
-                    value="Sun"
-                    checked
-                    style={{ color: '#16224F', fontWeight: '600' }}
-                  >
-                    Sun
-                  </Checkbox>
-                </Col>
+                {(userData.availability || []).map((item, key) => (
+                  <Col key={`availablity${key}`} span={6}>
+                    <Checkbox
+                      value={item}
+                      checked
+                      style={{ color: '#16224F', fontWeight: '600' }}
+                    >
+                      {item}
+                    </Checkbox>
+                  </Col>
+                ))}
               </Row>
               <Row>
                 <Col span={24} style={{ marginTop: '10px' }}></Col>
@@ -360,7 +321,7 @@ function ProfileDetails({ ...props }) {
                     style={{ color: '#16224F', fontWeight: '600' }}
                   >
                     <Radio value={1} checked>
-                      Full Time
+                      {userData.writer || NO_DATA.na}
                     </Radio>
                   </Radio.Group>
                 </Col>
@@ -375,7 +336,7 @@ function ProfileDetails({ ...props }) {
                     style={{ color: '#16224F', fontWeight: '600' }}
                   >
                     <Radio value={1} checked>
-                      Part Time
+                      {userData.freelancer || NO_DATA.na}
                     </Radio>
                   </Radio.Group>
                 </Col>
@@ -392,7 +353,7 @@ function ProfileDetails({ ...props }) {
               type="inner"
               title="Experience"
               extra={
-                <a href="./profileUserEdit">
+                <a href="#">
                   <Icon type="edit" />
                 </a>
               }
@@ -464,7 +425,7 @@ function ProfileDetails({ ...props }) {
                 <Col span={24}>
                   <Form.Item label="Expected Pay? (In Rupees per word)">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      0.3-0.5 Paise per word
+                      {userData.expectedPay || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
@@ -473,10 +434,8 @@ function ProfileDetails({ ...props }) {
                 <Col span={24}>
                   <Form.Item label="Previous writing experiences and skillsets.">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it{' '}
+                      {userData.writingSkillSet || NO_DATA.na}
+
                       <a href="">Read more..</a>
                     </p>
                   </Form.Item>
@@ -486,28 +445,14 @@ function ProfileDetails({ ...props }) {
                 <Col span={24}>
                   <Form.Item label=" companies that you've worked for in the past">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      ABA Infotech Pvt. Ltd.{' '}
+                      {userData.pastCompanies || NO_DATA.na}
                       <span
                         style={{
                           color: '#adadad',
                           fontSize: '12px',
                           fontWeight: '400',
                         }}
-                      >
-                        (Delhi)
-                      </span>
-                    </p>
-                    <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Tata Consultancy Service{' '}
-                      <span
-                        style={{
-                          color: '#adadad',
-                          fontSize: '12px',
-                          fontWeight: '400',
-                        }}
-                      >
-                        (Gurgaon)
-                      </span>
+                      ></span>
                     </p>
                   </Form.Item>
                 </Col>
@@ -516,8 +461,7 @@ function ProfileDetails({ ...props }) {
                 <Col span={24}>
                   <Form.Item label="Profession you are in, apart from freelance writing">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's{' '}
+                      {userData.currentProfession || NO_DATA.na}
                       <a href="">Read more..</a>
                     </p>
                   </Form.Item>
@@ -530,7 +474,7 @@ function ProfileDetails({ ...props }) {
               type="inner"
               title="Bank Details"
               extra={
-                <a href="./profileUserEdit">
+                <a href="#">
                   <Icon type="edit" />
                 </a>
               }
@@ -540,14 +484,14 @@ function ProfileDetails({ ...props }) {
                 <Col span={12}>
                   <Form.Item label="A/c Number">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      00910100020876
+                      {userData.accountNumber || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label="A/c Holder Name">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Rahul Sharma
+                      {userData.accountHolder || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
@@ -556,14 +500,14 @@ function ProfileDetails({ ...props }) {
                 <Col span={12}>
                   <Form.Item label="Bank Name">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      ICICI Bank
+                      {userData.bankName || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label="Branch Name">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Sadar Bazar Delhi-110006
+                      {userData.branchName || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
@@ -572,14 +516,14 @@ function ProfileDetails({ ...props }) {
                 <Col span={12}>
                   <Form.Item label="IFSC Code">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      ICIC0SADARB
+                      {userData.ifscCode || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item label="PAN Card">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      FJOPS3886L
+                      {userData.pancard || NO_DATA.na}
                     </p>
                   </Form.Item>
                 </Col>

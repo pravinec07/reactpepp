@@ -127,3 +127,7 @@ export const DAYS = [
   { value: 'sat', label: 'Sat' },
   { value: 'sun', label: 'Sun' },
 ];
+
+export const NO_DATA = {
+  na: 'N/A',
+};

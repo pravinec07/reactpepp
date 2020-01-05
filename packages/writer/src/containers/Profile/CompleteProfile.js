@@ -73,8 +73,8 @@ function CompleteProfileDetails({ ...props }) {
         console.log(Auth.idToken, '------>');
         dispatch(
           updateProfileStart({
-            ...values,
             ...getProfileResponse,
+            ...values,
             writerForm: false,
             accessToken: Auth.idToken.sessionToken,
           })

@@ -81,8 +81,8 @@ function ProfileVerify({ ...props }) {
       if (!err) {
         dispatch(
           updateProfileStart({
-            ...values,
             ...getProfileResponse,
+            ...values,
             writerForm: false,
             zohoForm: false,
             accessToken: Auth.idToken.sessionToken,

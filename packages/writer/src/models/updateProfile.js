@@ -66,5 +66,7 @@ export class ProfileModel {
     this.clientForm = data.clientForm || true;
     this.zohoForm = data.zohoForm || false;
     this.writerForm = data.writerForm || true;
+    this.bankName = data.bankName || '';
+    this.writer = data.writer || '';
   }
 }
