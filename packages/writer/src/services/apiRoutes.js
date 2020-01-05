@@ -9,4 +9,5 @@ export default {
   CHANGE_PASSWORD_OTP: 'user/auth/ResetPassword',
   CHANGE_PASSWORD: 'user/auth/ConfirmResetPassword',
   UPDATE_PROFILE: 'user/auth/updateUser',
+  GET_PROFILE: 'user/auth/getUserData',
 };

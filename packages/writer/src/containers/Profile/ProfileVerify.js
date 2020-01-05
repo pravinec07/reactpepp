@@ -52,9 +52,29 @@ function ProfileVerify({ ...props }) {
   }
   const Auth = useSelector(state => state.Auth);
 
-  const { updateProfileLoading, updateProfileError } = useSelector(
-    state => state.User
-  );
+  const {
+    updateProfileLoading,
+    updateProfileError,
+    getProfileLoading,
+    getProfileResponse,
+    getProfileError,
+  } = useSelector(state => state.User);
+  useEffect(() => {
+    dispatch(
+      userActions.getProfileStart({
+        username: Auth.idToken.userData.email,
+        accessToken: Auth.idToken.sessionToken,
+      })
+    );
+  }, []);
+  useEffect(() => {
+    if (getProfileLoading !== null) {
+      if (!getProfileLoading && !getProfileError) {
+      } else if (getProfileError) {
+        Notification('error', 'Error in Get Profile deatils', getProfileError);
+      }
+    }
+  }, [getProfileLoading, getProfileResponse, getProfileError]);
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
@@ -62,6 +82,9 @@ function ProfileVerify({ ...props }) {
         dispatch(
           updateProfileStart({
             ...values,
+            ...getProfileResponse,
+            writerForm: false,
+            zohoForm: false,
             accessToken: Auth.idToken.sessionToken,
           })
         );

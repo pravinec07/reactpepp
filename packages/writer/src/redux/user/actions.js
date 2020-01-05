@@ -17,6 +17,9 @@ const actions = {
   UPDATE_PROFILE_START: 'UPDATE_PROFILE_START',
   UPDATE_PROFILE_SUCCESS: 'UPDATE_PROFILE_SUCCESS',
   UPDATE_PROFILE_FAILURE: 'UPDATE_PROFILE_FAILURE',
+  GET_PROFILE_START: 'GET_PROFILE_START',
+  GET_PROFILE_SUCCESS: 'GET_PROFILE_SUCCESS',
+  GET_PROFILE_FAILURE: 'GET_PROFILE_FAILURE',
   signUpRequest: payload => {
     console.log(payload, 'actions');
     return {
@@ -82,6 +85,18 @@ const actions = {
   }),
   updateProfileFailure: data => ({
     type: actions.UPDATE_PROFILE_FAILURE,
+    payload: data,
+  }),
+  getProfileStart: data => ({
+    type: actions.GET_PROFILE_START,
+    payload: data,
+  }),
+  getProfileSuccess: data => ({
+    type: actions.GET_PROFILE_SUCCESS,
+    payload: data,
+  }),
+  getProfileFailure: data => ({
+    type: actions.GET_PROFILE_FAILURE,
     payload: data,
   }),
 };
