@@ -26,9 +26,30 @@ function CompleteProfileDetails({ ...props }) {
   const dispatch = useDispatch();
   const Auth = useSelector(state => state.Auth);
 
-  const { updateProfileLoading, updateProfileError } = useSelector(
-    state => state.User
-  );
+  const {
+    updateProfileLoading,
+    updateProfileError,
+    getProfileLoading,
+    getProfileResponse,
+    getProfileError,
+  } = useSelector(state => state.User);
+
+  useEffect(() => {
+    dispatch(
+      userActions.getProfileStart({
+        username: Auth.idToken.userData.email,
+        accessToken: Auth.idToken.sessionToken,
+      })
+    );
+  }, []);
+  useEffect(() => {
+    if (getProfileLoading !== null) {
+      if (!getProfileLoading && !getProfileError) {
+      } else if (getProfileError) {
+        Notification('error', 'Error in Get Profile deatils', getProfileError);
+      }
+    }
+  }, [getProfileLoading, getProfileResponse, getProfileError]);
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
@@ -37,6 +58,8 @@ function CompleteProfileDetails({ ...props }) {
         dispatch(
           updateProfileStart({
             ...values,
+            ...getProfileResponse,
+            writerForm: false,
             accessToken: Auth.idToken.sessionToken,
           })
         );

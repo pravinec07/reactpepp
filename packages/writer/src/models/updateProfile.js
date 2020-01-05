@@ -26,9 +26,7 @@ export class ProfileModel {
     this.companyName = data.companyName || 'Inherit';
     this.name = data.firstName || '';
     this.lastname = data.lastNmae || '';
-    this.phoneNumber = data.phoneNumber
-      ? `${data.prefix}${data.phoneNumber}`
-      : '';
+    this.phoneNumber = data.phoneNumber || '';
     this.identifyType = data.identifyType || '';
     this.industryType = data.industryType || '';
     this.cvUrl = data.cvUrl || '';
@@ -65,5 +63,8 @@ export class ProfileModel {
     this.branchName = data.branchName || '';
     this.accountHolder = data.accountHolder || '';
     this.accountNumber = data.accountNumber || '';
+    this.clientForm = data.clientForm || true;
+    this.zohoForm = data.zohoForm || false;
+    this.writerForm = data.writerForm || true;
   }
 }

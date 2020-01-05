@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: 'my-profile',
-    component: lazy(() => import('../Profile/ProfileUser')),
+    component: lazy(() => import('../Profile/Profile')),
   },
   {
     path: 'profileUserEdit',

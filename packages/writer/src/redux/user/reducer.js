@@ -16,6 +16,9 @@ const initState = {
   updateProfileLoading: null,
   updateProfileResponse: null,
   updateProfileError: null,
+  getProfileLoading: null,
+  getProfileResponse: null,
+  getProfileError: null,
 };
 
 export default function authReducer(state = initState, action) {
@@ -119,6 +122,27 @@ export default function authReducer(state = initState, action) {
         ...initState,
         updateProfileLoading: false,
         updateProfileError: action.payload,
+      };
+    case actions.GET_PROFILE_START:
+      return {
+        ...state,
+        getProfileLoading: true,
+        getProfileResponse: null,
+        getProfileError: null,
+      };
+    case actions.GET_PROFILE_SUCCESS:
+      return {
+        ...state,
+        getProfileLoading: false,
+        getProfileResponse: action.payload,
+        getProfileError: null,
+      };
+
+    case actions.GET_PROFILE_FAILURE:
+      return {
+        ...initState,
+        getProfileLoading: false,
+        getProfileError: action.payload,
       };
     default:
       return state;

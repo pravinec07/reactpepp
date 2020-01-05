@@ -14,3 +14,4 @@ export const changePassword = data =>
     data
   );
 export const updateProfile = data => api.post(apiRoutes.UPDATE_PROFILE, data);
+export const getProfile = data => api.post(apiRoutes.GET_PROFILE, data);
