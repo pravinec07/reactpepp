@@ -91,8 +91,7 @@ function Step1({ ...props }) {
               <Input
                 placeholder="Phone Number"
                 className="customInput"
-                maxLength={13}
-                type="number"
+                maxLength={10}
               />
             )}
           </FormItem>
