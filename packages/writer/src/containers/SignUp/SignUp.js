@@ -272,20 +272,11 @@ function SignUp(props) {
           <div className="isoSignUpForm">
             {formStep === 1 && (
               <Form layout="vertical" onSubmit={handleNextBackAction}>
-                <SignUpForm form={props.form} dev={dev} />
-                <>
-                  <FormItem>
-                    <Button
-                      loading={
-                        sendOtpLoading || verifyOtpLoading || signUpLoading
-                      }
-                      type="primary"
-                      htmlType="submit"
-                    >
-                      <IntlMessages id="page.signUpButton" />
-                    </Button>
-                  </FormItem>
-                </>
+                <SignUpForm
+                  form={props.form}
+                  loading={signUpLoading || verifyOtpLoading || signUpLoading}
+                />
+
                 <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
                   <Link to="/signin">
                     <IntlMessages id="page.signUpAlreadyAccount" />

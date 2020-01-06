@@ -24,6 +24,7 @@ import profile from '@iso/redux/profile/reducer';
 import githubSearch from '@iso/redux/githubSearch/reducers';
 import signup from '../containers/Signup/reducer';
 import articleReducer from '../redux/articles/reducers';
+import projectReducer from '../containers/Project/reducer';
 
 export default combineReducers({
   Auth,
@@ -51,4 +52,5 @@ export default combineReducers({
   githubSearch,
   signup,
   articleReducer,
+  projectReducer,
 });

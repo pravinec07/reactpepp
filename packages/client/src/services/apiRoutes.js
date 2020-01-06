@@ -6,4 +6,6 @@ export default {
   SEND_OTP: 'user/auth/sendOtp',
   RESEND_OTP: 'user/auth/resendOtp',
   VERIFY_OTP: 'user/auth/verifyOtp',
+  PROJECT_SAVE: 'user/project/createProject',
+  ARTICLE_SAVE: 'user/article/createArticle',
 };
