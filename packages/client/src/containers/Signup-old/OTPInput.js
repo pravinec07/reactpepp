@@ -1,5 +1,5 @@
-import React from 'react';
-import { Input, Row, Col } from 'antd';
+import React, { Fragment } from 'react';
+import { Form, Card, Modal, Input, Button, Row, Col, Icon } from 'antd';
 let completeOTP = '';
 export default function OTPInput(props) {
   const handleNumberChange = e => {
@@ -26,53 +26,59 @@ export default function OTPInput(props) {
   }
 
   return (
-    <>
+    <form>
       <Input.Group size="large" className="otp-input-group">
         <Row gutter={8}>
           <Col span={4}>
             <Input
               onKeyUp={handleEnter}
               onChange={handleNumberChange}
-              maxLength={1}
+              maxLength="1"
+              type="number"
             />
           </Col>
           <Col span={4}>
             <Input
               onKeyUp={handleEnter}
               onChange={handleNumberChange}
-              maxLength={1}
+              maxLength="1"
+              type="number"
             />
           </Col>
           <Col span={4}>
             <Input
               onKeyUp={handleEnter}
               onChange={handleNumberChange}
-              maxLength={1}
+              maxLength="1"
+              type="number"
             />
           </Col>
           <Col span={4}>
             <Input
               onKeyUp={handleEnter}
               onChange={handleNumberChange}
-              maxLength={1}
+              maxLength="1"
+              type="number"
             />
           </Col>
           <Col span={4}>
             <Input
               onKeyUp={handleEnter}
               onChange={handleNumberChange}
-              maxLength={1}
+              maxLength="1"
+              type="number"
             />
           </Col>
           <Col span={4}>
             <Input
               onKeyUp={handleEnter}
               onChange={handleNumberChange}
-              maxLength={1}
+              maxLength="1"
+              type="number"
             />
           </Col>
         </Row>
       </Input.Group>
-    </>
+    </form>
   );
 }

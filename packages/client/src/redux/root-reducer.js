@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import App from '@iso/redux/app/reducer';
-import Auth from '../containers/SignIn/reducer';
+import Auth from './auth/reducer';
 import Mails from '@iso/redux/mail/reducer';
 import Calendar from '@iso/redux/calendar/reducer';
 import Box from '@iso/redux/box/reducer';
@@ -22,8 +22,9 @@ import drawer from '@iso/redux/drawer/reducer';
 import modal from '@iso/redux/modal/reducer';
 import profile from '@iso/redux/profile/reducer';
 import githubSearch from '@iso/redux/githubSearch/reducers';
-import signup from '../containers/Signup/reducer';
+//import signup from '../containers/Signup-old/reducer';
 import articleReducer from '../redux/articles/reducers';
+import User from './user/reducer';
 
 export default combineReducers({
   Auth,
@@ -49,6 +50,6 @@ export default combineReducers({
   drawer,
   profile,
   githubSearch,
-  signup,
+  User,
   articleReducer,
 });

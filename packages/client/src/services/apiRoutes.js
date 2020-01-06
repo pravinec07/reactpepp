@@ -6,4 +6,6 @@ export default {
   SEND_OTP: 'user/auth/sendOtp',
   RESEND_OTP: 'user/auth/resendOtp',
   VERIFY_OTP: 'user/auth/verifyOtp',
+  CHANGE_PASSWORD_OTP: 'user/auth/ResetPassword',
+  CHANGE_PASSWORD: 'user/auth/ConfirmResetPassword',
 };

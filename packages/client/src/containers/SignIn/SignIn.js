@@ -1,29 +1,29 @@
 import React from 'react';
+import { Form, Row, Col } from 'antd';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Input from '@iso/components/uielements/input';
 import Checkbox from '@iso/components/uielements/checkbox';
 import Icon from '@iso/components/uielements/icon';
 import Button from '@iso/components/uielements/button';
-import Form from '@iso/components/uielements/form';
+// import Form from '@iso/components/uielements/form';
 import Notification from '@iso/components/Notification';
 import IntlMessages from '@iso/components/utility/intlMessages';
 import appAction from '@iso/redux/app/actions';
 import SignInStyleWrapper from './SignIn.styles';
-import authAction from './actions';
+import authAction from '../../redux/auth/actions';
 
 const { login } = authAction;
-
 const { clearMenu } = appAction;
 const FormItem = Form.Item;
 function SignIn(props) {
-  const dev = true;
+  const dev = false;
   // let history = useHistory();
   let location = useLocation();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = React.useState(false);
   const isLoggedIn = useSelector(state => state.Auth.idToken);
-  const response = useSelector(state => state.Auth);
+  const { loginLoading, loginError } = useSelector(state => state.Auth);
 
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
   React.useEffect(() => {
@@ -32,29 +32,28 @@ function SignIn(props) {
     }
   }, [isLoggedIn]);
   React.useEffect(() => {
-    if (response.loginLoading !== null) {
-      if (!response.loginLoading && !response.loginError) {
-      } else if (response.loginError) {
-        Notification('error', 'Error', response.loginError);
+    if (loginLoading !== null) {
+      if (!loginLoading && !loginError) {
+      } else if (loginError) {
+        Notification('error', 'Error', loginError);
       }
-      console.log('Login api called changed 1111', response.loginLoading);
+      console.log('Login api called changed', loginLoading);
     }
-  }, [response.loginLoading, response.loginError]);
+  }, [loginLoading, loginError]);
 
   function handleLogin(e) {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('handling login');
         dispatch(login(values));
         dispatch(clearMenu());
       }
     });
   }
   const prefixSelector = showPassword ? (
-    <Icon onClick={() => setShowPassword(!showPassword)} type="eye-invisible" />
-  ) : (
     <Icon onClick={() => setShowPassword(!showPassword)} type="eye" />
+  ) : (
+    <Icon onClick={() => setShowPassword(!showPassword)} type="eye-invisible" />
   );
   let { from } = location.state || { from: { pathname: '/dashboard' } };
   const { getFieldDecorator, getFieldsError } = props.form;
@@ -65,77 +64,80 @@ function SignIn(props) {
     return <Redirect to={from} />;
   }
   return (
-    <SignInStyleWrapper className="isoSignInPage">
-      <div className="isoLoginContentWrapper">
-        <div className="isoLoginContent">
+    <SignInStyleWrapper className="isoSignUpPage">
+      <div className="isoSignUpContentWrapper">
+        <div className="isoSignUpContent">
           <div className="isoLogoWrapper">
             <Link to="/dashboard">
-              <IntlMessages id="page.writer.signInTitle" />
+              <IntlMessages id="page.signInTitle" />
             </Link>
           </div>
-          <div className="isoSignInForm">
-            <Form onSubmit={handleLogin}>
-              <div className="isoInputWrapper">
-                <FormItem>
-                  {getFieldDecorator('username', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter Email.',
-                      },
-                    ],
-                    // initialValue: dev ? "pravin@gmail.com" : ""
-                  })(<Input placeholder="Email" size="large" />)}
-                </FormItem>
-              </div>
-              <div className="isoInputWrapper">
-                <FormItem>
-                  {getFieldDecorator('password', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter password.',
-                      },
-                    ],
-                    type: 'password',
-                  })(
-                    <Input
-                      addonAfter={prefixSelector}
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Password"
-                      size="large"
-                    />
-                  )}
-                </FormItem>
-              </div>
-
-              <div className="isoInputWrapper isoLeftRightComponent">
-                <FormItem>
-                  {getFieldDecorator('remeberMe', {
-                    valuePropName: 'checked',
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter user name/email.',
-                      },
-                    ],
-                    initialValue: dev ? true : false,
-                  })(
-                    <Checkbox>
-                      <IntlMessages id="page.writer.signInRememberMe" />
-                    </Checkbox>
-                  )}
-                </FormItem>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  disabled={hasErrors(getFieldsError())}
-                >
-                  <IntlMessages id="page.writer.signInButton" />
-                </Button>
-              </div>
-            </Form>
-            <div className="isoCenterComponent isoHelperWrapper">
+          <div className="isoSignUpForm">
+            <div className="isoInputWrapper">
+              <FormItem>
+                {getFieldDecorator('username', {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please enter user name/email.',
+                    },
+                  ],
+                  initialValue: dev ? 'pravin@gmail.com' : '',
+                })(<Input placeholder="Username" className="customInput" />)}
+              </FormItem>
+            </div>
+            <div className="isoInputWrapper" style={{ marginTop: '15px' }}>
+              <FormItem>
+                {getFieldDecorator('password', {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please enter password.',
+                    },
+                  ],
+                  initialValue: dev ? 'Pravin@123' : '',
+                })(
+                  <Input
+                    // addonAfter={prefixSelector}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                    className="customInput"
+                  />
+                )}
+              </FormItem>
+            </div>
+            <div className="isoInputWrapper">
+              <FormItem>
+                {getFieldDecorator('remeberMe', {
+                  valuePropName: 'checked',
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please enter user name/email.',
+                    },
+                  ],
+                  initialValue: dev ? true : false,
+                })(
+                  <Checkbox>
+                    <IntlMessages id="page.writer.signInRememberMe" />
+                  </Checkbox>
+                )}
+              </FormItem>
+            </div>
+            <div className="isoInputWrapper">
+              <Button
+                type="primary"
+                htmlType="submit"
+                disabled={hasErrors(getFieldsError())}
+                loading={loginLoading}
+              >
+                <IntlMessages id="page.writer.signInButton" />
+              </Button>
+            </div>
+            <div
+              className="isoCenterComponent isoHelperWrapper"
+              style={{ marginTop: '10px' }}
+            >
               <Link to="/forgotpassword" className="isoForgotPass">
                 <IntlMessages id="page.signInForgotPass" />
               </Link>
