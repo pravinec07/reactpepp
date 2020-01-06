@@ -205,13 +205,13 @@ const SignUpStyleWrapper = styled.div`
   .pepper_heading {
     position: absolute;
     top: 0em;
-    left: 18em;
+    left: 21em;
   }
   .pepper_heading h1 {
-    font-size: 4em;
+    font-size: 3em;
     font-family: roboto;
     font-weight: 300;
-    color: #4482ff;
+    color: #16224f;
   }
 `;
 
