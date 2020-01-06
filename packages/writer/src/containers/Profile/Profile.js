@@ -159,7 +159,7 @@ function ProfileDetails({ ...props }) {
                 <Col span={18}>
                   <hr />
                   <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Abdul_resume.docx -{' '}
+                    resume.docx -{' '}
                     <span
                       style={{
                         color: '#adadad',
@@ -436,7 +436,7 @@ function ProfileDetails({ ...props }) {
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
                       {userData.writingSkillSet || NO_DATA.na}
 
-                      <a href="">Read more..</a>
+                      {/* <a href="">Read more..</a> */}
                     </p>
                   </Form.Item>
                 </Col>
@@ -462,7 +462,7 @@ function ProfileDetails({ ...props }) {
                   <Form.Item label="Profession you are in, apart from freelance writing">
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
                       {userData.currentProfession || NO_DATA.na}
-                      <a href="">Read more..</a>
+                      {/* <a href="">Read more..</a> */}
                     </p>
                   </Form.Item>
                 </Col>

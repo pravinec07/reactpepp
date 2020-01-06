@@ -179,7 +179,7 @@ class ProfileForm extends React.Component {
                   <Col span={18}>
                     <hr />
                     <p style={{ color: '#16224F', fontWeight: '600' }}>
-                      Abdul_resume.docx -{' '}
+                      resume.docx -{' '}
                       <span
                         style={{
                           color: '#adadad',
@@ -506,7 +506,8 @@ class ProfileForm extends React.Component {
                         typesetting industry. Lorem Ipsum has been the
                         industry's standard dummy text ever since the 1500s,
                         when an unknown printer took a galley of type and
-                        scrambled it <a href="">Read more..</a>
+                        scrambled it 
+                        {/* <a href="">Read more..</a> */}
                       </p>
                     </Form.Item>
                   </Col>
@@ -547,7 +548,8 @@ class ProfileForm extends React.Component {
                       <p style={{ color: '#16224F', fontWeight: '600' }}>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
-                        industry's <a href="">Read more..</a>
+                        industry's 
+                        {/* <a href="">Read more..</a> */}
                       </p>
                     </Form.Item>
                   </Col>

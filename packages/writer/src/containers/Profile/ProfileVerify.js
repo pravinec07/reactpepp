@@ -295,7 +295,7 @@ function ProfileVerify({ ...props }) {
                           message: 'Please enter A/c number',
                         },
                       ],
-                    })(<Input placeholder="A/c Number" />)}
+                    })(<Input type="number" placeholder="A/c Number" />)}
                   </Form.Item>
                 </Col>
                 <Col span={12}>

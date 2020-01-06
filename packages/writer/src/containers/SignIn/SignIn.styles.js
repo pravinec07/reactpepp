@@ -15,6 +15,9 @@ const SignUpStyleWrapper = styled.div`
   background-size: cover;
   background-size: 60em;
   background-position: -5em 0em;
+  @media only screen and (min-width: 1400px) {
+    background-size: 70em;
+  }
   .hide {
     opacity: 0;
     height: 0;
@@ -48,12 +51,12 @@ const SignUpStyleWrapper = styled.div`
     padding: 30px 50px 0px 50px;
     position: relative;
     background-color: #fff;
-
+ 
     @media only screen and (max-width: 767px) {
       width: 100%;
       padding: 30px 20px;
     }
-
+  
     .isoLogoWrapper {
       width: 100%;
       display: flex;

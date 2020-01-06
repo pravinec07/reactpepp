@@ -15,6 +15,9 @@ const SignUpStyleWrapper = styled.div`
   background-size: cover;
   background-size: 60em;
   background-position: -5em 0em;
+  @media only screen and (min-width: 1400px) {
+    background-size: 70em;
+  }
   .hide {
     opacity: 0;
     height: 0;
