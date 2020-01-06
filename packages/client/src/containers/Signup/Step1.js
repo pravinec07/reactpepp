@@ -2,13 +2,15 @@ import React from 'react';
 import Input from '@iso/components/uielements/input';
 import Checkbox from '@iso/components/uielements/checkbox';
 import IntlMessages from '@iso/components/utility/intlMessages';
+import Radio, { RadioGroup } from '@iso/components/uielements/radio';
 import Form from '@iso/components/uielements/form';
 import Select, { SelectOption } from '@iso/components/uielements/select';
 
 const FormItem = Form.Item;
 
-function Step1({ form, dev }) {
+function Step1({ form, dev, handleRadioChange, identityType }) {
   const { getFieldDecorator } = form;
+
   const [confirmDirty, setConfirmDirty] = React.useState(false);
   const handleConfirmBlur = e => {
     const value = e.target.value;
@@ -38,6 +40,42 @@ function Step1({ form, dev }) {
   return (
     <>
       <div className="boxSignUp">
+        <div className="isoInputWrapper">
+          <FormItem label="Please identify yourself">
+            {getFieldDecorator('identifyType', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please select one identity',
+                },
+              ],
+            })(
+              <RadioGroup
+                name="identification"
+                onChange={handleRadioChange}
+                value={identityType}
+              >
+                <Radio value={'business'}>Business</Radio>
+                <Radio value={'agency'}>Agency</Radio>
+                <Radio value={'individual'}>Individual</Radio>
+              </RadioGroup>
+            )}
+          </FormItem>
+        </div>
+        {identityType !== 'individual' && (
+          <div className="isoInputWrapper">
+            <FormItem label="">
+              {getFieldDecorator('companyName', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input name of Company',
+                  },
+                ],
+              })(<Input placeholder="Company Name" className="customInput" />)}
+            </FormItem>
+          </div>
+        )}
         <div className="isoInputWrapper isoLeftRightComponent">
           <FormItem label="">
             {getFieldDecorator('firstName', {

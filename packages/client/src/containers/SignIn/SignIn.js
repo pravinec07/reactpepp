@@ -41,7 +41,7 @@ function SignIn(props) {
     }
   }, [loginLoading, loginError]);
 
-  function handleLogin(e) {
+  const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
@@ -49,7 +49,7 @@ function SignIn(props) {
         dispatch(clearMenu());
       }
     });
-  }
+  };
   const prefixSelector = showPassword ? (
     <Icon onClick={() => setShowPassword(!showPassword)} type="eye" />
   ) : (

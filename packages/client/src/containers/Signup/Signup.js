@@ -25,6 +25,7 @@ function SignUp(props) {
   const [formStep, setFormStep] = useState(1);
   const [visible, setVisible] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
+  const [identityType, setIdentityType] = React.useState('business');
   const { getFieldDecorator } = props.form;
 
   const dispatch = useDispatch();
@@ -75,6 +76,16 @@ function SignUp(props) {
       }
     }
   }, [signUpLoading, signUpError]);
+
+  function handleRadioChange(e) {
+    e.preventDefault();
+    switch (e.target.name) {
+      case 'identification': {
+        setIdentityType(e.target.value);
+        break;
+      }
+    }
+  }
 
   function handleOTPProcess() {
     props.form.validateFieldsAndScroll((err, values) => {
@@ -272,7 +283,12 @@ function SignUp(props) {
           <div className="isoSignUpForm">
             {formStep === 1 && (
               <Form layout="vertical" onSubmit={handleNextBackAction}>
-                <SignUpForm form={props.form} dev={dev} />
+                <SignUpForm
+                  form={props.form}
+                  dev={dev}
+                  identityType={identityType}
+                  handleRadioChange={handleRadioChange}
+                />
                 <>
                   <FormItem>
                     <Button

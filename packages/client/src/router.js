@@ -18,7 +18,7 @@ const publicRoutes = [
   {
     path: PUBLIC_ROUTE.LANDING,
     exact: true,
-    component: lazy(() => import('./containers/SignIn-old/SignIn')),
+    component: lazy(() => import('./containers/SignIn/SignIn')),
   },
   {
     path: PUBLIC_ROUTE.PAGE_404,
@@ -30,7 +30,7 @@ const publicRoutes = [
   },
   {
     path: PUBLIC_ROUTE.SIGN_IN,
-    component: lazy(() => import('./containers/SignIn-old/SignIn')),
+    component: lazy(() => import('./containers/SignIn/SignIn')),
   },
   {
     path: PUBLIC_ROUTE.SIGN_UP,

@@ -22,7 +22,6 @@ import drawer from '@iso/redux/drawer/reducer';
 import modal from '@iso/redux/modal/reducer';
 import profile from '@iso/redux/profile/reducer';
 import githubSearch from '@iso/redux/githubSearch/reducers';
-//import signup from '../containers/Signup-old/reducer';
 import articleReducer from '../redux/articles/reducers';
 import User from './user/reducer';
 
