@@ -12,7 +12,20 @@ import IntlMessages from '@iso/components/utility/intlMessages';
 import appAction from '@iso/redux/app/actions';
 import SignInStyleWrapper from './SignIn.styles';
 import authAction from '../../redux/auth/actions';
-
+import siteConfig from '@iso/config/site.config';
+const styles = {
+  footer: {
+    marginTop: '20px',
+    background: '#ffffff',
+    textAlign: 'center',
+    borderTop: '1px solid #ededed',
+    width: '100%',
+    float: 'right',
+    position: 'absolute',
+    bottom: '-50px',
+    padding: '20px',
+  },
+};
 const { login } = authAction;
 const { clearMenu } = appAction;
 const FormItem = Form.Item;
@@ -65,6 +78,9 @@ function SignIn(props) {
   }
   return (
     <SignInStyleWrapper className="isoSignUpPage">
+      <div className="pepper_heading">
+        <h1>Pepper Creator Zone</h1>
+      </div>
       <div className="isoSignUpContentWrapper">
         <div className="isoSignUpContent">
           <div className="isoLogoWrapper">
@@ -80,11 +96,11 @@ function SignIn(props) {
                     rules: [
                       {
                         required: true,
-                        message: 'Please enter user name/email.',
+                        message: 'Please enter user Email.',
                       },
                     ],
                     initialValue: dev ? 'pravin@gmail.com' : '',
-                  })(<Input placeholder="Username" className="customInput" />)}
+                  })(<Input placeholder="Email" className="customInput" />)}
                 </FormItem>
               </div>
               <div className="isoInputWrapper" style={{ marginTop: '15px' }}>
@@ -150,8 +166,10 @@ function SignIn(props) {
           </div>
         </div>
       </div>
+      <div style={styles.footer}>{siteConfig.writer.footerText}</div>
     </SignInStyleWrapper>
   );
 }
+
 const WrappedFormWIthSignIn = Form.create()(SignIn);
 export default WrappedFormWIthSignIn;

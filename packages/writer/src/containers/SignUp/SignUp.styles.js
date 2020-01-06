@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
-import bgImage from '@iso/assets/images/signUp2.svg';
+import bgImage from '@iso/assets/images/signIn.svg';
 import WithDirection from '@iso/lib/helpers/rtl';
 
 const SignUpStyleWrapper = styled.div`
@@ -13,8 +13,8 @@ const SignUpStyleWrapper = styled.div`
   position: relative;
   background: url(${bgImage}) no-repeat center center;
   background-size: cover;
-  background-size: 850px;
-  background-position: 0px 14px;
+  background-size: 60em;
+  background-position: -5em 0em;
   .hide {
     opacity: 0;
     height: 0;
@@ -33,12 +33,12 @@ const SignUpStyleWrapper = styled.div`
 
   .isoSignUpContentWrapper {
     width: 400px;
-    height: 83%;
+    height: 37em;
     overflow-y: auto;
     z-index: 10;
     position: relative;
     box-shadow: 0 3px 11px -1px rgba(69, 90, 100, 0.59);
-    margin: 0px 20px 0px 0px;
+    margin: 0em 5em;
   }
 
   .isoSignUpContent {
@@ -201,6 +201,17 @@ const SignUpStyleWrapper = styled.div`
     border: none;
     box-shadow: none;
     background: transparent;
+  }
+  .pepper_heading {
+    position: absolute;
+    top: 0em;
+    left: 18em;
+  }
+  .pepper_heading h1 {
+    font-size: 4em;
+    font-family: roboto;
+    font-weight: 300;
+    color: #4482ff;
   }
 `;
 
