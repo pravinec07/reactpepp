@@ -1,30 +1,46 @@
 import React, { Fragment } from 'react';
 import { Form, Steps } from 'antd';
+import { connect } from 'react-redux';
 import AddArticlesForm from './AddArticlesForm';
 import CreateProjectForm from './CreateProjectForm';
+import actions from './actions';
+import Notification from '@iso/components/Notification';
 
+const { projectSaveStart, articleSaveStart } = actions;
 class ProjectForm extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
-    current: 1,
+    current: 2,
     articles: [],
   };
 
+  componentWillReceiveProps(nextProps) {
+    console.log('nextprops--->', nextProps);
+    if (nextProps.project.projectId) {
+      this.setState({ current: 2 });
+    }
+    if (nextProps.project.articleSuccessful) {
+      Notification('success', 'Articles save Successfully', true);
+    }
+  }
+
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    const {
+      form,
+      user,
+      project,
+      projectSaveStart,
+      articleSaveStart,
+    } = this.props;
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        this.setState({
-          current: 2,
-        });
-        if (this.state.current === 2) {
-          const { articles } = this.state;
-          articles.push(values);
-          this.setState({
-            articles: articles,
-          });
+        console.log('Received values of form: ', values, user);
+        if (this.state.current === 1) {
+          projectSaveStart(values, user.username);
+        } else {
+          articleSaveStart(this.state.articles, project.projectId);
         }
       }
     });
@@ -33,6 +49,30 @@ class ProjectForm extends React.Component {
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  };
+
+  handleAddArticle = () => {
+    if (this.state.current === 2) {
+      const { articles } = this.state;
+      this.props.form.validateFieldsAndScroll((err, values) => {
+        articles.push(values);
+        this.setState({
+          articles: articles,
+        });
+      });
+    }
+  };
+
+  handleDeleteArticle = (key, record) => {
+    console.log('---->', key, record);
+    const { articles } = this.state;
+    const index = articles.findIndex(
+      art => art.articleTopic === record.articleTopic
+    );
+    articles.splice(index, 1);
+    this.setState({
+      articles: articles,
+    });
   };
 
   render() {
@@ -55,7 +95,12 @@ class ProjectForm extends React.Component {
         >
           {current === 1 && <CreateProjectForm data={this.props} />}
           {current === 2 && (
-            <AddArticlesForm data={this.props} articlesData={articles} />
+            <AddArticlesForm
+              data={this.props}
+              articlesData={articles}
+              handleAddArticle={this.handleAddArticle}
+              handleDeleteArticle={this.handleDeleteArticle}
+            />
           )}
         </Form>
       </Fragment>
@@ -65,4 +110,20 @@ class ProjectForm extends React.Component {
 
 const WrappedProjectForm = Form.create({ name: 'project' })(ProjectForm);
 
-export default WrappedProjectForm;
+function mapStateToProps(state) {
+  console.log('in project', state);
+  return {
+    project: state.projectReducer,
+    user: JSON.parse(
+      Buffer.from(state.Auth.idToken, 'base64').toString('ascii')
+    ).userData,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    projectSaveStart,
+    articleSaveStart,
+  }
+)(WrappedProjectForm);
