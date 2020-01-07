@@ -1,69 +1,111 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, Checkbox, Row, Col, Button, Radio } from 'antd';
-import Select, { SelectOption } from '@iso/components/uielements/select';
+import React from 'react';
+import Button from '@iso/components/uielements/button';
+import Input from '@iso/components/uielements/input';
+import Checkbox from '@iso/components/uielements/checkbox';
 import IntlMessages from '@iso/components/utility/intlMessages';
+import Form from '@iso/components/uielements/form';
+import { PASSWORD_REGX } from '../../config/Constants';
+const FormItem = Form.Item;
 
-export default function Step1(props) {
-  const { getFieldDecorator } = props.data.form;
-  const {
-    handleRadioChange,
-    identityType,
-    handleNextBackAction,
-    checkConfirm,
-    checkPassword,
-    handleConfirmBlur,
-    isAgreement,
-  } = props;
-  const prefixSelector = getFieldDecorator('prefix', {
-    initialValue: '+91',
-  })(
-    <Select style={{ width: 70 }}>
-      <SelectOption value="+91">+91</SelectOption>
-    </Select>
-  );
+function Step1({ ...props }) {
+  const { getFieldDecorator, getFieldsError } = props.form;
+  const [confirmDirty, setConfirmDirty] = React.useState(false);
+  const handleConfirmBlur = e => {
+    const value = e.target.value;
+    setConfirmDirty(confirmDirty => confirmDirty || !!value);
+  };
+  const checkPassword = (rule, value, callback) => {
+    if (value && !PASSWORD_REGX.regx.test(value)) {
+      callback(PASSWORD_REGX.error);
+    } else if (value && value !== props.form.getFieldValue('password')) {
+      callback('Two passwords that you enter is inconsistent.');
+    } else {
+      callback();
+    }
+  };
+  const checkConfirm = (rule, value, callback) => {
+    if (value && !PASSWORD_REGX.regx.test(value)) {
+      callback(PASSWORD_REGX.error);
+    } else {
+      if (value && confirmDirty) {
+        props.form.validateFields(['confirm'], { force: true });
+      }
+      callback();
+    }
+  };
+  function hasErrors(fieldsError) {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
   return (
-    <Fragment>
-      <h1
-        style={{ textAlign: 'center', marginBottom: '15px', color: '#16224F' }}
-      >
-        Sign Up as Client
-      </h1>
-      <Row gutter={24}>
-        <Col xs={24}>
-          <Form.Item label="Please identify yourself">
-            {getFieldDecorator('identifyType', {
+    <>
+      <div className="boxSignUp">
+        <div className="isoInputWrapper isoLeftRightComponent">
+          <FormItem label="">
+            {getFieldDecorator('firstName', {
               rules: [
                 {
                   required: true,
-                  message: 'Please select one identity',
+                  message: 'Please enter first name.',
+                },
+              ],
+            })(<Input placeholder="First name" className="customInput" />)}
+          </FormItem>
+          <FormItem label="">
+            {getFieldDecorator('lastName', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please enter last name.',
+                },
+              ],
+            })(<Input placeholder="Last name" className="customInput" />)}
+          </FormItem>
+        </div>
+        <div className="isoInputWrapper isoLeftRightComponent">
+          <FormItem label="">
+            {getFieldDecorator('prefix', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please enter country code.',
+                },
+              ],
+              initialValue: '+91',
+            })(
+              <Input
+                placeholder="Country Code"
+                className="customInput"
+                maxLength={3}
+                style={{ width: '30%' }}
+              />
+            )}
+          </FormItem>{' '}
+          <FormItem label="">
+            {getFieldDecorator('phoneNumber', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please enter Phone number.',
                 },
               ],
             })(
-              <Radio.Group name="identification" onChange={handleRadioChange}>
-                <Radio value={'business'}>Business</Radio>
-                <Radio value={'agency'}>Agency</Radio>
-                <Radio value={'individual'}>Individual</Radio>
-              </Radio.Group>
+              <Input
+                placeholder="Phone Number"
+                className="customInput"
+                maxLength={10}
+                style={{ width: '170%', marginLeft: '-65%' }}
+              />
             )}
-          </Form.Item>
-        </Col>
-        {identityType !== 'individual' && (
-          <Col xs={24}>
-            <Form.Item label="Company Name">
-              {getFieldDecorator('companyName', {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input name of Company',
-                  },
-                ],
-              })(<Input placeholder="Company Name" />)}
-            </Form.Item>
-          </Col>
-        )}
-        <Col xs={24}>
-          <Form.Item label="Email Id">
+          </FormItem>
+        </div>
+        {/* this is for remove autofill email and password by browser */}
+        <div className="hide">
+          <Input tabIndex="-1" id="email" type="email" />
+          <Input tabIndex="-1" type="password" />
+        </div>
+        {/* this is for remove autofill email and password by browser*/}
+        <div className="isoInputWrapper">
+          <FormItem label="" hasFeedback>
             {getFieldDecorator('email', {
               rules: [
                 {
@@ -72,41 +114,14 @@ export default function Step1(props) {
                 },
                 {
                   required: true,
-                  message: 'Please input your email',
+                  message: 'Please input your E-mail.',
                 },
               ],
-            })(<Input placeholder="Email" />)}
-          </Form.Item>
-        </Col>
-
-        <Col xs={24}>
-          <Form.Item label="Contact Number">
-            {getFieldDecorator('phoneNumber', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input contact number',
-                },
-                {
-                  min: 10,
-                },
-                {
-                  max: 10,
-                },
-              ],
-              initialValue: '',
-            })(
-              <Input
-                placeholder="Phone Number"
-                addonBefore={prefixSelector}
-                maxLength={10}
-                type="number"
-              />
-            )}
-          </Form.Item>
-        </Col>
-        <Col xs={24}>
-          <Form.Item label="Password" hasFeedback>
+            })(<Input placeholder="E-mail" className="customInput" />)}
+          </FormItem>
+        </div>
+        <div className="isoInputWrapper">
+          <FormItem label="" hasFeedback>
             {getFieldDecorator('password', {
               rules: [
                 {
@@ -116,15 +131,18 @@ export default function Step1(props) {
                 {
                   validator: checkConfirm,
                 },
-                {
-                  min: 6,
-                },
               ],
-            })(<Input.Password placeholder="password" />)}
-          </Form.Item>
-        </Col>
-        <Col xs={24}>
-          <Form.Item hasFeedback>
+            })(
+              <Input
+                type="password"
+                placeholder="Password"
+                className="customInput"
+              />
+            )}
+          </FormItem>
+        </div>
+        <div className="isoInputWrapper">
+          <FormItem label="" hasFeedback>
             {getFieldDecorator('confirm', {
               rules: [
                 {
@@ -134,57 +152,53 @@ export default function Step1(props) {
                 {
                   validator: checkPassword,
                 },
-                {
-                  min: 6,
-                },
               ],
             })(
               <Input
                 type="password"
                 placeholder="Confirm Password"
                 onBlur={handleConfirmBlur}
+                className="customInput"
               />
             )}
-          </Form.Item>
-        </Col>
-        <Col xs={24}>
-          <Form.Item>
+          </FormItem>
+        </div>
+        <div className="isoInputWrapper" style={{ marginBottom: '20px' }}>
+          <FormItem>
             {getFieldDecorator('agreement', {
+              valuePropName: 'checked',
               rules: [
                 {
+                  message: 'Please accept terms and conditions',
                   required: true,
-                  message: 'Please select agreement',
                 },
               ],
             })(
-              <Checkbox name="agreement" onChange={handleRadioChange}>
-                {' '}
-                By clicking Agree and Sign up, you agree to Pepper content's
-                Terms of use and Privacy Policy.
+              <Checkbox>
+                <IntlMessages id="page.signUpTermsConditions" />
               </Checkbox>
             )}
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={24}>
-        <Col span={24}>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={handleNextBackAction}
-            disabled={!isAgreement}
-            className="full-width"
-          >
-            Agree and Sign Up
-          </Button>
-        </Col>
-      </Row>
-
-      <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
-        <Link to="/signin">
-          <IntlMessages id="page.signUpAlreadyAccount" />
-        </Link>
+          </FormItem>
+        </div>
+        <>
+          <FormItem>
+            <Button
+              loading={props.loading}
+              disabled={
+                !(
+                  props.form.getFieldsValue().agreement &&
+                  !hasErrors(getFieldsError())
+                )
+              }
+              type="primary"
+              htmlType="submit"
+            >
+              <IntlMessages id="page.signUpButton" />
+            </Button>
+          </FormItem>
+        </>
       </div>
-    </Fragment>
+    </>
   );
 }
+export default Step1;

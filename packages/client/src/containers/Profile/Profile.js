@@ -1,55 +1,20 @@
-import React from 'react';
-import {
-  Form,
-  Input,
-  Upload,
-  Icon,
-  Row,
-  Col,
-  Card,
-  Checkbox,
-  Button,
-  Modal,
-  message,
-  Radio,
-  Select,
-  Collapse,
-  Slider,
-} from 'antd';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Icon, Row, Col, Card, Button, Select, Collapse } from 'antd';
+import Upload from '@iso/components/uielements/upload';
+import Input, { Textarea } from '@iso/components/uielements/input';
+// import Button from "@iso/components/uielements/button";
+import Checkbox from '@iso/components/uielements/checkbox';
+import message from '@iso/components/uielements/message';
+import Modal from '@iso/components/uielements/modal';
+import Radio from '@iso/components/uielements/radio';
+import Form from '@iso/components/uielements/form';
+import Notification from '@iso/components/Notification';
+import userActions from '../../redux/user/actions';
+import { DAYS, NO_DATA } from '../../config/Constants';
 const { Panel } = Collapse;
 const { Option } = Select;
-const marks = {
-  0: {
-    label: <strong>Tropical</strong>,
-  },
-  5: {
-    label: <strong>Promotional</strong>,
-  },
-};
-const marks2 = {
-  0: {
-    label: <strong>Concise</strong>,
-  },
-  5: {
-    label: <strong>Explanatory</strong>,
-  },
-};
-const marks3 = {
-  0: {
-    label: <strong>Formal</strong>,
-  },
-  5: {
-    label: <strong>Casual</strong>,
-  },
-};
-const marks4 = {
-  0: {
-    label: <strong>Niche</strong>,
-  },
-  5: {
-    label: <strong>Generic</strong>,
-  },
-};
+const ButtonGroup = Button.Group;
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -58,409 +23,519 @@ function getBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
-class ProfileForm extends React.Component {
-  state = {
-    confirmDirty: false,
-    autoCompleteResult: [],
-    previewVisible: false,
-    previewImage: '',
-    fileList: [
-      {
-        uid: '-1',
-        name: 'image.png',
-        status: 'done',
-        url: 'http://localhost:3054/static/media/user1.56a1f25e.png',
-      },
-    ],
-  };
-
-  handleCancel = () => this.setState({ previewVisible: false });
-
-  handlePreview = async file => {
+function ProfileDetails({ ...props }) {
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [userData, setUserData] = useState({});
+  const dispatch = useDispatch();
+  const handleCancel = () => setPreviewVisible(false);
+  const handlePreview = async file => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-
-    this.setState({
-      previewImage: file.url || file.preview,
-      previewVisible: true,
-    });
+    setPreviewImage(file.url || file.preview);
+    setPreviewVisible(true);
   };
-
-  handleChange = ({ fileList }) => this.setState({ fileList });
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  }
-
-  handleSubmit = e => {
+  const handleChange = () => {};
+  // onChange(info) {
+  //   if (info.file.status !== "uploading") {
+  //     console.log(info.file, info.fileList);
+  //   }
+  //   if (info.file.status === "done") {
+  //     message.success(`${info.file.name} file uploaded successfully`);
+  //   } else if (info.file.status === "error") {
+  //     message.error(`${info.file.name} file upload failed.`);
+  //   }
+  // }
+  const Auth = useSelector(state => state.Auth);
+  const {
+    getProfileLoading,
+    getProfileResponse,
+    getProfileError,
+  } = useSelector(state => state.User);
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        dispatch();
+        // updateProfileStart({
+        //   ...values,
+        //   accessToken: Auth.idToken.sessionToken,
+        // })
       }
     });
   };
-
-  handleConfirmBlur = e => {
-    const { value } = e.target;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  };
-
-  compareToFirstPassword = (rule, value, callback) => {
-    const { form } = this.props;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
+  useEffect(() => {
+    dispatch(
+      userActions.getProfileStart({
+        username: Auth.idToken.userData.email,
+        accessToken: Auth.idToken.sessionToken,
+      })
+    );
+  }, []);
+  useEffect(() => {
+    if (getProfileLoading !== null) {
+      if (!getProfileLoading && !getProfileError) {
+        setUserData(getProfileResponse);
+      } else if (getProfileError) {
+        Notification('error', 'Error in Get Profile deatils', getProfileError);
+      }
     }
-  };
+  }, [getProfileLoading, getProfileResponse, getProfileError]);
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   props.form.validateFieldsAndScroll((err, values) => {
+  //     if (!err) {
+  //       console.log("Received values of form: ", values);
+  //     }
+  //   });
+  // };
 
-  validateToNextPassword = (rule, value, callback) => {
-    const { form } = this.props;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
-    }
-    callback();
-  };
-
-  handleWebsiteChange = value => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = ['.com', '.org', '.net'].map(
-        domain => `${value}${domain}`
-      );
-    }
-    this.setState({ autoCompleteResult });
-  };
-  uploadButton = () => (
+  const uploadButton = () => (
     <div>
       <Icon type="plus" />
       <div className="ant-upload-text">Upload</div>
     </div>
   );
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    const { TextArea } = Input;
-    const { previewVisible, previewImage, fileList } = this.state;
 
-    return (
-      <>
-        <Form
-          layout="vertical"
-          onSubmit={this.handleSubmit}
-          style={{ padding: '0px 20px 20px 20px' }}
-        >
-          <h2 style={{ margin: '10px 0px' }}>Client Details</h2>
-          <Row gutter={12}>
-            <Col span={10}>
-              <Card
-                type="inner"
-                title="Company Information"
-                extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
-                  </a>
-                }
-                style={{ height: '353px' }}
-              >
-                <Form.Item label="Company Name">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    ABA Infotech Pvt Ltd
-                  </p>
-                </Form.Item>
-                <Form.Item label="Company Email">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    info@abainfotech.com
-                  </p>
-                </Form.Item>
-                <Form.Item label="Company Website">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    www.abainfotech.com
-                  </p>
-                </Form.Item>
-              </Card>
-            </Col>
-            <Col span={10}>
-              <Card
-                type="inner"
-                title="POC Details"
-                extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
-                  </a>
-                }
-              >
-                <Form.Item label="">
-                  <Row>
-                    <Col span={24}>
-                      <Checkbox checked>I am the POC</Checkbox>
-                    </Col>
-                  </Row>
-                </Form.Item>
-                <Form.Item label="Name">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Rahul Sharma
-                  </p>
-                </Form.Item>
-                <Form.Item label="Email">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    rahulsharma888@gmail.com
-                  </p>
-                </Form.Item>
-                <Form.Item label="Phone">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    +91-8586047534
-                  </p>
-                </Form.Item>
-                <Collapse accordion>
-                  <Panel header="Add Alternate POC" key="1">
-                    <Form.Item label="Alternate POC Name">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Name" />)}
-                    </Form.Item>
-                    <Form.Item label="Alternate POC Email">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Email" />)}
-                    </Form.Item>
-                    <Form.Item label="Alternate POC Phone">
-                      {getFieldDecorator('companyName', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Please input your Company Name!',
-                          },
-                        ],
-                      })(<Input placeholder="Enter POC Phone" />)}
-                    </Form.Item>
-                  </Panel>
-                </Collapse>
-              </Card>
-            </Col>
-          </Row>
-          {/*  */}
-          <Row>
-            <Col span={24} style={{ marginTop: '20px' }}></Col>
-          </Row>
-          <Row gutter={12}>
-            <Col span={10}>
-              <Card
-                type="inner"
-                title="Industry & Audience"
-                extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
-                  </a>
-                }
-              >
-                <Form.Item label="Primary Industry">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Technology & Software
-                  </p>
-                </Form.Item>
-                <Form.Item label="Secondary Industry">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Digital Marketing
-                  </p>
-                </Form.Item>
-                <Form.Item label="What are you looking for">
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox checked>Content Writer</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox checked>Graphic Designer</Checkbox>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox checked>Language Translators</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox>Video Maker</Checkbox>
-                    </Col>
-                  </Row>
-                </Form.Item>
+  const { getFieldDecorator } = props.form;
+  console.log(userData, 'hello');
+  return (
+    <>
+      <Form
+        layout="vertical"
+        onSubmit={handleSubmit}
+        style={{ padding: '0px 20px 20px 20px' }}
+      >
+        <h2 style={{ margin: '10px 0px' }}>Writer Details</h2>
+        <Row gutter={12}>
+          <Col span={11}>
+            <Card
+              type="inner"
+              title="Basic Information"
+              extra={
+                <a href="#">
+                  <Icon type="edit" />
+                </a>
+              }
+            >
+              <Row>
+                <Col span={12}>
+                  <Form.Item label="Most Prefered Genre">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.genre1 || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item label="Second Most Prefered Genre">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.genre2 || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Form.Item label="Most Prefered Vertical">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.vertical1 || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item label="Second Most Prefered Vertical">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.vertical2 || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
 
-                <Form.Item label="Preferred Language">
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox checked>English</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox checked>Hindi</Checkbox>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox checked>French</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox checked>Spanish</Checkbox>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox checked>Punjabi</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox checked>German</Checkbox>
-                    </Col>
-                  </Row>
-                </Form.Item>
-                <Row>
-                  <Col span={24}>
-                    <p>Tonality</p>
-                    <Row gutter={24}>
-                      <Col span={24}>
-                        <Slider
-                          disabled
-                          defaultValue={4}
-                          min={0}
-                          max={5}
-                          marks={marks}
-                          style={{ width: '80%' }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row gutter={24}>
-                      <Col span={24}>
-                        <Slider
-                          disabled
-                          defaultValue={2}
-                          min={0}
-                          max={5}
-                          marks={marks2}
-                          style={{ width: '80%' }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row gutter={24}>
-                      <Col span={24}>
-                        <Slider
-                          disabled
-                          defaultValue={3}
-                          min={0}
-                          max={5}
-                          marks={marks3}
-                          style={{ width: '80%' }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row gutter={24}>
-                      <Col span={24}>
-                        <Slider
-                          disabled
-                          defaultValue={4}
-                          min={0}
-                          max={5}
-                          marks={marks4}
-                          style={{ width: '80%' }}
-                        />
-                      </Col>
-                    </Row>
+              <Row>
+                <Col span={24}>
+                  <p style={{ color: '#000000d9' }}> Uploaded CV</p>
+                </Col>
+                <Col span={18}>
+                  <hr />
+                  <p style={{ color: '#16224F', fontWeight: '600' }}>
+                    resume.docx -{' '}
+                    <span
+                      style={{
+                        color: '#adadad',
+                        fontSize: '12px',
+                        fontWeight: '400',
+                      }}
+                    >
+                      {' '}
+                      Uploaded on May 20, 2019
+                    </span>
+                  </p>
+                </Col>
+                <Col span={6}>
+                  <hr />
+                  <ButtonGroup>
+                    <Button>
+                      <Icon type="download" />
+                    </Button>
+                    <Button>
+                      <Icon type="delete" />
+                    </Button>
+                  </ButtonGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  <p
+                    style={{
+                      color: '#000000d9',
+                      marginBottom: '10px',
+                      marginTop: '12px',
+                    }}
+                  >
+                    Languages you are proficient in
+                  </p>
+                </Col>
+              </Row>
+              {(userData.languages || []).map((item, key) => (
+                <Col key={`language${key}`} span={12}>
+                  <Checkbox checked>{item}</Checkbox>
+                </Col>
+              ))}
+            </Card>
+          </Col>
+          <Col span={11}>
+            <Card
+              type="inner"
+              title="Profile Details"
+              extra={
+                <a href="#">
+                  <Icon type="edit" />
+                </a>
+              }
+            >
+              <Row>
+                <Col span={7}>
+                  <p
+                    className="ant-form-item"
+                    style={{ marginBottom: '0px', fontWeight: '600' }}
+                  >
+                    Upload Photo
+                  </p>
+                  <Upload
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    listType="picture-card"
+                    // fileList={fileList}
+                    onPreview={handlePreview}
+                    onChange={handleChange}
+                  >
+                    {uploadButton()}
+                  </Upload>
+                  <Modal
+                    visible={previewVisible}
+                    footer={null}
+                    onCancel={handleCancel}
+                  >
+                    <img
+                      alt="example"
+                      style={{ width: '100%' }}
+                      src={previewImage}
+                    />
+                  </Modal>
+                </Col>
+                <Col span={8}>
+                  <Form.Item label="First Name">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.name || NO_DATA.na}{' '}
+                      {userData.lastname || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                  <Form.Item label="Phone">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.phoneNumber || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+                <Col span={9}>
+                  <Form.Item label="Last Name">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.lastname || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                  <Form.Item label="Email">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.email || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col span={24}></Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Form.Item label="Occupation">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.occupation || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item label="Daily Word Count">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.dailyWordCount || NO_DATA.na} WPD
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  {' '}
+                  <p style={{ color: '#000000a6', marginBottom: '10px' }}>
+                    Weekday Availability
+                  </p>
+                </Col>
+                {(userData.availability || []).map((item, key) => (
+                  <Col key={`availablity${key}`} span={6}>
+                    <Checkbox
+                      value={item}
+                      checked
+                      style={{ color: '#16224F', fontWeight: '600' }}
+                    >
+                      {item}
+                    </Checkbox>
                   </Col>
-                </Row>
-              </Card>
-            </Col>
-            <Col span={10}>
-              <Card
-                type="inner"
-                title="Other Company Details"
-                extra={
-                  <a href="./editDetails">
-                    <Icon type="edit" />
-                  </a>
-                }
-              >
-                <Form.Item label="Company Registered Name">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    ABA Infotech
+                ))}
+              </Row>
+              <Row>
+                <Col span={24} style={{ marginTop: '10px' }}></Col>
+                <Col span={5}>
+                  <p className="ant-form-item" style={{ marginBottom: '0px' }}>
+                    Writer
                   </p>
-                </Form.Item>
-                <Form.Item label="Company Address">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    609 6th Floor Padma Tower 2,
+                </Col>
+                <Col span={7}>
+                  <Radio.Group
+                    onChange={null}
+                    style={{ color: '#16224F', fontWeight: '600' }}
+                  >
+                    <Radio value={1} checked>
+                      {userData.writer || NO_DATA.na}
+                    </Radio>
+                  </Radio.Group>
+                </Col>
+                <Col span={5}>
+                  <p className="ant-form-item" style={{ marginBottom: '0px' }}>
+                    Freelancer
                   </p>
-                </Form.Item>
-                <Form.Item label="">
-                  <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    Near Rajender Place Metro Station
+                </Col>
+                <Col span={7}>
+                  <Radio.Group
+                    onChange={null}
+                    style={{ color: '#16224F', fontWeight: '600' }}
+                  >
+                    <Radio value={1} checked>
+                      {userData.freelancer || NO_DATA.na}
+                    </Radio>
+                  </Radio.Group>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24} style={{ marginTop: '20px' }}></Col>
+        </Row>
+        <Row gutter={12}>
+          <Col span={11}>
+            <Card
+              type="inner"
+              title="Experience"
+              extra={
+                <a href="#">
+                  <Icon type="edit" />
+                </a>
+              }
+            >
+              <Row>
+                <Col span={24}>
+                  <p style={{ color: '#000000d9', marginTop: '10px' }}>
+                    {' '}
+                    Uploaded Samples
                   </p>
-                </Form.Item>
-                <Form.Item
-                  label=""
-                  style={{ paddingBottom: '0px', marginBottom: '0px' }}
-                >
-                  <Row>
-                    <Col span={11}>
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        Delhi
-                      </p>
-                    </Col>
-                    <Col span={2}></Col>
-                    <Col span={11}>
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        New Delhi
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={24} style={{ marginTop: '12px' }}></Col>
-                    <Col span={11}>
-                      <p style={{ color: '#16224F', fontWeight: '600' }}>
-                        India
-                      </p>
-                    </Col>
-                    <Col span={2}></Col>
-                    <Col span={11}>
-                      <Form.Item label="">
-                        <p style={{ color: '#16224F', fontWeight: '600' }}>
-                          110008
-                        </p>
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                </Form.Item>
-                <Form.Item label="Company Phone">
+                </Col>
+                <Col span={18}>
+                  <hr />
                   <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    011-47020788
+                    File1.docx -{' '}
+                    <span
+                      style={{
+                        color: '#adadad',
+                        fontSize: '12px',
+                        fontWeight: '400',
+                      }}
+                    >
+                      {' '}
+                      Uploaded on May 20, 2019
+                    </span>
                   </p>
-                </Form.Item>
-                <Form.Item label="Company GST">
+                </Col>
+                <Col span={6}>
+                  <hr />
+                  <ButtonGroup>
+                    <Button>
+                      <Icon type="download" />
+                    </Button>
+                    <Button>
+                      <Icon type="delete" />
+                    </Button>
+                  </ButtonGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24} style={{ marginTop: '3px' }}></Col>
+                <Col span={18}>
                   <p style={{ color: '#16224F', fontWeight: '600' }}>
-                    MHNC89787SJS9
+                    File2.docx -{' '}
+                    <span
+                      style={{
+                        color: '#adadad',
+                        fontSize: '12px',
+                        fontWeight: '400',
+                      }}
+                    >
+                      {' '}
+                      Uploaded on May 20, 2019
+                    </span>
                   </p>
-                </Form.Item>
-              </Card>
-            </Col>
-          </Row>
-        </Form>{' '}
-      </>
-    );
-  }
+                </Col>
+                <Col span={6}>
+                  <ButtonGroup>
+                    <Button>
+                      <Icon type="download" />
+                    </Button>
+                    <Button>
+                      <Icon type="delete" />
+                    </Button>
+                  </ButtonGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  <Form.Item label="Expected Pay? (In Rupees per word)">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.expectedPay || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  <Form.Item label="Previous writing experiences and skillsets.">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.writingSkillSet || NO_DATA.na}
+
+                      {/* <a href="">Read more..</a> */}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  <Form.Item label=" companies that you've worked for in the past">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.pastCompanies || NO_DATA.na}
+                      <span
+                        style={{
+                          color: '#adadad',
+                          fontSize: '12px',
+                          fontWeight: '400',
+                        }}
+                      ></span>
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  <Form.Item label="Profession you are in, apart from freelance writing">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.currentProfession || NO_DATA.na}
+                      {/* <a href="">Read more..</a> */}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+          <Col span={11}>
+            <Card
+              type="inner"
+              title="Bank Details"
+              extra={
+                <a href="#">
+                  <Icon type="edit" />
+                </a>
+              }
+            >
+              <Row>
+                <Col span={24} style={{ marginTop: '10px' }}></Col>
+                <Col span={12}>
+                  <Form.Item label="A/c Number">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.accountNumber || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item label="A/c Holder Name">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.accountHolder || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Form.Item label="Bank Name">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.bankName || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item label="Branch Name">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.branchName || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Form.Item label="IFSC Code">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.ifscCode || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item label="PAN Card">
+                    <p style={{ color: '#16224F', fontWeight: '600' }}>
+                      {userData.pancard || NO_DATA.na}
+                    </p>
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+        </Row>
+      </Form>
+    </>
+  );
 }
 
-const WrappedProfileForm = Form.create({ name: 'profile' })(ProfileForm);
+const WrappedProfileDetails = Form.create({ name: 'profile' })(ProfileDetails);
 
-export default WrappedProfileForm;
+export default WrappedProfileDetails;

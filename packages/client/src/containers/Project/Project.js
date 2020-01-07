@@ -111,12 +111,10 @@ class ProjectForm extends React.Component {
 const WrappedProjectForm = Form.create({ name: 'project' })(ProjectForm);
 
 function mapStateToProps(state) {
-  console.log('in project', state);
+  console.log('in project', state.Auth.idToken);
   return {
     project: state.projectReducer,
-    user: JSON.parse(
-      Buffer.from(state.Auth.idToken, 'base64').toString('ascii')
-    ).userData,
+    user: state.Auth.idToken.userData,
   };
 }
 

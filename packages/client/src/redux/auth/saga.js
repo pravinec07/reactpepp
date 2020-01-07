@@ -1,19 +1,17 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import { createBrowserHistory } from 'history';
-
 import { getToken, clearToken } from '@iso/lib/helpers/utility';
+
 import actions from './actions';
 import { signIn } from '../../services/usersApi';
+import { LOCAL_MESSAGE } from '../../config/Constants';
+
 const history = createBrowserHistory();
 
 export function* loginRequest() {
-  yield takeEvery('LOGIN_REQUEST', function*({ payload }) {
+  yield takeEvery(actions.LOGIN_REQUEST, function*({ payload }) {
     try {
-      console.log(payload, 'LOGIN_REQUEST');
-
       const response = yield call(signIn, payload);
-      console.log(response, payload, '-------->');
-
       switch (response.status) {
         case 200:
           const status =
@@ -27,7 +25,7 @@ export function* loginRequest() {
               );
               yield put({
                 type: actions.LOGIN_SUCCESS,
-                token,
+                token: response.data,
               });
               yield localStorage.setItem('id_token', token);
               break;
@@ -39,18 +37,18 @@ export function* loginRequest() {
               break;
           }
           break;
-        case 404:
-          yield put({ type: actions.LOGIN_ERROR });
-          break;
-        case 500:
-          yield put({ type: actions.LOGIN_ERROR });
-          break;
         default:
-          yield put({ type: actions.LOGIN_ERROR });
-          break;
+          yield put({
+            type: actions.LOGIN_ERROR,
+            payload: LOCAL_MESSAGE.somthingWrong,
+          });
       }
     } catch (e) {
-      yield put({ type: actions.LOGIN_ERROR, payload: e });
+      console.log('Error ', e);
+      yield put({
+        type: actions.LOGIN_ERROR,
+        payload: LOCAL_MESSAGE.somthingWrong,
+      });
     }
   });
 }
@@ -63,7 +61,11 @@ export function* logout() {
 }
 export function* checkAuthorization() {
   yield takeEvery(actions.CHECK_AUTHORIZATION, function*() {
-    const token = getToken().get('idToken');
+    const token =
+      getToken().get('idToken') &&
+      JSON.parse(
+        Buffer.from(getToken().get('idToken'), 'base64').toString('ascii')
+      );
     if (token) {
       yield put({
         type: actions.LOGIN_SUCCESS,

@@ -51,12 +51,12 @@ const SignUpStyleWrapper = styled.div`
     padding: 30px 50px 0px 50px;
     position: relative;
     background-color: #fff;
- 
+
     @media only screen and (max-width: 767px) {
       width: 100%;
       padding: 30px 20px;
     }
-  
+
     .isoLogoWrapper {
       width: 100%;
       display: flex;

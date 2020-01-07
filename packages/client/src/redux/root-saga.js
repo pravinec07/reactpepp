@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import authSagas from '../containers/SignIn/saga';
+import authSagas from './auth/saga';
 import contactSagas from '@iso/redux/contacts/saga';
 import invoicesSagas from '@iso/redux/invoice/saga';
 import mailSagas from '@iso/redux/mail/saga';
@@ -14,8 +14,8 @@ import articles from '@iso/redux/articles/sagas';
 import investors from '@iso/redux/investors/sagas';
 import scrumBoardSaga from '@iso/redux/scrumBoard/saga';
 import profileSaga from '@iso/redux/profile/saga';
-import signUpSaga from '../containers/Signup/saga';
 import articleSaga from '../redux/articles/sagas';
+import userSagas from './user/saga';
 import projectSaga from '../containers/Project/saga';
 
 export default function* rootSaga(getState) {
@@ -35,7 +35,7 @@ export default function* rootSaga(getState) {
     investors(),
     scrumBoardSaga(),
     profileSaga(),
-    signUpSaga(),
+    userSagas(),
     articleSaga(),
     projectSaga(),
   ]);
