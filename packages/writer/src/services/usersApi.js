@@ -13,3 +13,5 @@ export const changePassword = data =>
       : apiRoutes.CHANGE_PASSWORD_OTP,
     data
   );
+export const updateProfile = data => api.post(apiRoutes.UPDATE_PROFILE, data);
+export const getProfile = data => api.post(apiRoutes.GET_PROFILE, data);

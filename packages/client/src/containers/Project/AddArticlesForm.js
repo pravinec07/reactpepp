@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Form, Input, Upload, Icon, Row, Col, Button, Table, Card } from 'antd';
 
 export default function AddArticlesForm(props) {
-  const { articlesData } = props;
+  const { articlesData, handleAddArticle, handleDeleteArticle } = props;
   const { getFieldDecorator } = props.data.form;
   const { TextArea } = Input;
   const prop = {
@@ -68,9 +68,12 @@ export default function AddArticlesForm(props) {
       render: (key, record) => {
         return (
           <div>
-            <Icon type="eye" />
-            <Icon type="edit" />
-            <Icon type="delete" />
+            <Icon
+              type="delete"
+              onClick={() => {
+                handleDeleteArticle(key, record);
+              }}
+            />
           </div>
         );
       },
@@ -164,7 +167,11 @@ export default function AddArticlesForm(props) {
             <Row gutter={24}>
               <Col span={24} style={{ float: 'right' }}>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">
+                  <Button
+                    type="primary"
+                    htmlType="button"
+                    onClick={handleAddArticle}
+                  >
                     Add
                   </Button>
                 </Form.Item>

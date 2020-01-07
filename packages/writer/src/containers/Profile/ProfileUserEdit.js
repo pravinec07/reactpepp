@@ -361,7 +361,7 @@ class ProfileForm extends React.Component {
                         paddingTop: '5px',
                       }}
                     >
-                      Abdul_resume.docx -{' '}
+                      resume.docx -{' '}
                       <span
                         style={{
                           color: '#adadad',

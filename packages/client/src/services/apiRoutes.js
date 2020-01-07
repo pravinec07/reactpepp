@@ -8,4 +8,6 @@ export default {
   VERIFY_OTP: 'user/auth/verifyOtp',
   CHANGE_PASSWORD_OTP: 'user/auth/ResetPassword',
   CHANGE_PASSWORD: 'user/auth/ConfirmResetPassword',
+  PROJECT_SAVE: 'user/project/createProject',
+  ARTICLE_SAVE: 'user/article/createArticle',
 };

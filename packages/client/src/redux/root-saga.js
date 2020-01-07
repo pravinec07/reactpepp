@@ -16,6 +16,8 @@ import scrumBoardSaga from '@iso/redux/scrumBoard/saga';
 import profileSaga from '@iso/redux/profile/saga';
 import articleSaga from '../redux/articles/sagas';
 import userSagas from './user/saga';
+import projectSaga from '../containers/Project/saga';
+
 export default function* rootSaga(getState) {
   yield all([
     authSagas(),
@@ -35,5 +37,6 @@ export default function* rootSaga(getState) {
     profileSaga(),
     userSagas(),
     articleSaga(),
+    projectSaga(),
   ]);
 }

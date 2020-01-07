@@ -32,6 +32,7 @@ function ManagePassword(props) {
         dispatch(
           changePasswordStart({
             ...values,
+            username: Auth.idToken.userData.email,
             accessToken: Auth.idToken.accessToken,
           })
         );

@@ -16,6 +16,20 @@ import ThankYou from './step2';
 import OTPInput from './OTPInput';
 import { Navigation } from '../../utils/functions';
 import { LoginButton } from './LoginButton';
+import siteConfig from '@iso/config/site.config';
+const styles = {
+  footer: {
+    marginTop: '20px',
+    background: '#ffffff',
+    textAlign: 'center',
+    borderTop: '1px solid #ededed',
+    width: '100%',
+    float: 'right',
+    position: 'absolute',
+    bottom: '-50px',
+    padding: '20px',
+  },
+};
 const { signUpRequest } = userActions;
 const FormItem = Form.Item;
 
@@ -151,6 +165,9 @@ function SignUp(props) {
   }
   return (
     <SignUpStyleWrapper className="isoSignUpPage">
+      <div className="pepper_heading">
+        <h1>Pepper Creator Zone</h1>
+      </div>
       <Modal
         visible={visible}
         onOk={handleOTPProcess}
@@ -272,20 +289,11 @@ function SignUp(props) {
           <div className="isoSignUpForm">
             {formStep === 1 && (
               <Form layout="vertical" onSubmit={handleNextBackAction}>
-                <SignUpForm form={props.form} dev={dev} />
-                <>
-                  <FormItem>
-                    <Button
-                      loading={
-                        sendOtpLoading || verifyOtpLoading || signUpLoading
-                      }
-                      type="primary"
-                      htmlType="submit"
-                    >
-                      <IntlMessages id="page.signUpButton" />
-                    </Button>
-                  </FormItem>
-                </>
+                <SignUpForm
+                  form={props.form}
+                  loading={signUpLoading || verifyOtpLoading || signUpLoading}
+                />
+
                 <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">
                   <Link to="/signin">
                     <IntlMessages id="page.signUpAlreadyAccount" />
@@ -300,6 +308,7 @@ function SignUp(props) {
           </div>
         </div>
       </div>
+      <div style={styles.footer}>{siteConfig.writer.footerText}</div>
     </SignUpStyleWrapper>
   );
 }

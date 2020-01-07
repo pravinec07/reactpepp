@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Icon, Row, Col, Card } from 'antd';
 import Upload from '@iso/components/uielements/upload';
 import Button from '@iso/components/uielements/button';
+import message from '@iso/components/uielements/message';
 import Checkbox from '@iso/components/uielements/checkbox';
 import Form from '@iso/components/uielements/form';
 import Select, { SelectOption } from '@iso/components/uielements/select';
@@ -19,31 +20,81 @@ import {
 } from '../../config/Constants';
 const { Dragger } = Upload;
 const FormItem = Form.Item;
-const { signUpRequest } = userActions;
-
+const { updateProfileStart } = userActions;
+const UploadProps = {
+  name: 'file',
+  multiple: false,
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  onChange(info) {
+    const { status } = info.file;
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
 function CompleteProfileDetails({ ...props }) {
-  const dev = true;
-  const { getFieldDecorator } = props.form;
+  const { getFieldDecorator, getFieldsError } = props.form;
   const dispatch = useDispatch();
-  const response = useSelector(state => state.User);
+  const Auth = useSelector(state => state.Auth);
+
+  const {
+    updateProfileLoading,
+    updateProfileError,
+    getProfileLoading,
+    getProfileResponse,
+    getProfileError,
+  } = useSelector(state => state.User);
+
+  useEffect(() => {
+    dispatch(
+      userActions.getProfileStart({
+        username: Auth.idToken.userData.email,
+        accessToken: Auth.idToken.sessionToken,
+      })
+    );
+  }, []);
+  useEffect(() => {
+    if (getProfileLoading !== null) {
+      if (!getProfileLoading && !getProfileError) {
+      } else if (getProfileError) {
+        Notification('error', 'Error in Get Profile deatils', getProfileError);
+      }
+    }
+  }, [getProfileLoading, getProfileResponse, getProfileError]);
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        dispatch(signUpRequest(values));
+        console.log(Auth.idToken, '------>');
+        dispatch(
+          updateProfileStart({
+            ...getProfileResponse,
+            ...values,
+            writerForm: false,
+            accessToken: Auth.idToken.sessionToken,
+          })
+        );
       }
     });
   };
-
+  function hasErrors(fieldsError) {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
   useEffect(() => {
-    if (response.signUpLoading !== null) {
-      if (!response.signUpLoading && !response.signUpError) {
-      } else if (response.signUpError) {
-        Notification('error', 'Error', response.signUpError);
+    if (updateProfileLoading !== null) {
+      if (!updateProfileLoading && !updateProfileError) {
+        Notification('success', 'Success', 'Profile Completed Successfully.');
+      } else if (updateProfileError) {
+        Notification('error', 'Error', updateProfileError);
       }
-      console.log('property changed', response.signUpLoading);
+      console.log('property changed', updateProfileLoading);
     }
-  }, [response.signUpLoading, response.signUpError]);
+  }, [updateProfileLoading, updateProfileError]);
   return (
     <>
       <Row>
@@ -72,34 +123,32 @@ function CompleteProfileDetails({ ...props }) {
                     label=""
                     help="Uploading your CV/Resume adds a lot of credibility to your application and helps us evaluate better. Please upload only PDF files."
                   >
-                    {getFieldDecorator('dragger', {
-                      valuePropName: 'fileList',
-                      // getValueFromEvent: this.normFile,
-                    })(
-                      <Dragger name="files" action="/upload.do">
-                        <p className="ant-upload-drag-icon">
-                          <Icon type="inbox" />
-                        </p>
-                        <p className="ant-upload-text">
-                          Click or drag file to this area to upload
-                        </p>
-                        <p className="ant-upload-hint">
-                          Support for a single or bulk upload.
-                        </p>
-                      </Dragger>
-                    )}
+                    <Dragger {...UploadProps}>
+                      <p className="ant-upload-drag-icon">
+                        <Icon type="inbox" />
+                      </p>
+                      <p className="ant-upload-text">
+                        Click or drag file to this area to upload
+                      </p>
+                      <p className="ant-upload-hint">
+                        Support for a single or bulk upload.
+                      </p>
+                    </Dragger>
                   </Form.Item>
                 </Col>
               </Row>
               <Row gutter={24}>
                 <Col span={12}>
-                  <p
-                    className="ant-form-item"
-                    style={{ marginBottom: '0px', fontWeight: '600' }}
+                  <FormItem
+                    label={
+                      <span
+                        className="ant-form-item"
+                        style={{ marginBottom: '0px', fontWeight: '600' }}
+                      >
+                        Select your Most Prefered Genre
+                      </span>
+                    }
                   >
-                    Select your Most Prefered Genre
-                  </p>
-                  <FormItem>
                     {getFieldDecorator('genre1', {
                       rules: [
                         {
@@ -237,10 +286,9 @@ function CompleteProfileDetails({ ...props }) {
                 </Col>
                 <Col span={24}>
                   <FormItem help="Please update the samples based on your proficiency in the different languages.">
-                    {getFieldDecorator('languages', {
-                      valuePropName: 'value',
-                      initialValue: dev ? [LANGUAGE[0].value] : [],
-                    })(<Checkbox.Group options={LANGUAGE} />)}
+                    {getFieldDecorator('languages', {})(
+                      <Checkbox.Group options={LANGUAGE} />
+                    )}
                   </FormItem>
                 </Col>
               </Row>
@@ -260,22 +308,17 @@ function CompleteProfileDetails({ ...props }) {
                     label=""
                     help="The more, the merrier. We will only be able to assign you assignments in verticals and genre that you can prove you have previous experience in. And these samples help us pinpoint these verticals and categories!"
                   >
-                    {getFieldDecorator('dragger', {
-                      valuePropName: 'fileList',
-                      // getValueFromEvent: this.normFile,
-                    })(
-                      <Dragger name="files" action="/upload.do">
-                        <p className="ant-upload-drag-icon">
-                          <Icon type="inbox" />
-                        </p>
-                        <p className="ant-upload-text">
-                          Click or drag file to this area to upload
-                        </p>
-                        <p className="ant-upload-hint">
-                          Support for a single or bulk upload.
-                        </p>
-                      </Dragger>
-                    )}
+                    <Dragger {...UploadProps}>
+                      <p className="ant-upload-drag-icon">
+                        <Icon type="inbox" />
+                      </p>
+                      <p className="ant-upload-text">
+                        Click or drag file to this area to upload
+                      </p>
+                      <p className="ant-upload-hint">
+                        Support for a single or bulk upload.
+                      </p>
+                    </Dragger>
                   </Form.Item>
                 </Col>
               </Row>
@@ -291,7 +334,6 @@ function CompleteProfileDetails({ ...props }) {
                   <FormItem>
                     {getFieldDecorator('expectedPay', {
                       valuePropName: 'value',
-                      initialValue: dev ? PAY_RANGE[0].value : '',
                     })(
                       <Select
                         showSearch
@@ -366,7 +408,6 @@ function CompleteProfileDetails({ ...props }) {
                   <FormItem help="Please quote a minimum working price for your content services. We will keep this in mind while we evaluate and negotiate.">
                     {getFieldDecorator('socialMedia', {
                       valuePropName: 'value',
-                      initialValue: dev ? POSITION_SOURCE[0].value : '',
                     })(
                       <Select
                         showSearch
@@ -410,16 +451,15 @@ function CompleteProfileDetails({ ...props }) {
                 </Col>
               </Row>
               <Row gutter={24}>
-                <Col span={12} style={{ textAlign: 'right' }}>
+                <Col span={12} style={{ textAlign: 'center' }}>
                   <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                      Save for Later
-                    </Button>
-                  </Form.Item>
-                </Col>
-                <Col span={12} style={{ textAlign: 'left' }}>
-                  <Form.Item>
-                    <Button type="danger" htmlType="submit">
+                    <Button
+                      disabled={hasErrors(getFieldsError())}
+                      loading={updateProfileLoading}
+                      type="danger"
+                      htmlType="submit"
+                      style={{ textAlign: 'center', marginBottom: '10px' }}
+                    >
                       Submit
                     </Button>
                   </Form.Item>
@@ -429,7 +469,7 @@ function CompleteProfileDetails({ ...props }) {
           </Card>
         </Col>
         <Col span={5}></Col>
-      </Row>{' '}
+      </Row>
     </>
   );
 }
