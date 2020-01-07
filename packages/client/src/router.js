@@ -34,7 +34,7 @@ const publicRoutes = [
   },
   {
     path: PUBLIC_ROUTE.SIGN_UP,
-    component: lazy(() => import('./containers/Signup/Signup')),
+    component: lazy(() => import('./containers/SignUp/SignUp')),
   },
   {
     path: PUBLIC_ROUTE.FORGET_PASSWORD,

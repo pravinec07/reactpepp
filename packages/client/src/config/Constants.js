@@ -117,3 +117,22 @@ export const Constants = {
     REWORK: 'pink',
   },
 };
+
+export const DAYS = [
+  { value: 'mon', label: 'Mon' },
+  { value: 'tue', label: 'Tue' },
+  { value: 'wed', label: 'Wed' },
+  { value: 'thu', label: 'Thu' },
+  { value: 'fri', label: 'Fri' },
+  { value: 'sat', label: 'Sat' },
+  { value: 'sun', label: 'Sun' },
+];
+
+export const NO_DATA = {
+  na: 'N/A',
+};
+export const PASSWORD_REGX = {
+  regx: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+  error:
+    'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character',
+};
