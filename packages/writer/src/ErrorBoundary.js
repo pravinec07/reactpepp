@@ -11,7 +11,22 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <p>Loading failed! Please reload.</p>;
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flex: 1,
+            textAlign: 'center',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
+          <p style={{ fontSize: '30px', fontWeight: 'bold' }}>
+            Loading failed! Please reload.
+          </p>
+        </div>
+      );
     }
 
     return this.props.children;
