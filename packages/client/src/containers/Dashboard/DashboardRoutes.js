@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: 'SignUp',
-    component: lazy(() => import('../SignUp/SignUp')),
+    component: lazy(() => import('../Signup/Signup')),
   },
   {
     path: 'calendar',

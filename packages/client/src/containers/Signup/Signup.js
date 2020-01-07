@@ -8,11 +8,11 @@ import Spin from '@iso/components/uielements/spin';
 import Form from '@iso/components/uielements/form';
 import IntlMessages from '@iso/components/utility/intlMessages';
 
-import SignUpStyleWrapper from './SignUp.styles';
+import SignUpStyleWrapper from './Signup.styles';
 import Notification from '@iso/components/Notification';
 import userActions from '../../redux/user/actions';
-import SignUpForm from './step1';
-import ThankYou from './step2';
+import SignUpForm from './Step1';
+import ThankYou from './Step2';
 import OTPInput from './OTPInput';
 import { Navigation } from '../../utils/functions';
 import { LoginButton } from './LoginButton';

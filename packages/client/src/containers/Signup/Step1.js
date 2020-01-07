@@ -55,9 +55,9 @@ function Step1({ form, dev, handleRadioChange, identityType }) {
                 onChange={handleRadioChange}
                 value={identityType}
               >
-                <Radio value={'business'}>Business</Radio>
-                <Radio value={'agency'}>Agency</Radio>
-                <Radio value={'individual'}>Individual</Radio>
+                <input type="radio" value={'business'} defaultChecked /> Business
+                <input type="radio" value={'agency'} /> Agency
+                <input type="radio" value={'individual'} /> Individual
               </RadioGroup>
             )}
           </FormItem>
